@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!--
+    Secret Auth0 identifiers and settings
+    =====================================
+    These values are required to connect to Auth0 for authorization,
+    which is why we're storing them in their own string resource file.
+
+    DO NOT CHECK THIS FILE INTO A PUBLIC REPOSITORY!
+    -->
+
+    <string name="com_auth0_domain">dev-proj-inte.eu.auth0.com</string>
+    <string name="com_auth0_client_id">RMxdAU4dxX8QLYLmO06a6CRcS2e9Kzz0</string>
+
+</resources>
