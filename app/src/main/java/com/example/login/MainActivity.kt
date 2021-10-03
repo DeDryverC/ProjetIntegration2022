@@ -1,5 +1,6 @@
 package com.example.login
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.core.view.isVisible
@@ -39,7 +40,13 @@ class MainActivity : AppCompatActivity() {
         binding.buttonGet.setOnClickListener { getUserMetadata() }
         binding.buttonSet.setOnClickListener { setUserMetadata() }
     }
+    private fun onConnection() {
 
+        val intent = Intent(this, MapsActivity::class.java)
+        // start your next activity
+        startActivity(intent)
+
+    }
     private fun login() {
         WebAuthProvider
             .login(account)
@@ -101,11 +108,13 @@ class MainActivity : AppCompatActivity() {
 
                 override fun onSuccess(profile: UserProfile) {
                     cachedUserProfile = profile
-                    setContentView(R.layout.activity_maps)
+                    onConnection()
                 }
 
             })
     }
+
+
 
     private fun getUserMetadata() {
         // Guard against getting the metadata when no user is logged in
