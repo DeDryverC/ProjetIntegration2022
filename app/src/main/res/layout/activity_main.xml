@@ -6,12 +6,12 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    <ScrollView
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         tools:ignore="MissingConstraints">
 
-        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        <LinearLayout
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="match_parent"

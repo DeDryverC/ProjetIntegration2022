@@ -3,6 +3,7 @@ package com.example.login
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.Menu
 import androidx.core.view.isVisible
 import com.auth0.android.Auth0
 import com.auth0.android.authentication.AuthenticationAPIClient
@@ -40,6 +41,7 @@ class MainActivity : AppCompatActivity() {
         binding.buttonGet.setOnClickListener { getUserMetadata() }
         binding.buttonSet.setOnClickListener { setUserMetadata() }
     }
+
     private fun onConnection() {
 
         val intent = Intent(this, MapsActivity::class.java)
@@ -55,15 +57,14 @@ class MainActivity : AppCompatActivity() {
             .withAudience(getString(R.string.login_audience, getString(R.string.com_auth0_domain)))
             .start(this, object : Callback<Credentials, AuthenticationException> {
 
-                override fun onFailure(exception: AuthenticationException) {
-                    showSnackBar(getString(R.string.login_failure_message, exception.getCode()))
+                override fun onFailure(error: AuthenticationException) {
+                    showSnackBar(getString(R.string.login_failure_message, error.getCode()))
                 }
 
-                override fun onSuccess(credentials: Credentials) {
-                    cachedCredentials = credentials
-                    showSnackBar(getString(R.string.login_success_message, credentials.accessToken))
-                    updateUI()
-                    showUserProfile()
+                override fun onSuccess(result: Credentials) {
+                    cachedCredentials = result
+                    showSnackBar(getString(R.string.login_success_message, result.accessToken))
+                    onConnection()
 
                 }
             })
@@ -75,13 +76,13 @@ class MainActivity : AppCompatActivity() {
             .withScheme(getString(R.string.com_auth0_scheme))
             .start(this, object : Callback<Void?, AuthenticationException> {
 
-                override fun onFailure(exception: AuthenticationException) {
+                override fun onFailure(error: AuthenticationException) {
                     updateUI()
                     showSnackBar(getString(R.string.general_failure_with_exception_code,
-                        exception.getCode()))
+                        error.getCode()))
                 }
 
-                override fun onSuccess(payload: Void?) {
+                override fun onSuccess(result: Void?) {
                     cachedCredentials = null
                     cachedUserProfile = null
                     updateUI()
@@ -98,17 +99,17 @@ class MainActivity : AppCompatActivity() {
 
         val client = AuthenticationAPIClient(account)
         client
-            .userInfo(cachedCredentials!!.accessToken!!)
+            .userInfo(cachedCredentials!!.accessToken)
             .start(object : Callback<UserProfile, AuthenticationException> {
 
-                override fun onFailure(exception: AuthenticationException) {
+                override fun onFailure(error: AuthenticationException) {
                     showSnackBar(getString(R.string.general_failure_with_exception_code,
-                        exception.getCode()))
+                        error.getCode()))
                 }
 
-                override fun onSuccess(profile: UserProfile) {
-                    cachedUserProfile = profile
-                    onConnection()
+                override fun onSuccess(result: UserProfile) {
+                    cachedUserProfile = result
+
                 }
 
             })
@@ -122,22 +123,22 @@ class MainActivity : AppCompatActivity() {
             return
         }
 
-        val usersClient = UsersAPIClient(account, cachedCredentials!!.accessToken!!)
+        val usersClient = UsersAPIClient(account, cachedCredentials!!.accessToken)
 
         usersClient
             .getProfile(cachedUserProfile!!.getId()!!)
             .start(object : Callback<UserProfile, ManagementException> {
 
-                override fun onFailure(exception: ManagementException) {
+                override fun onFailure(error: ManagementException) {
                     showSnackBar(getString(R.string.general_failure_with_exception_code,
-                        exception.getCode()))
+                        error.getCode()))
                 }
 
-                override fun onSuccess(userProfile: UserProfile) {
-                    cachedUserProfile = userProfile
+                override fun onSuccess(result: UserProfile) {
+                    cachedUserProfile = result
                     updateUI()
 
-                    val country = userProfile.getUserMetadata()["country"] as String?
+                    val country = result.getUserMetadata()["country"] as String?
                     binding.edittextCountry.setText(country)
                 }
 
@@ -150,20 +151,20 @@ class MainActivity : AppCompatActivity() {
             return
         }
 
-        val usersClient = UsersAPIClient(account, cachedCredentials!!.accessToken!!)
+        val usersClient = UsersAPIClient(account, cachedCredentials!!.accessToken)
         val metadata = mapOf("country" to binding.edittextCountry.text.toString())
 
         usersClient
             .updateMetadata(cachedUserProfile!!.getId()!!, metadata)
             .start(object : Callback<UserProfile, ManagementException> {
 
-                override fun onFailure(exception: ManagementException) {
+                override fun onFailure(error: ManagementException) {
                     showSnackBar(getString(R.string.general_failure_with_exception_code,
-                        exception.getCode()))
+                        error.getCode()))
                 }
 
-                override fun onSuccess(profile: UserProfile) {
-                    cachedUserProfile = profile
+                override fun onSuccess(result: UserProfile) {
+                    cachedUserProfile = result
                     updateUI()
 
                     showSnackBar(getString(R.string.general_success_message))

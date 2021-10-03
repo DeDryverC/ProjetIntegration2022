@@ -42,5 +42,6 @@
         <string name="login_failure_message">Failed to log in. %1$s</string>
         <string name="general_failure_with_exception_code">Failed - exception code: %1$s</string>
         <string name="general_success_message">Success!</string>
+    <string name="log_out">Log out</string>
 
-    </resources>
+</resources>
