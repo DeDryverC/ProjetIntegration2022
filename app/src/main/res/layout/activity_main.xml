@@ -2,20 +2,24 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/connection"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
     <ScrollView
+        android:id="@+id/scrollView2"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        tools:ignore="MissingConstraints">
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="-124dp"
+        tools:layout_editor_absoluteY="29dp">
 
         <LinearLayout
-            android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:gravity="center">
+            android:gravity="center"
+            android:orientation="vertical">
 
             <TextView
                 android:id="@+id/textview_title"
@@ -42,8 +46,8 @@
                 android:id="@+id/button_logout"
                 android:layout_width="200dp"
                 android:layout_height="wrap_content"
-                android:text="@string/button_logout"
                 android:enabled="false"
+                android:text="@string/button_logout"
                 app:layout_constraintEnd_toEndOf="@+id/textview_title"
                 app:layout_constraintStart_toStartOf="@+id/textview_title"
                 app:layout_constraintTop_toBottomOf="@+id/button_login" />
@@ -52,19 +56,19 @@
                 android:id="@+id/textview_user_profile"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_margin="18dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/button_logout"
-                android:layout_margin="18dp"/>
+                app:layout_constraintTop_toBottomOf="@id/button_logout" />
 
             <LinearLayout
                 android:id="@+id/linearlayout_metadata"
-                android:visibility="invisible"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:gravity="center"
                 android:layout_marginTop="16dp"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:visibility="invisible"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/textview_user_profile">
@@ -73,16 +77,16 @@
                     android:id="@+id/textview_metadata_heading"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textStyle="bold"
-                    android:text="@string/textview_metadata_heading"/>
+                    android:text="@string/textview_metadata_heading"
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/textview_metadata_info"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:layout_margin="8dp"
-                    android:textAlignment="center"
                     android:text="@string/textview_metadata_info"
+                    android:textAlignment="center"
                     android:textSize="12sp" />
 
                 <EditText
@@ -94,22 +98,22 @@
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:gravity="center">
+                    android:gravity="center"
+                    android:orientation="horizontal">
 
                     <Button
                         android:id="@+id/button_get"
                         android:layout_width="100dp"
                         android:layout_height="wrap_content"
-                        android:text="@string/button_get"
-                        android:layout_marginRight="8dp"/>
+                        android:layout_marginRight="8dp"
+                        android:text="@string/button_get" />
 
                     <Button
                         android:id="@+id/button_set"
                         android:layout_width="100dp"
                         android:layout_height="wrap_content"
-                        android:text="@string/button_set"
-                        android:layout_marginLeft="8dp"/>
+                        android:layout_marginLeft="8dp"
+                        android:text="@string/button_set" />
 
                 </LinearLayout>
 
@@ -118,5 +122,19 @@
         </LinearLayout>
 
     </ScrollView>
+
+
+    <!-- Barre de navigation -->
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/night_grey"
+        android:theme="@style/BottomNavigationStyle"
+        app:itemIconTint="@drawable/bottom_nav_color"
+        app:itemTextColor="@drawable/bottom_nav_color"
+        app:layout_constraintBottom_toBottomOf="@+id/scrollView2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:menu="@menu/bottom_navigation_menu" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

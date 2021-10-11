@@ -8,5 +8,4 @@
     tools:context=".MapsActivity"
     >
 
-
 </androidx.fragment.app.FragmentContainerView>
