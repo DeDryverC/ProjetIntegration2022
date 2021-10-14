@@ -38,8 +38,7 @@ class MainActivity : AppCompatActivity() {
 
         binding.buttonLogin.setOnClickListener { login() }
         binding.buttonLogout.setOnClickListener { logout() }
-        binding.buttonGet.setOnClickListener { getUserMetadata() }
-        binding.buttonSet.setOnClickListener { setUserMetadata() }
+
     }
 
     private fun onConnection() {
@@ -90,89 +89,6 @@ class MainActivity : AppCompatActivity() {
 
             })
     }
-
-    private fun showUserProfile() {
-        // Guard against showing the profile when no user is logged in
-        if (cachedCredentials == null) {
-            return
-        }
-
-        val client = AuthenticationAPIClient(account)
-        client
-            .userInfo(cachedCredentials!!.accessToken)
-            .start(object : Callback<UserProfile, AuthenticationException> {
-
-                override fun onFailure(error: AuthenticationException) {
-                    showSnackBar(getString(R.string.general_failure_with_exception_code,
-                        error.getCode()))
-                }
-
-                override fun onSuccess(result: UserProfile) {
-                    cachedUserProfile = result
-
-                }
-
-            })
-    }
-
-
-
-    private fun getUserMetadata() {
-        // Guard against getting the metadata when no user is logged in
-        if (cachedCredentials == null) {
-            return
-        }
-
-        val usersClient = UsersAPIClient(account, cachedCredentials!!.accessToken)
-
-        usersClient
-            .getProfile(cachedUserProfile!!.getId()!!)
-            .start(object : Callback<UserProfile, ManagementException> {
-
-                override fun onFailure(error: ManagementException) {
-                    showSnackBar(getString(R.string.general_failure_with_exception_code,
-                        error.getCode()))
-                }
-
-                override fun onSuccess(result: UserProfile) {
-                    cachedUserProfile = result
-                    updateUI()
-
-                    val country = result.getUserMetadata()["country"] as String?
-                    binding.edittextCountry.setText(country)
-                }
-
-            })
-    }
-
-    private fun setUserMetadata() {
-        // Guard against getting the metadata when no user is logged in
-        if (cachedCredentials == null) {
-            return
-        }
-
-        val usersClient = UsersAPIClient(account, cachedCredentials!!.accessToken)
-        val metadata = mapOf("country" to binding.edittextCountry.text.toString())
-
-        usersClient
-            .updateMetadata(cachedUserProfile!!.getId()!!, metadata)
-            .start(object : Callback<UserProfile, ManagementException> {
-
-                override fun onFailure(error: ManagementException) {
-                    showSnackBar(getString(R.string.general_failure_with_exception_code,
-                        error.getCode()))
-                }
-
-                override fun onSuccess(result: UserProfile) {
-                    cachedUserProfile = result
-                    updateUI()
-
-                    showSnackBar(getString(R.string.general_success_message))
-                }
-
-            })
-    }
-
     private fun updateUI() {
         val isLoggedIn = cachedCredentials != null
 
