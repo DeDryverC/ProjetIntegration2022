@@ -37,7 +37,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         binding.buttonLogin.setOnClickListener { login() }
-        binding.buttonLogout.setOnClickListener { logout() }
+
 
     }
 
@@ -69,26 +69,7 @@ class MainActivity : AppCompatActivity() {
             })
     }
 
-    private fun logout() {
-        WebAuthProvider
-            .logout(account)
-            .withScheme(getString(R.string.com_auth0_scheme))
-            .start(this, object : Callback<Void?, AuthenticationException> {
 
-                override fun onFailure(error: AuthenticationException) {
-                    updateUI()
-                    showSnackBar(getString(R.string.general_failure_with_exception_code,
-                        error.getCode()))
-                }
-
-                override fun onSuccess(result: Void?) {
-                    cachedCredentials = null
-                    cachedUserProfile = null
-                    updateUI()
-                }
-
-            })
-    }
     private fun updateUI() {
         val isLoggedIn = cachedCredentials != null
 

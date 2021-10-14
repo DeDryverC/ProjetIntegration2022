@@ -1,6 +1,7 @@
 package com.example.login
 
 import android.Manifest
+import android.content.Intent
 import android.content.pm.PackageManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -128,15 +129,21 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
     // actions on click menu items
     override fun onOptionsItemSelected(item: MenuItem) = when (item.itemId) {
         R.id.action_search -> {
-            msgShow("Search")
+            val intent = Intent(this, MainActivity::class.java)
+            // start your next activity
+            startActivity(intent)
             true
         }
+        //action_profile est l'id renseigné dans menu.xml
         R.id.action_profile -> {
+            //La fonction
             msgShow("Profile")
             true
         }
-        R.id.action_setting -> {
-            msgShow("Setting")
+        R.id.action_login -> {
+            val intent = Intent(this, MainActivity::class.java)
+            // start your next activity
+            startActivity(intent)
             true
         }
         else -> {

@@ -14,8 +14,8 @@
         android:id="@+id/action_setting"
         android:title="Setting" />
     <item
-        android:id="@+id/action_test"
-        android:title="test" />
+        android:id="@+id/action_login"
+        android:title="login" />
     <item
         android:id="@+id/action_test2"
         android:title="test2" />
