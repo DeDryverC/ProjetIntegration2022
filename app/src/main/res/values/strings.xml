@@ -43,5 +43,13 @@
         <string name="general_failure_with_exception_code">Failed - exception code: %1$s</string>
         <string name="general_success_message">Success!</string>
     <string name="log_out">Log out</string>
+    
+    
+    <!-- Barre de navigation -->
+    <string name="bottom_map_item">Carte</string>
+    <string name="bottom_account_item">Compte</string>
+    <string name="bottom_trash_item">Tri</string>
+    <string name="bottom_eco_item">Eco</string>
+    <string name="bottom_other_item">Autre</string>
 
 </resources>
