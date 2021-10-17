@@ -17,6 +17,6 @@
         android:id="@+id/action_login"
         android:title="login" />
     <item
-        android:id="@+id/action_test2"
-        android:title="test2" />
+        android:id="@+id/action_collecte"
+        android:title="Organiser Collecte" />
 </menu>
