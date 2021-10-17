@@ -7,7 +7,7 @@ import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.login.R
 
-class CollecteAdapter : RecyclerView.Adapter<CollecteAdapter.ViewHolder>(){
+class CollecteAdapter(private val layoutId: Int) : RecyclerView.Adapter<CollecteAdapter.ViewHolder>(){
 
     // boite pour ranger les composants à controler
     class ViewHolder(view: View): RecyclerView.ViewHolder(view){
@@ -17,7 +17,7 @@ class CollecteAdapter : RecyclerView.Adapter<CollecteAdapter.ViewHolder>(){
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.item_horizontal_collecte, parent, false)
+            .inflate(layoutId, parent, false)
 
         return ViewHolder(view)
     }
