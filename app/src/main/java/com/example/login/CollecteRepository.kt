@@ -1,5 +1,7 @@
 package com.example.login
 
+import androidx.activity.OnBackPressedCallback
+import com.example.login.CollecteRepository.Singleton.collecteList
 import com.example.login.CollecteRepository.Singleton.databaseRef
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -8,10 +10,36 @@ import com.google.firebase.database.ValueEventListener
 
 class CollecteRepository {
 
-    object Singleton{
+    object Singleton {
         // se connecter à la référence collecte de la DB
         val databaseRef = FirebaseDatabase.getInstance().getReference("collectes")
+
         // créer liste avec les collectes
         val collecteList = arrayListOf<CollecteModel>()
+    }
+    fun updateData(callback: ()->Unit){
+        //absorber les données depuis DB
+        databaseRef.addValueEventListener(object:ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                // retirer les ancciennes collectes pour mettre a jour la liste
+                collecteList.clear()
+                // récolter la liste
+                for(ds in snapshot.children){
+                    //construire un objet collecte
+                    val collecte = ds.getValue(CollecteModel::class.java)
 
-}}
+                    // vérifier que la collecte existe
+                    if(collecte != null){
+                        // ajout de la collecte à la liste
+                        collecteList.add(collecte)
+                    }
+                }
+                // actionner le callback
+                callback()
+            }
+
+            override fun onCancelled(error: DatabaseError) {}
+
+        })
+    }
+}
