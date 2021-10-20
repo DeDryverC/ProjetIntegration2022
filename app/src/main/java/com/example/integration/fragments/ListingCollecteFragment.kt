@@ -1,4 +1,4 @@
-package com.example.login.fragments
+package com.example.integration.fragments
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -6,12 +6,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
-import com.example.login.CollecteModel
-import com.example.login.CollecteRepository.Singleton.collecteList
-import com.example.login.EventActivity
-import com.example.login.R
-import com.example.login.adapter.CollecteAdapter
-import com.example.login.adapter.CollecteItemDecoration
+import com.example.integration.CollecteRepository.Singleton.collecteList
+import com.example.integration.EventActivity
+import com.example.integration.R
+import com.example.integration.adapter.CollecteAdapter
+import com.example.integration.adapter.CollecteItemDecoration
 
 class ListingCollecteFragment(private val context: EventActivity) : Fragment(){
 

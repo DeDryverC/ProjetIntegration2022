@@ -1,4 +1,4 @@
-package com.example.login.adapter
+package com.example.integration.adapter
 
 import android.net.Uri
 import android.view.LayoutInflater
@@ -8,10 +8,9 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.example.login.CollecteModel
-import com.example.login.EventActivity
-import com.example.login.R
-import org.w3c.dom.Text
+import com.example.integration.CollecteModel
+import com.example.integration.EventActivity
+import com.example.integration.R
 
 class CollecteAdapter(private val context: EventActivity,
                       private val collecteList: List<CollecteModel>,

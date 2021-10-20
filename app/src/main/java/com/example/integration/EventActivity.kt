@@ -1,8 +1,8 @@
-package com.example.login
+package com.example.integration
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.example.login.fragments.ListingCollecteFragment
+import com.example.integration.fragments.ListingCollecteFragment
 
 class EventActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

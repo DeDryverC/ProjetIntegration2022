@@ -1,29 +1,23 @@
-package com.example.login
+package com.example.integration
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.Menu
-import androidx.core.view.isVisible
 import com.auth0.android.Auth0
-import com.auth0.android.authentication.AuthenticationAPIClient
 import com.auth0.android.authentication.AuthenticationException
 import com.auth0.android.callback.Callback
-import com.auth0.android.management.ManagementException
-import com.auth0.android.management.UsersAPIClient
 import com.auth0.android.provider.WebAuthProvider
 import com.auth0.android.result.Credentials
-import com.auth0.android.result.UserProfile
+import com.example.integration.databinding.ActivityMainBinding
 import com.google.android.material.snackbar.Snackbar
-import com.example.login.databinding.ActivityMainBinding
-class MainActivity : AppCompatActivity() {
+
+class LoginActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
 
     // Login/logout-related properties
     private lateinit var account: Auth0
     private var cachedCredentials: Credentials? = null
-    private var cachedUserProfile: UserProfile? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -48,6 +42,7 @@ class MainActivity : AppCompatActivity() {
         startActivity(intent)
 
     }
+
     private fun login() {
         WebAuthProvider
             .login(account)
@@ -67,31 +62,6 @@ class MainActivity : AppCompatActivity() {
 
                 }
             })
-    }
-
-
-    private fun updateUI() {
-        val isLoggedIn = cachedCredentials != null
-
-        binding.textviewTitle.text = if (isLoggedIn) {
-            getString(R.string.logged_in_title)
-        } else {
-            getString(R.string.logged_out_title)
-        }
-        binding.buttonLogin.isEnabled = !isLoggedIn
-        binding.buttonLogout.isEnabled = isLoggedIn
-        binding.linearlayoutMetadata.isVisible = isLoggedIn
-
-        binding.textviewUserProfile.isVisible = isLoggedIn
-
-        val userName = cachedUserProfile?.name ?: ""
-        val userEmail = cachedUserProfile?.email ?: ""
-        binding.textviewUserProfile.text = getString(R.string.user_profile, userName, userEmail)
-
-
-        if (!isLoggedIn) {
-            binding.edittextCountry.setText("")
-        }
     }
 
     private fun showSnackBar(text: String) {

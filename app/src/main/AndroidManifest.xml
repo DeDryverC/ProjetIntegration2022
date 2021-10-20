@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.login">
+    package="com.example.integration">
 
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
@@ -15,7 +15,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Login">
         <activity
-            android:name=".EventActivity"
+            android:name="com.example.integration.EventActivity"
             android:exported="true" />
 
         <meta-data
@@ -23,7 +23,7 @@
             android:value="@string/google_maps_key" />
 
         <activity
-            android:name=".MainActivity"
+            android:name="com.example.integration.LoginActivity"
             android:exported="true"
             android:label="Citoyapp">
             <intent-filter>
@@ -32,7 +32,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MapsActivity" />
+        <activity android:name="com.example.integration.MapsActivity" />
     </application>
 
 </manifest>

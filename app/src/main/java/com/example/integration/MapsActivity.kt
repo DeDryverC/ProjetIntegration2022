@@ -1,4 +1,4 @@
-package com.example.login
+package com.example.integration
 
 import android.Manifest
 import android.content.Intent
@@ -10,7 +10,6 @@ import android.view.MenuItem
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import com.auth0.android.provider.WebAuthProvider.logout
 
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
@@ -18,9 +17,9 @@ import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
-import com.example.login.databinding.ActivityMapsBinding
 import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import java.util.*
+
 
 class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
@@ -59,13 +58,14 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
             )
         }
     }
+
     override fun onMapReady(googleMap: GoogleMap) {
         mMap = googleMap
 
         // Add a marker in Sydney and move the camera
         val ephec = LatLng(50.66586937988797, 4.61221029898094)
         val zoomLevel = 15f
-        mMap.addMarker(MarkerOptions().position(ephec))
+        mMap.addMarker(MarkerOptions().position(ephec).title("Ephec"))
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(ephec,zoomLevel))
         setMapLongClick(mMap)
         enableMyLocation()
@@ -129,7 +129,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
     // actions on click menu items
     override fun onOptionsItemSelected(item: MenuItem) = when (item.itemId) {
         R.id.action_search -> {
-            val intent = Intent(this, MainActivity::class.java)
+            val intent = Intent(this, LoginActivity::class.java)
             // start your next activity
             startActivity(intent)
             true
@@ -137,11 +137,11 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         //action_profile est l'id renseigné dans menu.xml
         R.id.action_profile -> {
             //La fonction
-            msgShow("Profile")
+            msgShow("affiche un msg")
             true
         }
         R.id.action_login -> {
-            val intent = Intent(this, MainActivity::class.java)
+            val intent = Intent(this, LoginActivity::class.java)
             // start your next activity
             startActivity(intent)
             true

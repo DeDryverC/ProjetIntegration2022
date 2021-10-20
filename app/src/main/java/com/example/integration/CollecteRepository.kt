@@ -1,8 +1,7 @@
-package com.example.login
+package com.example.integration
 
-import androidx.activity.OnBackPressedCallback
-import com.example.login.CollecteRepository.Singleton.collecteList
-import com.example.login.CollecteRepository.Singleton.databaseRef
+import com.example.integration.CollecteRepository.Singleton.collecteList
+import com.example.integration.CollecteRepository.Singleton.databaseRef
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase

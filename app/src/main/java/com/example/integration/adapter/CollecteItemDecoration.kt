@@ -1,4 +1,4 @@
-package com.example.login.adapter
+package com.example.integration.adapter
 
 import android.graphics.Rect
 import android.view.View

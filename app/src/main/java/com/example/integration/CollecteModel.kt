@@ -1,4 +1,4 @@
-package com.example.login
+package com.example.integration
 
 class CollecteModel (
     val nom: String="Collecte BLC",
