@@ -1,5 +1,6 @@
 package com.example.integration
 
+import android.util.Log
 import com.example.integration.CollecteRepository.Singleton.collecteList
 import com.example.integration.CollecteRepository.Singleton.databaseRef
 import com.google.firebase.database.DataSnapshot
@@ -11,17 +12,18 @@ class CollecteRepository {
 
     object Singleton {
         // se connecter à la référence collecte de la DB
-        val databaseRef = FirebaseDatabase.getInstance().getReference("collectes")
+        val databaseRef = FirebaseDatabase.getInstance("https://projetintegration-83d97-default-rtdb.europe-west1.firebasedatabase.app").getReference("collectes")
 
         // créer liste avec les collectes
         val collecteList = arrayListOf<CollecteModel>()
     }
-    fun updateData(callback: ()->Unit){
+    fun updateData(callback: () -> Unit){
+        println("bonjour")
         //absorber les données depuis DB
         databaseRef.addValueEventListener(object:ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 // retirer les ancciennes collectes pour mettre a jour la liste
-                collecteList.clear()
+                // collecteList.clear()
                 // récolter la liste
                 for(ds in snapshot.children){
                     //construire un objet collecte
