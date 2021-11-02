@@ -23,7 +23,7 @@ class CollecteRepository {
         databaseRef.addValueEventListener(object:ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 // retirer les ancciennes collectes pour mettre a jour la liste
-                // collecteList.clear()
+                collecteList.clear()
                 // récolter la liste
                 for(ds in snapshot.children){
                     //construire un objet collecte
@@ -42,5 +42,9 @@ class CollecteRepository {
             override fun onCancelled(error: DatabaseError) {}
 
         })
+    }
+
+    fun updateCollecte(collecte:CollecteModel){
+        databaseRef.child(collecte.id).setValue(collecte)
     }
 }

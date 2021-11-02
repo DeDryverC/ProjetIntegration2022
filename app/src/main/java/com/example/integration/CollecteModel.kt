@@ -1,7 +1,9 @@
 package com.example.integration
 
 class CollecteModel (
-    val imageUrl: String? = "",
-    val localisation: String?="",
-    val nom: String?=""
+    val id: String = "collecte0",
+    var imageUrl: String? = "",
+    var localisation: String?="",
+    var nom: String?="",
+    var liked: Boolean=false
         )
