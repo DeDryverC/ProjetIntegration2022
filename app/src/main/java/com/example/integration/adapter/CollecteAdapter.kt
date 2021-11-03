@@ -8,14 +8,12 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.example.integration.CollecteModel
-import com.example.integration.CollecteRepository
-import com.example.integration.EventActivity
-import com.example.integration.R
+import com.example.integration.*
 
-class CollecteAdapter(private val context: EventActivity,
-                      private val collecteList: List<CollecteModel>,
-                      private val layoutId: Int) : RecyclerView.Adapter<CollecteAdapter.ViewHolder>(){
+class CollecteAdapter(
+    val context: EventActivity,
+    private val collecteList: List<CollecteModel>,
+    private val layoutId: Int) : RecyclerView.Adapter<CollecteAdapter.ViewHolder>(){
 
     // boite pour ranger les composants à controler
     class ViewHolder(view: View): RecyclerView.ViewHolder(view){
@@ -63,6 +61,12 @@ class CollecteAdapter(private val context: EventActivity,
             currentCollecte.liked = !currentCollecte.liked
             // mettre à jour la collecte
             repo.updateCollecte(currentCollecte)
+        }
+
+        // interaction lors du clic sur collecte
+        holder.itemView.setOnClickListener{
+            // affoche popup de collecte
+            CollectePopup(this, currentCollecte).show()
         }
     }
 
