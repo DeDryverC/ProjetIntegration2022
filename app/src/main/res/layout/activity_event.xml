@@ -8,9 +8,10 @@
 
     <TextView
         android:id="@+id/textView"
-        android:layout_width="151dp"
-        android:layout_height="62dp"
-        android:text="Voici la liste des collectes déjà organisées"
+        style="@style/TextAppearance.AppCompat.Title"
+        android:layout_width="417dp"
+        android:layout_height="24dp"
+        android:text="CitoyApp"
         android:textFontWeight="700"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="360dp"
+    android:layout_height="500dp"
+    android:padding="15dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardView2"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        app:cardCornerRadius="8dp"
+        app:cardElevation="4dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/image_item"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+            android:src="@drawable/blc"
+            tools:layout_editor_absoluteX="0dp"
+            tools:layout_editor_absoluteY="0dp" />
+    </androidx.cardview.widget.CardView>
+
+    <TextView
+        android:id="@+id/popup_collecte_name"
+        style="@style/MaterialAlertDialog.MaterialComponents.Title.Text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="36dp"
+        android:text="Nom collecte"
+        app:layout_constraintBottom_toBottomOf="@+id/cardView2"
+        app:layout_constraintStart_toEndOf="@+id/cardView2"
+        app:layout_constraintTop_toTopOf="@+id/cardView2"
+        app:layout_constraintVertical_bias="0.431" />
+
+    <ImageView
+        android:id="@+id/close_button"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginEnd="32dp"
+        android:src="@drawable/ic_close"
+        app:layout_constraintBottom_toBottomOf="@+id/cardView2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/cardView2"
+        app:layout_constraintVertical_bias="0.4" />
+
+    <TextView
+        android:id="@+id/popup_collecte_description"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Description de la collecte"
+        app:layout_constraintTop_toBottomOf="@+id/cardView2"
+        app:layout_constraintStart_toStartOf="@+id/cardView2"
+        android:layout_marginTop="15dp"
+        style="@style/TextAppearance.AppCompat.Title"/>
+
+    <TextView
+        android:id="@+id/popup_collecte_description_subtitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Petite description"
+        app:layout_constraintStart_toStartOf="@+id/popup_collecte_description"
+        app:layout_constraintTop_toBottomOf="@+id/popup_collecte_description"/>
+
+    <TextView
+        android:id="@+id/popup_collecte_organisateur"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Organisateur"
+        android:layout_marginTop="15dp"
+        app:layout_constraintStart_toStartOf="@+id/popup_collecte_description_subtitle"
+        app:layout_constraintTop_toBottomOf="@+id/popup_collecte_description_subtitle"
+        style="@style/TextAppearance.AppCompat.Title"/>
+
+    <TextView
+        android:id="@+id/popup_collecte_organisateur_subtitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Arthur"
+        app:layout_constraintStart_toStartOf="@+id/popup_collecte_organisateur"
+        app:layout_constraintTop_toBottomOf="@+id/popup_collecte_organisateur" />
+
+    <TextView
+        android:id="@+id/popup_collecte_localisation"
+        style="@style/TextAppearance.AppCompat.Title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Localité"
+        app:layout_constraintStart_toStartOf="@+id/popup_collecte_organisateur_subtitle"
+        app:layout_constraintTop_toBottomOf="@+id/popup_collecte_organisateur_subtitle"
+        android:layout_marginTop="15dp"/>
+
+    <TextView
+        android:id="@+id/popup_collecte_localite"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Braine-le-Comte"
+        app:layout_constraintStart_toStartOf="@+id/popup_collecte_localisation"
+        app:layout_constraintTop_toBottomOf="@+id/popup_collecte_localisation" />
+
+    <View
+        android:id="@+id/view_separation"
+        android:layout_width="1dp"
+        android:layout_height="10dp"
+        android:layout_marginTop="50dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/popup_collecte_localite"
+        app:layout_constraintTop_toBottomOf="@+id/popup_collecte_localite" />
+
+    <ImageView
+        android:id="@+id/delete_button"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:src="@drawable/ic_trash"
+        app:layout_constraintBottom_toBottomOf="@+id/view_separation"
+        app:layout_constraintEnd_toStartOf="@+id/view_separation"
+        app:layout_constraintTop_toTopOf="@+id/view_separation"
+        android:layout_marginRight="50dp"/>
+
+    <ImageView
+        android:id="@+id/star_button"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:src="@drawable/ic_unstar"
+        app:layout_constraintBottom_toBottomOf="@+id/view_separation"
+        app:layout_constraintStart_toEndOf="@+id/view_separation"
+        app:layout_constraintTop_toTopOf="@+id/view_separation"
+        android:layout_marginLeft="50dp"/>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
