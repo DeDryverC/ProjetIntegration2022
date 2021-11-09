@@ -52,4 +52,6 @@
     <string name="bottom_eco_item">Eco</string>
     <string name="bottom_other_item">Autre</string>
 
+
+    <string name="scan1">Scannez un code/ticket</string>
 </resources>

@@ -2,6 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.integration">
 
+    <uses-permission android:name="android.permission.CAMERA"/>
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.INTERNET" />
@@ -17,7 +18,9 @@
         <activity
             android:name="com.example.integration.EventActivity"
             android:exported="true" />
-
+        <activity
+            android:name="com.example.integration.ScanActivity"
+            android:exported="true" />
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
@@ -33,6 +36,8 @@
             </intent-filter>
         </activity>
         <activity android:name="com.example.integration.MapsActivity" />
+
     </application>
+
 
 </manifest>
