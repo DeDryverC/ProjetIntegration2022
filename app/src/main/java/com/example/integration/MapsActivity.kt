@@ -1,10 +1,12 @@
 package com.example.integration
 
 import android.Manifest
+import android.content.ContentValues.TAG
 import android.content.Intent
 import android.content.pm.PackageManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
@@ -18,6 +20,9 @@ import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import com.google.android.gms.maps.model.BitmapDescriptorFactory
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 import java.util.*
 
 
@@ -25,6 +30,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
     private lateinit var mMap: GoogleMap
     private val REQUEST_LOCATION_PERMISSION = 1
+    private val db = Firebase.firestore
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -36,6 +42,8 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         val mapFragment = supportFragmentManager
             .findFragmentById(R.id.map) as SupportMapFragment
         mapFragment.getMapAsync(this)
+
+
     }
 
     private fun setMapLongClick(map: GoogleMap) {
@@ -47,6 +55,14 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
                 latLng.latitude,
                 latLng.longitude
             )
+            val depot = hashMapOf(
+                "name" to "Depots",
+                "lat" to latLng.latitude,
+                "long" to latLng.longitude
+            )
+            db.collection("depots").document(""+latLng.latitude)
+                .set(depot)
+
             map.addMarker(
                 MarkerOptions()
 
@@ -56,22 +72,50 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
                     .draggable(true)
                     .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_CYAN))
             )
+
+
+
+
         }
+
     }
 
     override fun onMapReady(googleMap: GoogleMap) {
         mMap = googleMap
-
-        // Add a marker in Sydney and move the camera
-        val ephec = LatLng(50.66586937988797, 4.61221029898094)
-        val zoomLevel = 15f
-        mMap.addMarker(MarkerOptions().position(ephec).title("Ephec"))
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(ephec,zoomLevel))
+        addDepots(mMap)
         setMapLongClick(mMap)
         enableMyLocation()
 
+
     }
 
+    private fun addDepots(googleMap: GoogleMap) {
+
+        db.collection("depots")
+            .get()
+            .addOnSuccessListener { result ->
+                for (document in result) {
+
+                    val lat = document.data.getValue("lat")
+                    val long = document.data.getValue("long")
+                    val name = document.data.getValue("name")
+                    val pos = LatLng(lat as Double, long as Double)
+
+                    mMap.addMarker(
+                        MarkerOptions()
+
+                            .position(pos)
+                            .title(name as String)
+                            .draggable(true)
+                    )
+
+
+                }
+            }
+            .addOnFailureListener { exception ->
+                Log.d(TAG, "Error getting documents: ", exception)
+            }
+    }
     private fun isPermissionGranted() : Boolean {
         return ContextCompat.checkSelfPermission(
             this,
