@@ -15,8 +15,4 @@
     </style>
 
 
-    <!-- Style pour la barre de navigation-->
-    <style name="BottomNavigationStyle" parent="Widget.Design.BottomNavigationView">
-        <item name="android:textSize">18sp</item>
-    </style>
 </resources>

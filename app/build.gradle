@@ -1,6 +1,7 @@
 plugins {
     id 'com.android.application'
     id 'kotlin-android'
+    id 'kotlin-android-extensions'
     id 'com.google.gms.google-services'
 }
 
@@ -45,7 +46,7 @@ dependencies {
     implementation 'com.auth0.android:auth0:2.0.0'
     implementation 'com.google.android.gms:play-services-maps:17.0.1'
     implementation 'com.google.firebase:firebase-inappmessaging:19.1.5'
-    implementation 'com.google.firebase:firebase-database:19.2.1'
+    implementation 'com.google.firebase:firebase-database:20.0.2'
     implementation 'com.google.firebase:firebase-database-ktx:20.0.2'
     testImplementation 'junit:junit:4.+'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'

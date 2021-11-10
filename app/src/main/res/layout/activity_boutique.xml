@@ -16,7 +16,7 @@
         android:weightSum="16">
 
         <ImageView
-            android:layout_width="59dp"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_gravity="start|center_vertical"
             android:layout_weight="2"
@@ -24,7 +24,7 @@
 
         <TextView
             android:id="@+id/txtPrice"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:layout_weight="11"
@@ -39,32 +39,33 @@
             android:layout_height="match_parent"
             android:layout_weight="3">
 
+            <ImageView
+                android:id="@+id/cartButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:src="@drawable/ic_shop" />
+
+            <com.nex3z.notificationbadge.NotificationBadge
+                android:id="@+id/badge"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_alignTop="@id/cartButton"
+                android:layout_marginLeft="10dp"
+                android:layout_toRightOf="@id/cartButton"
+                app:nbMaxTextLength="2" />
+
         </FrameLayout>
 
-        <ImageView
-            android:id="@+id/cartButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:src="@drawable/ic_shop" />
-
-        <com.nex3z.notificationbadge.NotificationBadge
-            android:id="@+id/badge"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_alignTop="@id/cartButton"
-            android:layout_marginLeft="0dp"
-            android:layout_toRightOf="@id/cartButton"
-            app:nbMaxTextLength="2" />
 
     </LinearLayout>
 
-    
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_articles"
-        android:padding="8dp"
-        android:layout_below="@+id/panel"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent"
+        android:layout_below="@+id/panel"
+        android:padding="8dp" />
     
 </RelativeLayout>
