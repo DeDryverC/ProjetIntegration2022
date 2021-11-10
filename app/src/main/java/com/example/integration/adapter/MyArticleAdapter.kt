@@ -86,7 +86,7 @@ class MyArticleAdapter(
                         val cartModel =  snapshot.getValue(CartModel::class.java)
                         val updateData: MutableMap<String,Any> = HashMap()
                         cartModel!!.quantity = cartModel!!.quantity+1
-                        updateData["quantitée"] = cartModel!!.quantity
+                        updateData["quantity"] = cartModel!!.quantity
                         updateData["Prix Total"] = cartModel!!.quantity * cartModel.prix!!.toFloat()
 
                          userCart.child(articleModel.key!!)

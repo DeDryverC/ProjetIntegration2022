@@ -2,10 +2,10 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/mainBoutique"
+    android:id="@+id/panierBoutique"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".BoutiqueActivity">
+    tools:context=".PanierActivity">
 
     <LinearLayout
         android:id="@+id/panel"
@@ -24,48 +24,24 @@
             android:src="@drawable/ic_nav_before" />
 
         <TextView
+            android:id="@+id/txtTotal"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:layout_weight="11"
             android:gravity="center"
-            android:text="Boutique"
+            android:text="Panier"
             android:textSize="30sp"
             android:textStyle="bold" />
 
-        <FrameLayout
-            android:id="@+id/btnCart"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="3">
-
-            <ImageView
-                android:id="@+id/cartButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:src="@drawable/ic_shop" />
-
-            <com.nex3z.notificationbadge.NotificationBadge
-                android:id="@+id/badge"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_alignTop="@id/cartButton"
-                android:layout_marginLeft="10dp"
-                android:layout_toRightOf="@id/cartButton"
-                app:nbMaxTextLength="2" />
-
-        </FrameLayout>
-
-
     </LinearLayout>
 
-
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recycler_articles"
+        android:id="@+id/recycler_panier"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/panel"
         android:padding="8dp" />
-    
+
+
 </RelativeLayout>

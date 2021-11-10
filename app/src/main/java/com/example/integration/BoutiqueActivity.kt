@@ -1,5 +1,6 @@
 package com.example.integration
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
@@ -16,6 +17,8 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import kotlinx.android.synthetic.main.activity_boutique.*
+import kotlinx.android.synthetic.main.activity_boutique.boutique_before
+import kotlinx.android.synthetic.main.activity_panier.*
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
 import org.greenrobot.eventbus.ThreadMode
@@ -39,7 +42,7 @@ class BoutiqueActivity : AppCompatActivity(), IArticleLoadListener, ICartLoadLis
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN, sticky = true)
-    public fun onUpdateCartEvent(event:UpdateCartEvent) {
+    fun onUpdateCartEvent(event:UpdateCartEvent) {
         countCartFromFirebase()
     }
 
@@ -107,6 +110,9 @@ class BoutiqueActivity : AppCompatActivity(), IArticleLoadListener, ICartLoadLis
         val gridLayoutManager = GridLayoutManager(this,2)
         recycler_articles.layoutManager = gridLayoutManager
         recycler_articles.addItemDecoration(SpaceItemDecoration())
+
+        btnCart.setOnClickListener { startActivity(Intent(this,PanierActivity::class.java)) }
+        boutique_before!!.setOnClickListener{ finish()}
     }
 
     override fun onArticleLoadSuccess(articleModelList: List<ArticleModel>?) {
@@ -127,4 +133,5 @@ class BoutiqueActivity : AppCompatActivity(), IArticleLoadListener, ICartLoadLis
     override fun onCartLoadFailed(message: String?) {
         Snackbar.make(mainBoutique,message!!,Snackbar.LENGTH_LONG).show()
     }
+
 }
