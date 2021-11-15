@@ -33,11 +33,7 @@ class CollecteRepository {
         val collecteList = arrayListOf<CollecteModel>()
 
         // contenir lien de l'image courante
-        var downloadUri: Uri
-            get() {
-                TODO()
-            }
-            set(value) {}
+        var downloadUri: Uri? = null
     }
     fun updateData(callback: () -> Unit){
         //absorber les données depuis DB

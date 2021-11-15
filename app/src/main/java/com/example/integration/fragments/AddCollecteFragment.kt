@@ -16,7 +16,6 @@ import com.example.integration.CollecteRepository
 import com.example.integration.CollecteRepository.Singleton.downloadUri
 import com.example.integration.EventActivity
 import com.example.integration.R
-import java.net.URI
 import java.util.*
 
 class AddCollecteFragment(
@@ -51,7 +50,6 @@ class AddCollecteFragment(
     }
 
     private fun sendForm(view:View) {
-        println("COUCOU")
         val repo = CollecteRepository()
         repo.uploadImage(file!!){
             val collecteName = view.findViewById<EditText>(R.id.name_input).text.toString()
@@ -61,16 +59,14 @@ class AddCollecteFragment(
             val downloadImageUrl = downloadUri
             // créer nouvel objet collecteModel
             val collect = CollecteModel(
-                UUID.randomUUID().toString(),
-                collecteName,
                 collecteDescription,
-                false,
+                UUID.randomUUID().toString(),
                 downloadImageUrl.toString(),
+                false,
                 collecteLocalisation,
+                collecteName,
                 collecteOrganisateur
             )
-
-
             // envoyer en DB
             repo.insertCollecte(collect)
         }
@@ -90,7 +86,7 @@ class AddCollecteFragment(
             if(data == null || data.data == null) return
 
             // récupérer image sélectionnée
-            val file = data.data
+            file = data.data
 
             // mettre à jour l'aperçu de l'image
             uploadedImage?.setImageURI(file)
