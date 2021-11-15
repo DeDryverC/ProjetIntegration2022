@@ -18,7 +18,7 @@ class EventActivity : AppCompatActivity() {
         repo.updateData{
             // injecter la liste des activités (seulement images pour l'instant)
             val transaction = supportFragmentManager.beginTransaction()
-            transaction.replace(R.id.fragment_listeCollectes, AddCollecteFragment(this))
+            transaction.replace(R.id.fragment_listeCollectes, ListingCollecteFragment(this))
             transaction.addToBackStack(null)
             transaction.commit()
         }
