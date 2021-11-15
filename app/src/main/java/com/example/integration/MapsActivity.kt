@@ -10,6 +10,8 @@ import android.view.MenuItem
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.fragment.app.Fragment
+import com.example.integration.fragments.ListingCollecteFragment
 
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
@@ -128,24 +130,6 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
     // actions on click menu items
     override fun onOptionsItemSelected(item: MenuItem) = when (item.itemId) {
-        R.id.action_search -> {
-            val intent = Intent(this, LoginActivity::class.java)
-            // start your next activity
-            startActivity(intent)
-            true
-        }
-        //action_profile est l'id renseigné dans menu.xml
-        R.id.action_profile -> {
-            //La fonction
-            msgShow("affiche un msg")
-            true
-        }
-        R.id.action_login -> {
-            val intent = Intent(this, LoginActivity::class.java)
-            // start your next activity
-            startActivity(intent)
-            true
-        }
 
         R.id.action_collecte_listing -> {
             val intent = Intent(this, EventActivity::class.java)

@@ -2,27 +2,6 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     >
-
-    <item
-        android:id="@+id/action_search"
-        android:icon="@mipmap/outline_search_white_18dp"
-        android:title="Search"
-         />
-    <item
-        android:id="@+id/action_profile"
-        android:title="Profile" />
-    <item
-        android:id="@+id/action_setting"
-        android:title="Setting" />
-    <item
-        android:id="@+id/action_login"
-        android:title="Voir mes favoris" />
-    <item
-        android:id="@+id/action_add_collecte"
-        android:title="Organiser Collecte" />
-    <item
-        android:id="@+id/action_fav_listing"
-        android:title="Voir favoris" />
     <item
         android:id="@+id/action_collecte_listing"
         android:title="Voir collectes à proximité" />
