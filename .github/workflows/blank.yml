@@ -27,7 +27,11 @@ jobs:
         uses: fwilhe2/setup-kotlin@0.2.0
       # Runs a single command using the runners shell
       - uses: gradle/wrapper-validation-action@v1.0.4
-      - run: kotlin /app/src/test/java/com/example/integration/test.kts
+    
+      - name: Run Kotlin Script
+        uses: sureshg/kts-exec@v2.2
+        with:
+          script: "test.kts"
 
          
           
