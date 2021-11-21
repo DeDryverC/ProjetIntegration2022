@@ -27,6 +27,8 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
     private val REQUEST_LOCATION_PERMISSION = 1
 
 
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -36,6 +38,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         val mapFragment = supportFragmentManager
             .findFragmentById(R.id.map) as SupportMapFragment
         mapFragment.getMapAsync(this)
+
     }
 
     private fun setMapLongClick(map: GoogleMap) {
@@ -136,8 +139,9 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         }
         //action_profile est l'id renseigné dans menu.xml
         R.id.action_profile -> {
-            //La fonction
-            msgShow("affiche un msg")
+
+            val mail = intent.getStringExtra("key")
+            msgShow("$mail")
             true
         }
         R.id.action_login -> {

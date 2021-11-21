@@ -4,12 +4,18 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.auth0.android.Auth0
+import com.auth0.android.authentication.AuthenticationAPIClient
 import com.auth0.android.authentication.AuthenticationException
 import com.auth0.android.callback.Callback
 import com.auth0.android.provider.WebAuthProvider
 import com.auth0.android.result.Credentials
+import com.auth0.android.result.UserProfile
 import com.example.integration.databinding.ActivityMainBinding
 import com.google.android.material.snackbar.Snackbar
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
+
 
 class LoginActivity : AppCompatActivity() {
 
@@ -18,6 +24,8 @@ class LoginActivity : AppCompatActivity() {
     // Login/logout-related properties
     private lateinit var account: Auth0
     private var cachedCredentials: Credentials? = null
+    private var cachedUserProfile: UserProfile? = null
+    private val db = Firebase.firestore
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,12 +43,11 @@ class LoginActivity : AppCompatActivity() {
 
     }
 
-    private fun onConnection() {
+    private fun onConnection(text: String?) {
 
         val intent = Intent(this, MapsActivity::class.java)
-        // start your next activity
+        intent.putExtra("key",text)
         startActivity(intent)
-
     }
 
     private fun login() {
@@ -58,10 +65,44 @@ class LoginActivity : AppCompatActivity() {
                 override fun onSuccess(result: Credentials) {
                     cachedCredentials = result
                     showSnackBar(getString(R.string.login_success_message, result.accessToken))
-                    onConnection()
-
+                    showUserProfile()
                 }
             })
+    }
+    private fun showUserProfile() {
+        // Guard against showing the profile when no user is logged in
+        if (cachedCredentials == null) {
+            return
+        }
+
+        val client = AuthenticationAPIClient(account)
+        client
+            .userInfo(cachedCredentials!!.accessToken!!)
+            .start(object : Callback<UserProfile, AuthenticationException> {
+
+                override fun onFailure(exception: AuthenticationException) {
+                    showSnackBar(getString(R.string.general_failure_with_exception_code,
+                        exception.getCode()))
+                }
+
+                override fun onSuccess(profile: UserProfile) {
+                    cachedUserProfile = profile
+                    createUser(profile?.email)
+                    onConnection(profile?.email)
+                }
+
+            })
+    }
+
+    private fun createUser(text: String?) {
+
+        val user = hashMapOf(
+            "email" to "$text",
+            "lastConnect" to java.util.Calendar.getInstance(),
+            "points" to 1
+        )
+        db.collection("clients").document("$text")
+            .set(user)
     }
 
     private fun showSnackBar(text: String) {
