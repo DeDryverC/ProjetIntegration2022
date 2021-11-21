@@ -26,10 +26,6 @@ jobs:
         # uses: fwilhe2/setup-kotlin@f5c4ad2f991043954a8c5d6b9d69fbed78e3eba6
         uses: fwilhe2/setup-kotlin@0.2.0
       # Runs a single command using the runners shell
-      - uses: gradle/gradle-build-action@v2.0.1
-        with:
-         arguments: build --dry-run
-         build-root-directory: ProjetIntegration2022/
       - uses: gradle/wrapper-validation-action@v1.0.4
 
          
