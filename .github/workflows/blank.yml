@@ -26,10 +26,5 @@ jobs:
         # uses: fwilhe2/setup-kotlin@f5c4ad2f991043954a8c5d6b9d69fbed78e3eba6
         uses: fwilhe2/setup-kotlin@0.2.0
       # Runs a single command using the runners shell
-      - uses: eskatos/gradle-command-action@v1
-        with:
-          arguments: runOnGitHub
-          wrapper-cache-enabled: true
-          dependencies-cache-enabled: true
-          configuration-cache-enabled: true
+      - uses: gradle/gradle-build-action@v2.0.1
           
