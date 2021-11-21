@@ -29,7 +29,8 @@ jobs:
       - uses: gradle/wrapper-validation-action@v1.0.4
     
       - name: Run Kotlin test
-        run: gradlew test
+        run : chmod +x gradlew
+              ./gradlew test
 
          
           
