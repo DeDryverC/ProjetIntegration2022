@@ -27,10 +27,11 @@ jobs:
         uses: fwilhe2/setup-kotlin@0.2.0
       # Runs a single command using the runners shell
       - uses: gradle/wrapper-validation-action@v1.0.4
-      - uses: fwilhe2/setup-kotlin@main
-        with:
-          install-native: true
-      - run: kotlinc-native LoginUnitTest.kt
+    
+      - name: Run Kotlin test
+        run : |
+              chmod +x gradlew
+              ./gradlew test
 
          
           
