@@ -27,4 +27,6 @@ jobs:
         uses: fwilhe2/setup-kotlin@0.2.0
       # Runs a single command using the runners shell
       - uses: gradle/gradle-build-action@v2.0.1
+        with:
+         build-root-directory: /
           
