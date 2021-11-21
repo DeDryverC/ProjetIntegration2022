@@ -26,7 +26,6 @@ jobs:
         # uses: fwilhe2/setup-kotlin@f5c4ad2f991043954a8c5d6b9d69fbed78e3eba6
         uses: fwilhe2/setup-kotlin@0.2.0
       # Runs a single command using the runners shell
-      - name: Tests
-          # compilation/simulation
-          # Lancer le test
+      - name: Run the script
+        run: kotlin ProjetIntegration2022/app/src/main/java/com/example/integration/LoginActivity.main.kts
           
