@@ -27,7 +27,7 @@ jobs:
         uses: fwilhe2/setup-kotlin@0.2.0
       # Runs a single command using the runners shell
       - uses: gradle/wrapper-validation-action@v1.0.4
-      - run: kotlin ProjetIntegration2022/app/src/test/java/com/example/integration/test.kts
+      - run: kotlin /ProjetIntegration2022/app/src/test/java/com/example/integration/test.kts
 
          
           
