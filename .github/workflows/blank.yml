@@ -29,9 +29,7 @@ jobs:
       - uses: gradle/wrapper-validation-action@v1.0.4
     
       - name: Run Kotlin Script
-        uses: sureshg/kts-exec@v2.2
-        with:
-          script: "ProjetIntegration2022/app/src/test/java/com/example/integration/test.kts"
+        uses: ./gradlew test
 
          
           
