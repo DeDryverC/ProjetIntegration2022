@@ -139,9 +139,9 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         }
         //action_profile est l'id renseigné dans menu.xml
         R.id.action_profile -> {
-
-            val mail = intent.getStringExtra("key")
-            msgShow("$mail")
+            val intent = Intent(this, ClassementActivity::class.java)
+            // start your next activity
+            startActivity(intent)
             true
         }
         R.id.action_login -> {
