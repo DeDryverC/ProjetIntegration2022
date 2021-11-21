@@ -33,6 +33,7 @@
             </intent-filter>
         </activity>
         <activity android:name="com.example.integration.MapsActivity" />
+        <activity android:name="com.example.integration.ClassementActivity" />
     </application>
 
 </manifest>

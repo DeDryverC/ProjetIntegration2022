@@ -15,6 +15,8 @@ import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+import java.time.LocalDateTime
+import java.util.*
 
 
 class LoginActivity : AppCompatActivity() {
@@ -95,10 +97,10 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun createUser(text: String?) {
-
+    val date = LocalDateTime.now()
         val user = hashMapOf(
             "email" to "$text",
-            "lastConnect" to java.util.Calendar.getInstance(),
+            "lastConnect" to "$date",
             "points" to 1
         )
         db.collection("clients").document("$text")
