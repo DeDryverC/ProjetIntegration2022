@@ -77,13 +77,14 @@
 
             <TextView
                 android:id="@+id/txtPrice"
-                android:text="1$"
-                android:layout_alignParentBottom="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentRight="true"
-                android:textSize="20sp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+                android:layout_alignParentBottom="true"
+                android:text="1$"
+                android:textSize="20sp"/>
+
 
         </RelativeLayout>
 
@@ -93,6 +94,12 @@
             android:layout_weight="1"
             android:layout_width="0dp"
             android:layout_height="wrap_content"/>
+
+        <ImageView
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_gravity="bottom"
+            android:src="@drawable/money"/>
 
 
     </LinearLayout>

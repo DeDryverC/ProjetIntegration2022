@@ -64,7 +64,7 @@ class MyArticleAdapter(
             .load(list[position].imageUrl)
             .into(holder.imageView!!)
         holder.txtName!!.text = StringBuilder().append(list[position].nom)
-        holder.txtPrice!!.text = StringBuilder("$").append(list[position].prix)
+        holder.txtPrice!!.text = StringBuilder("").append(list[position].prix)
 
         holder.setClickListener(object:IRecyclerClickListener{
             override fun onItemClickListener(view: View?, position: Int) {

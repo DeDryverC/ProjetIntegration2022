@@ -2,6 +2,7 @@ package com.example.integration.adapter
 
 import android.app.AlertDialog
 import android.content.Context
+import android.media.Image
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -52,7 +53,7 @@ class MyPanierAdapter(
             .load(cartModelList[position].imageUrl)
             .into(holder.imageView!!)
         holder.txtName!!.text = StringBuilder().append(cartModelList[position].nom)
-        holder.txtPrice!!.text = StringBuilder("$").append(cartModelList[position].prix)
+        holder.txtPrice!!.text = StringBuilder("").append(cartModelList[position].prix)
         holder.txtQuantity!!.text = StringBuilder("").append(cartModelList[position].quantity)
 
         holder.btnMoins!!.setOnClickListener{_ -> minusCartItem(holder,cartModelList[position])}
