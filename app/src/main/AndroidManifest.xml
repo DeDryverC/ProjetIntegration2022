@@ -14,14 +14,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Login">
-        <activity
-            android:name="com.example.integration.EventActivity"
-            android:exported="true" />
-
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
+        <activity
+            android:name="com.example.integration.EventActivity"
 
+            android:exported="true" />
         <activity
             android:name="com.example.integration.LoginActivity"
             android:exported="true"
@@ -33,6 +32,7 @@
             </intent-filter>
         </activity>
         <activity android:name="com.example.integration.MapsActivity" />
+        <activity android:name=".RubishDescription"/>
     </application>
 
 </manifest>

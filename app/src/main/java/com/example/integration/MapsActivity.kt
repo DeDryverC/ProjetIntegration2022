@@ -61,7 +61,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback,
                 "long" to latLng.longitude,
                 "description" to "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus ullamcorper accumsan porta. Nulla facilisi."
             )
-            db.collection("depots").document(""+latLng.latitude)
+            db.collection("depots").document("" + latLng.latitude)
                 .set(depot)
 
             map.addMarker(
@@ -73,8 +73,6 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback,
                     .draggable(true)
                     .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_CYAN))
             )
-
-
 
 
         }
@@ -123,6 +121,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback,
                         MarkerOptions()
 
                             .position(pos)
+                            //.title cree le mini popup contenant le nom du depot (visible lorsque on clique sur le depot)
                             .title(name as String)
                             .snippet(desc as String)
                             .draggable(true)
@@ -135,10 +134,16 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback,
                 Log.d(TAG, "Error getting documents: ", exception)
             }
     }
-    private fun isPermissionGranted() : Boolean {
+
+
+    //permission et activation de la localisation
+
+
+    private fun isPermissionGranted(): Boolean {
         return ContextCompat.checkSelfPermission(
             this,
-            Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED
+            Manifest.permission.ACCESS_FINE_LOCATION
+        ) == PackageManager.PERMISSION_GRANTED
     }
 
     private fun enableMyLocation() {
@@ -194,15 +199,12 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback,
 
     // actions on click menu items
     override fun onOptionsItemSelected(item: MenuItem) = when (item.itemId) {
-
         R.id.action_collecte_listing -> {
             val intent = Intent(this, EventActivity::class.java)
             // start your next activity
             startActivity(intent)
             true
         }
-
-
 
         else -> {
             // If we got here, the user's action was not recognized.

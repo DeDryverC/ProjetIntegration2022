@@ -31,19 +31,22 @@
         <entry key="..\:/Users/louis/OneDrive/Bureau/1)Cours-Ephec/BAC3/ProjetIntegration/code/ProjetIntegration2022/app/src/main/res/layout/activity_maps.xml" value="0.19972826086956522" />
         <entry key="..\:/Users/louis/OneDrive/Bureau/1)Cours-Ephec/BAC3/ProjetIntegration/code/ProjetIntegration2022/app/src/main/res/menu/bottom_navigation_menu.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/louis/OneDrive/Bureau/1)Cours-Ephec/BAC3/ProjetIntegration/code/ProjetIntegration2022/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.3828125" />
-        <entry key="..\:/Users/scham/Desktop/ProjetIntegration2022/app/src/main/res/drawable-anydpi/ic_home.xml" value="0.24270833333333333" />
-        <entry key="..\:/Users/scham/Desktop/ProjetIntegration2022/app/src/main/res/drawable/bottom_nav_color.xml" value="0.3828125" />
         <entry key="..\:/Users/scham/Desktop/ProjetIntegration2022/app/src/main/res/layout/activity_event.xml" value="0.33" />
         <entry key="..\:/Users/scham/Desktop/ProjetIntegration2022/app/src/main/res/layout/activity_main.xml" value="0.18009118541033434" />
-        <entry key="..\:/Users/scham/Desktop/ProjetIntegration2022/app/src/main/res/layout/activity_maps.xml" value="0.33" />
-        <entry key="..\:/Users/scham/Desktop/ProjetIntegration2022/app/src/main/res/layout/fragment_add_collecte.xml" value="0.33" />
-        <entry key="..\:/Users/scham/Desktop/ProjetIntegration2022/app/src/main/res/layout/fragment_collection.xml" value="0.475" />
         <entry key="..\:/Users/scham/Desktop/ProjetIntegration2022/app/src/main/res/layout/fragment_liste_collecte.xml" value="0.36666666666666664" />
-        <entry key="..\:/Users/scham/Desktop/ProjetIntegration2022/app/src/main/res/layout/item_horizontal_collecte.xml" value="0.25" />
-        <entry key="..\:/Users/scham/Desktop/ProjetIntegration2022/app/src/main/res/layout/item_vertical_collecte.xml" value="0.5" />
-        <entry key="..\:/Users/scham/Desktop/ProjetIntegration2022/app/src/main/res/layout/popup_collecte_details.xml" value="0.5" />
-        <entry key="..\:/Users/scham/Desktop/ProjetIntegration2022/app/src/main/res/menu/bottom_navigation_menu.xml" value="0.22" />
+        <entry key="..\:/Users/scham/Desktop/ProjetIntegration2022/app/src/main/res/layout/item_horizontal_collecte.xml" value="0.278125" />
+        <entry key="..\:/Users/scham/Desktop/ProjetIntegration2022/app/src/main/res/layout/item_vertical_collecte.xml" value="0.33" />
+        <entry key="..\:/Users/scham/Desktop/ProjetIntegration2022/app/src/main/res/menu/bottom_navigation_menu.xml" value="0.1" />
         <entry key="..\:/Users/scham/Desktop/ProjetIntegration2022/app/src/main/res/menu/menu.xml" value="0.1" />
+        <entry key="..\:/Users/test/StudioProjects/ProjetIntegration2022/app/src/main/res/layout/activity_event.xml" value="0.1" />
+        <entry key="..\:/Users/test/StudioProjects/ProjetIntegration2022/app/src/main/res/layout/activity_main.xml" value="0.15081521739130435" />
+        <entry key="..\:/Users/test/StudioProjects/ProjetIntegration2022/app/src/main/res/layout/fragment_liste_collecte.xml" value="0.22" />
+        <entry key="..\:/Users/test/StudioProjects/ProjetIntegration2022/app/src/main/res/layout/marker_info_contents.xml" value="0.33" />
+        <entry key="..\:/Users/test/StudioProjects/ProjetIntegration2022/app/src/main/res/layout/popup_collecte_details.xml" value="0.25" />
+        <entry key="..\:/Users/test/StudioProjects/ProjetIntegration2022/app/src/main/res/layout/popup_rubbish.xml" value="0.19746376811594202" />
+        <entry key="..\:/Users/test/StudioProjects/ProjetIntegration2022/app/src/main/res/layout/popup_rubish_details.xml" value="0.33" />
+        <entry key="..\:/Users/test/StudioProjects/ProjetIntegration2022/app/src/main/res/layout/popup_rubish_window.xml" value="0.14427083333333332" />
+        <entry key="..\:/Users/test/StudioProjects/ProjetIntegration2022/app/src/main/res/layout/rubish_description_page.xml" value="0.22" />
       </map>
     </option>
   </component>
