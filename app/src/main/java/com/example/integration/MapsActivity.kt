@@ -29,6 +29,8 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
     private val REQUEST_LOCATION_PERMISSION = 1
 
 
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -38,6 +40,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         val mapFragment = supportFragmentManager
             .findFragmentById(R.id.map) as SupportMapFragment
         mapFragment.getMapAsync(this)
+
     }
 
     private fun setMapLongClick(map: GoogleMap) {
@@ -131,6 +134,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
     // actions on click menu items
     override fun onOptionsItemSelected(item: MenuItem) = when (item.itemId) {
 
+
         R.id.action_collecte_listing -> {
             val intent = Intent(this, EventActivity::class.java)
             // start your next activity
@@ -143,7 +147,26 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
             startActivity(intent)
             true
         }
-
+        }
+        R.id.action_boutique -> {
+            val intent = Intent(this, BoutiqueActivity::class.java)
+            // start your next activity
+            startActivity(intent)
+            true
+        }
+        //action_profile est l'id renseigné dans menu.xml
+        R.id.action_classement -> {
+            val intent = Intent(this, ClassementActivity::class.java)
+            // start your next activity
+            startActivity(intent)
+            true
+        }
+        R.id.action_login -> {
+            val intent = Intent(this, LoginActivity::class.java)
+            // start your next activity
+            startActivity(intent)
+            true
+        }
 
 
         else -> {

@@ -1,18 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
+
     xmlns:app="http://schemas.android.com/apk/res-auto"
     >
+
     <item
-        android:id="@+id/action_search"
-        android:icon="@mipmap/outline_search_white_18dp"
-        android:title="Search"
-         />
+        android:id="@+id/action_classement"
+        android:title="Classement" />
     <item
-        android:id="@+id/action_profile"
-        android:title="Profile" />
-    <item
-        android:id="@+id/action_setting"
-        android:title="Setting" />
+        android:id="@+id/action_collecte"
+        android:title="Organiser Collecte" />
     <item
         android:id="@+id/action_login"
         android:title="login" />
@@ -20,9 +17,12 @@
         android:id="@+id/action_collecte"
         android:title="Organiser Collecte" />
     <item
+
         android:id="@+id/action_boutique"
         android:title="Boutique" />
     <item
         android:id="@+id/action_collecte_listing"
         android:title="Voir collectes à proximité" />
+
 </menu>
+
