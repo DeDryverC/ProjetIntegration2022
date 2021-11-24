@@ -20,6 +20,6 @@
         android:id="@+id/action_collecte"
         android:title="Organiser Collecte" />
     <item
-        android:id="@+id/action_scan"
+        android:id="@+id/action_ticket"
         android:title="Scan ticket" />
 </menu>

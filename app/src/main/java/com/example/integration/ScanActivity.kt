@@ -1,103 +1,121 @@
 package com.example.integration
 
+import android.Manifest
 import android.annotation.SuppressLint
+import android.app.Activity
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Bundle
 import android.os.PersistableBundle
 import android.util.Log
+import android.util.SparseArray
+import android.view.SurfaceHolder
 import android.widget.Toast
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import com.budiyev.android.codescanner.AutoFocusMode
-import com.budiyev.android.codescanner.CodeScanner
-import com.budiyev.android.codescanner.DecodeCallback
-import com.budiyev.android.codescanner.ErrorCallback
-import com.budiyev.android.codescanner.ScanMode
+import androidx.core.util.isNotEmpty
+import com.budiyev.android.codescanner.*
+import com.google.android.gms.vision.CameraSource
+import com.google.android.gms.vision.Detector
+import com.google.android.gms.vision.barcode.Barcode
+import com.google.android.gms.vision.barcode.BarcodeDetector
+import com.google.zxing.integration.android.IntentIntegrator
 import kotlinx.android.synthetic.main.activity_scan_ticket.*
 import java.util.*
-
+import kotlin.Exception
 
 
 private const val CAMERA_REQUEST_CODE = 101;
 
 class ScanActivity : AppCompatActivity() {
 
-    private lateinit var codeScanner: CodeScanner;
+    private val requestCodeCameraPermission = 1001;
+    private lateinit var cameraSource: CameraSource
+    private lateinit var detector: BarcodeDetector
 
-
-
-    override fun onCreate(savedInstanceState: Bundle?, persistentState: PersistableBundle?) {
+    override fun onCreate(savedInstanceState: Bundle?){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_scan_ticket);
 
-        setupPermissions();
-        codeScanner();
-    }
-
-    private fun codeScanner(){
-        codeScanner = CodeScanner(this, scanner_view)
-
-        codeScanner.apply{
-            camera = CodeScanner.CAMERA_BACK;
-            formats = CodeScanner.ALL_FORMATS;
-
-            autoFocusMode = AutoFocusMode.SAFE;
-            scanMode = ScanMode.CONTINUOUS;
-            isAutoFocusEnabled = true;
-            isFlashEnabled = false;
-
-            decodeCallback = DecodeCallback {
-                runOnUiThread{
-                    tv_textView.text = it.text;
-                }
-            }
-            errorCallback = ErrorCallback {
-                runOnUiThread{
-                    Log.e("Main", "Erreur d'initialisation de la camera : ${it.message}");
-                }
-            }
-
-            scanner_view.setOnClickListener{
-                codeScanner.startPreview();
-            }
+        if(ContextCompat.checkSelfPermission(this@ScanActivity, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED){
+            askCameraPermission();
         }
-    }
-
-    override fun onResume(){
-        super.onResume();
-        codeScanner.startPreview();
-    }
-
-    override fun onPause(){
-        codeScanner.releaseResources();
-        super.onPause();
-    }
-
-    private fun setupPermissions(){
-        val permission = ContextCompat.checkSelfPermission(this, android.Manifest.permission.CAMERA)
-        if(permission != PackageManager.PERMISSION_GRANTED){
-            makeRequest();
+        else{
+            setupControls();
         }
+
     }
 
-    private fun makeRequest(){
-        ActivityCompat.requestPermissions(this, arrayOf(android.Manifest.permission.CAMERA), CAMERA_REQUEST_CODE)
+    private fun setupControls(){
+        detector = BarcodeDetector.Builder(this@ScanActivity).build();
+        cameraSource = CameraSource.Builder(this@ScanActivity, detector).setAutoFocusEnabled(true).build();
+        cameraSurfaceView.holder.addCallback(surfaceCallback);
+        detector.setProcessor(processor);
     }
 
+    private fun askCameraPermission(){
+        ActivityCompat.requestPermissions(this@ScanActivity, arrayOf(Manifest.permission.CAMERA), requestCodeCameraPermission);
+    }
 
-    @SuppressLint("MissingSuperCall")
-    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
     ) {
-        when(requestCode){
-            CAMERA_REQUEST_CODE -> {
-                if (grantResults.isEmpty() || grantResults[0] != PackageManager.PERMISSION_GRANTED){
-                    Toast.makeText(this, "Vous avez besoin de la camera pour faire fonctionner le scan!", Toast.LENGTH_SHORT).show();
-                } else{
-                    //ca a fonctionné
-                }
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        if(requestCode == requestCodeCameraPermission && grantResults.isNotEmpty()){
+            if(grantResults[0] == PackageManager.PERMISSION_GRANTED){
+                setupControls();
+            }
+            else{
+                Toast.makeText(applicationContext, "Permission refusée", Toast.LENGTH_SHORT).show()
             }
         }
     }
 
+    private val surfaceCallback = object : SurfaceHolder.Callback{
+        override fun surfaceCreated(surfaceHolder: SurfaceHolder) {
+            try{
+                if (ActivityCompat.checkSelfPermission(
+                        this@ScanActivity,
+                        Manifest.permission.CAMERA
+                    ) != PackageManager.PERMISSION_GRANTED
+                ) {
+                    return
+                }
+                cameraSource.start(surfaceHolder)
+            }catch(exception: Exception){
+                Toast.makeText(applicationContext, "Quelque chose s'est mal passé", Toast.LENGTH_SHORT).show();
+            }
+        }
+
+        override fun surfaceChanged(p0: SurfaceHolder, p1: Int, p2: Int, p3: Int) {
+
+        }
+
+        override fun surfaceDestroyed(p0: SurfaceHolder) {
+            cameraSource.stop()
+        }
+
+    }
+
+    private val processor = object : Detector.Processor<Barcode>{
+        override fun release() {
+
+        }
+
+        override fun receiveDetections(detections: Detector.Detections<Barcode>?) {
+            if(detections != null && detections.detectedItems.isNotEmpty()){
+                val qrCodes: SparseArray<Barcode> = detections.detectedItems;
+                val code = qrCodes.valueAt(0);
+                textScanResult.text = code.displayValue;
+            }else{
+                textScanResult.text=" ";
+            }
+        }
+
+    }
 }

@@ -54,4 +54,6 @@
 
 
     <string name="scan1">Scannez un code/ticket</string>
+    <string name="scan_qr">Scannez le barcode/QR code</string>
+    <string name="enter_ticket_number">Entrer le numéro de ticket manuellement</string>
 </resources>
