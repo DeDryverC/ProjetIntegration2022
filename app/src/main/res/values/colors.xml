@@ -8,4 +8,5 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="night_grey">#3C3E3C</color>
+    <color name="upload">#9bae57</color>
 </resources>

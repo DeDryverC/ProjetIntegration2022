@@ -1,23 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
-        android:id="@+id/connection"
-        android:title="@string/bottom_account_item"
-        android:icon="@drawable/ic_account" />
+        android:id="@+id/collecte_page"
+        android:title="Collectes"
+        android:icon="@drawable/ic_trash"
+        />
     <item
-        android:id="@+id/connection"
-        android:title="@string/bottom_trash_item"
-        android:icon="@drawable/ic_trash" />
+        android:id="@+id/collection_page"
+        android:title="Favorites"
+        android:icon="@drawable/ic_start"
+        />
     <item
-        android:id="@+id/map"
-        android:title="@string/bottom_map_item"
-        android:icon="@drawable/ic_map" />
-    <item
-        android:id="@+id/connection"
-        android:title="@string/bottom_eco_item"
-        android:icon="@drawable/ic_eco" />
-    <item
-        android:id="@+id/connection"
-        android:title="@string/bottom_other_item"
-        android:icon="@drawable/ic_other" />
+        android:id="@+id/add_collecte_page"
+        android:title="Ajouter"
+        android:icon="@drawable/ic_add"
+        />
 </menu>

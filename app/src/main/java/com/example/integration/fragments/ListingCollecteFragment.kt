@@ -19,7 +19,7 @@ class ListingCollecteFragment(private val context: EventActivity) : Fragment(){
 
         // récupérer 1er recyclerView
         val horizontalRecyclerView = view.findViewById<RecyclerView>(R.id.horizontal_recycler_view)
-        horizontalRecyclerView.adapter = CollecteAdapter(context, collecteList, R.layout.item_horizontal_collecte)
+        horizontalRecyclerView.adapter = CollecteAdapter(context, collecteList.filter { !it.liked }, R.layout.item_horizontal_collecte)
 
         // récupérer 2eme recyclerView
         val verticalRecyclerView = view.findViewById<RecyclerView>(R.id.vertical_recycler_view)

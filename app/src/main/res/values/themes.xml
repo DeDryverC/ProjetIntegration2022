@@ -15,8 +15,16 @@
     </style>
 
 
+
     <!-- Style pour la barre de navigation-->
     <style name="BottomNavigationStyle" parent="Widget.Design.BottomNavigationView">
         <item name="android:textSize">18sp</item>
     </style>
+
+    <!-- Personnaliser barre de navigation -->
+    <style name="bottomNavigationTheme" parent="Widget.Design.BottomNavigationView">
+        <item name="android:textSize">18sp</item>
+        <item name="android:fontFamily">@font/kanit</item>
+    </style>
+
 </resources>

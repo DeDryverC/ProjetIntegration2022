@@ -12,6 +12,7 @@ import org.junit.Assert.*
 class MapsUnitTest {
     @Test
     fun addition_isCorrect() {
-        assertEquals(5, 2 + 2)
+        print(assertEquals(5, 3 + 2))
+
     }
 }

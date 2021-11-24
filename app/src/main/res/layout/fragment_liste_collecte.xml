@@ -5,6 +5,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Découvrez de nouvelles collectes organisées"
+        style="@style/MaterialAlertDialog.MaterialComponents.Title.Text"
+        android:layout_marginLeft="15dp"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/horizontal_recycler_view"
@@ -18,7 +24,8 @@
         android:layout_height="wrap_content"
         android:text="Dernières collectes organisées"
         android:layout_marginTop="15dp"
-        android:layout_marginLeft="15dp"/>
+        android:layout_marginLeft="15dp"
+        style="@style/MaterialAlertDialog.MaterialComponents.Title.Text"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/vertical_recycler_view"
