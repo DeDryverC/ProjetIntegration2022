@@ -131,14 +131,20 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
     // actions on click menu items
     override fun onOptionsItemSelected(item: MenuItem) = when (item.itemId) {
-        R.id.action_search -> {
-            val intent = Intent(this, LoginActivity::class.java)
+        R.id.action_collecte_listing -> {
+            val intent = Intent(this, EventActivity::class.java)
+            // start your next activity
+            startActivity(intent)
+            true
+        }
+        R.id.action_boutique -> {
+            val intent = Intent(this, BoutiqueActivity::class.java)
             // start your next activity
             startActivity(intent)
             true
         }
         //action_profile est l'id renseigné dans menu.xml
-        R.id.action_profile -> {
+        R.id.action_classement -> {
             val intent = Intent(this, ClassementActivity::class.java)
             // start your next activity
             startActivity(intent)
