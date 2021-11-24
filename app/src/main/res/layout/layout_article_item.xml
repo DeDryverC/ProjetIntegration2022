@@ -13,7 +13,8 @@
         android:layout_gravity="center"
         android:padding="16dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:background="#E7E7E7">
 
         <ImageView
             android:id="@+id/imageView"
