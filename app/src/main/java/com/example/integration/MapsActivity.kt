@@ -4,31 +4,29 @@ import android.Manifest
 import android.content.ContentValues.TAG
 import android.content.Intent
 import android.content.pm.PackageManager
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import androidx.fragment.app.Fragment
-import com.example.integration.fragments.ListingCollecteFragment
-
-import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
+import com.google.android.gms.maps.GoogleMap.OnInfoWindowCloseListener
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
-import com.google.android.gms.maps.model.LatLng
-import com.google.android.gms.maps.model.MarkerOptions
 import com.google.android.gms.maps.model.BitmapDescriptorFactory
-import com.google.firebase.firestore.FirebaseFirestore
+import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.Marker
+import com.google.android.gms.maps.model.MarkerOptions
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import java.util.*
 
 
-class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
+class MapsActivity : AppCompatActivity(), OnMapReadyCallback,
+    GoogleMap.OnInfoWindowLongClickListener, OnInfoWindowCloseListener {
 
     private lateinit var mMap: GoogleMap
     private val REQUEST_LOCATION_PERMISSION = 1
@@ -60,7 +58,8 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
             val depot = hashMapOf(
                 "name" to "Depots",
                 "lat" to latLng.latitude,
-                "long" to latLng.longitude
+                "long" to latLng.longitude,
+                "description" to "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus ullamcorper accumsan porta. Nulla facilisi."
             )
             db.collection("depots").document(""+latLng.latitude)
                 .set(depot)
@@ -88,8 +87,24 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         setMapLongClick(mMap)
         enableMyLocation()
 
-
+        mMap.setOnInfoWindowLongClickListener(this@MapsActivity)
+        mMap.setOnInfoWindowCloseListener(this@MapsActivity)
+        // fenetre d'info personnalisée
+        mMap.setInfoWindowAdapter(MarkerInfoWindowAdapter(this))
     }
+
+
+    override fun onInfoWindowClose(marker: Marker) {
+        msgShow("Close Info Window")
+    }
+
+    override fun onInfoWindowLongClick(marker: Marker) {
+        val intent = Intent(this, RubishDescription::class.java)
+        intent.putExtra("MARKER_TITLE", marker.title)
+        intent.putExtra("MARKER_DESCRIPTION", marker.snippet)
+        startActivity(intent)
+    }
+
 
     private fun addDepots(googleMap: GoogleMap) {
 
@@ -102,12 +117,14 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
                     val long = document.data.getValue("long")
                     val name = document.data.getValue("name")
                     val pos = LatLng(lat as Double, long as Double)
+                    val desc = document.data.getValue("description")
 
                     mMap.addMarker(
                         MarkerOptions()
 
                             .position(pos)
                             .title(name as String)
+                            .snippet(desc as String)
                             .draggable(true)
                     )
 
@@ -144,8 +161,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
                 return
             }
             mMap.isMyLocationEnabled = true
-        }
-        else {
+        } else {
             ActivityCompat.requestPermissions(
                 this,
                 arrayOf<String>(Manifest.permission.ACCESS_FINE_LOCATION),
@@ -157,7 +173,8 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
     override fun onRequestPermissionsResult(
         requestCode: Int,
         permissions: Array<String>,
-        grantResults: IntArray) {
+        grantResults: IntArray
+    ) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         if (requestCode == REQUEST_LOCATION_PERMISSION) {
             if (grantResults.contains(PackageManager.PERMISSION_GRANTED)) {
@@ -165,6 +182,9 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
             }
         }
     }
+
+    //menu
+
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         val inflater = menuInflater
@@ -191,6 +211,8 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         }
     }
 
+
+    //fonction pour faire un popup de texte
     fun msgShow(msg: String) {
         Toast.makeText(this, msg, Toast.LENGTH_LONG).show()
     }

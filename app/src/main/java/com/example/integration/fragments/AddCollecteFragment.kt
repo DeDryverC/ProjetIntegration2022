@@ -71,7 +71,6 @@ class AddCollecteFragment(
             repo.insertCollecte(collect)
         }
     }
-
     private fun pickupImage() {
         val intent = Intent()
         intent.type = "image/"

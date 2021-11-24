@@ -52,4 +52,12 @@
     <string name="bottom_eco_item">Eco</string>
     <string name="bottom_other_item">Autre</string>
 
+    <!-- Page de description du depot lors de la création du dépôt-->
+    <string name="this_is_a_popup_window_on_the_map">This is a popup window on the map.</string>
+    <!-- Page popup de description du depot-->
+    <string name="description_depot">Description du dépôt</string>
+    <string name="lorem_ipsum">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus ullamcorper accumsan porta. Nulla facilisi.</string>
+    <string name="nom_depot">Nom du dépots</string>
+    <string name="test_depot">test depot</string>
+
 </resources>
