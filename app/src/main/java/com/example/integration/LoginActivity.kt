@@ -12,9 +12,10 @@ import com.auth0.android.result.Credentials
 import com.auth0.android.result.UserProfile
 import com.example.integration.databinding.ActivityMainBinding
 import com.google.android.material.snackbar.Snackbar
+import com.google.firebase.ktx.Firebase
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ktx.firestore
-import com.google.firebase.ktx.Firebase
+
 import java.time.LocalDateTime
 import java.util.*
 
