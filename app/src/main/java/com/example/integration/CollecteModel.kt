@@ -7,5 +7,7 @@ class CollecteModel (
     var liked: Boolean=false,
     var localisation: String="",
     var nom: String="",
-    var organisateur: String=""
+    var organisateur: String="",
+    var date: String="",
+    var heure: String=""
         )

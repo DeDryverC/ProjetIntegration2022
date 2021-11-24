@@ -1,33 +1,36 @@
 package com.example.integration.fragments
 
+import android.annotation.SuppressLint
 import android.app.Activity
+import android.app.DatePickerDialog
+import android.app.TimePickerDialog
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.EditText
-import android.widget.ImageView
+import android.widget.*
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.example.integration.CollecteModel
 import com.example.integration.CollecteRepository
 import com.example.integration.CollecteRepository.Singleton.downloadUri
 import com.example.integration.EventActivity
 import com.example.integration.R
+import com.google.type.Date
 import java.util.*
 
 class AddCollecteFragment(
     private val context: EventActivity
 ) : Fragment(){
     private var file: Uri? = null
-    private var uploadedImage:ImageView? = null
+    private var uploadedImage: ImageView? = null
 
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
+            inflater: LayoutInflater,
+            container: ViewGroup?,
+            savedInstanceState: Bundle?
     ): View? {
         val view = inflater?.inflate(R.layout.fragment_add_collecte, container, false)
 
@@ -38,7 +41,7 @@ class AddCollecteFragment(
         val pickupImageButton = view.findViewById<Button>(R.id.upload_button)
 
         // lorsqu'on clique dessus ca ouvre la galerie du téléphone
-        pickupImageButton.setOnClickListener{
+        pickupImageButton.setOnClickListener {
             pickupImage()
         }
 
@@ -49,23 +52,27 @@ class AddCollecteFragment(
         return view
     }
 
-    private fun sendForm(view:View) {
+    private fun sendForm(view: View) {
         val repo = CollecteRepository()
-        repo.uploadImage(file!!){
+        repo.uploadImage(file!!) {
             val collecteName = view.findViewById<EditText>(R.id.name_input).text.toString()
             val collecteDescription = view.findViewById<EditText>(R.id.description_input).text.toString()
             val collecteLocalisation = view.findViewById<EditText>(R.id.adresse_input).text.toString()
-            val collecteOrganisateur= view.findViewById<EditText>(R.id.organisateur_input).text.toString()
+            val collecteOrganisateur = view.findViewById<EditText>(R.id.organisateur_input).text.toString()
             val downloadImageUrl = downloadUri
+            val collecteDate = view.findViewById<EditText>(R.id.jour_input).text.toString()
+            val collecteHeure = view.findViewById<EditText>(R.id.heure_input).text.toString()
             // créer nouvel objet collecteModel
             val collect = CollecteModel(
-                collecteDescription,
-                UUID.randomUUID().toString(),
-                downloadImageUrl.toString(),
-                false,
-                collecteLocalisation,
-                collecteName,
-                collecteOrganisateur
+                    collecteDescription,
+                    UUID.randomUUID().toString(),
+                    downloadImageUrl.toString(),
+                    false,
+                    collecteLocalisation,
+                    collecteName,
+                    collecteOrganisateur,
+                    collecteDate,
+                    collecteHeure
             )
             // envoyer en DB
             repo.insertCollecte(collect)
@@ -81,9 +88,9 @@ class AddCollecteFragment(
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        if(requestCode == 47 && resultCode == Activity.RESULT_OK){
+        if (requestCode == 47 && resultCode == Activity.RESULT_OK) {
             // vérifier si données sont nulles
-            if(data == null || data.data == null) return
+            if (data == null || data.data == null) return
 
             // récupérer image sélectionnée
             file = data.data
@@ -93,5 +100,4 @@ class AddCollecteFragment(
 
         }
     }
-
 }
