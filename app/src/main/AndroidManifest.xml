@@ -18,6 +18,9 @@
             android:name=".PanierActivity"
             android:exported="true" />
         <activity
+            android:name=".ClassementActivity"
+            android:exported="true" />
+        <activity
             android:name=".BoutiqueActivity"
             android:exported="true" />
         <activity

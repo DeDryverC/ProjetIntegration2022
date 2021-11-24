@@ -141,28 +141,21 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
             startActivity(intent)
             true
         }
-        R.id.action_boutique -> {
-            val intent = Intent(this, BoutiqueActivity::class.java)
-            // start your next activity
-            startActivity(intent)
-            true
-        }
-        }
-        R.id.action_boutique -> {
-            val intent = Intent(this, BoutiqueActivity::class.java)
-            // start your next activity
-            startActivity(intent)
-            true
-        }
-        //action_profile est l'id renseigné dans menu.xml
         R.id.action_classement -> {
             val intent = Intent(this, ClassementActivity::class.java)
             // start your next activity
             startActivity(intent)
+
             true
         }
         R.id.action_login -> {
             val intent = Intent(this, LoginActivity::class.java)
+            // start your next activity
+            startActivity(intent)
+            true
+        }
+        R.id.action_boutique -> {
+            val intent = Intent(this, BoutiqueActivity::class.java)
             // start your next activity
             startActivity(intent)
             true

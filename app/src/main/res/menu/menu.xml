@@ -8,14 +8,8 @@
         android:id="@+id/action_classement"
         android:title="Classement" />
     <item
-        android:id="@+id/action_collecte"
-        android:title="Organiser Collecte" />
-    <item
         android:id="@+id/action_login"
         android:title="login" />
-    <item
-        android:id="@+id/action_collecte"
-        android:title="Organiser Collecte" />
     <item
 
         android:id="@+id/action_boutique"
