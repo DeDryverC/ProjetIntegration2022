@@ -56,4 +56,16 @@
     <string name="scan1">Scannez un code/ticket</string>
     <string name="scan_qr">Scannez le barcode/QR code</string>
     <string name="enter_ticket_number">Entrer le numéro de ticket manuellement</string>
+    <string name="numero_ticket">Numero de ticket</string>
+    <string name="TextView_enterTicket">Entrez les informations de votre ticket</string>
+    <string name="ticketTec">Sélectionnez le service de transports en communs utilisé</string>
+    <string name="send_ticket">Entrer le ticket</string>
+
+    <string-array name="tec_array">
+        <item>SNCB</item>
+        <item>TEC</item>
+        <item>STIB</item>
+        <item>De Lijn</item>
+    </string-array>
+
 </resources>

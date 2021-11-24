@@ -14,8 +14,15 @@ class TicketActivity : AppCompatActivity() {
         setContentView(R.layout.activity_ticket);
 
         val btn_scan = findViewById<Button>(R.id.button_scan);
+        val btn_enter = findViewById<Button>(R.id.button_enter);
+
         btn_scan.setOnClickListener {
             val intent = Intent(this, ScanActivity::class.java)
+            startActivity(intent)
+        }
+
+        btn_enter.setOnClickListener {
+            val intent = Intent(this, EnterTicketNumberActivity::class.java)
             startActivity(intent)
         }
 

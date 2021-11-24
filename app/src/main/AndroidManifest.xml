@@ -26,6 +26,8 @@
             android:stateNotNeeded="true"/>
         <activity
             android:name="com.example.integration.TicketActivity" />
+        <activity
+            android:name="com.example.integration.EnterTicketNumberActivity" />
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
