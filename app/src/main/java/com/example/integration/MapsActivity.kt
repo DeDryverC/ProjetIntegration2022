@@ -137,6 +137,12 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
             startActivity(intent)
             true
         }
+        R.id.action_boutique -> {
+            val intent = Intent(this, BoutiqueActivity::class.java)
+            // start your next activity
+            startActivity(intent)
+            true
+        }
 
 
 
