@@ -53,6 +53,12 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback,
                 latLng.latitude,
                 latLng.longitude
             )
+
+            //lancement de l'activité contentant le formulaire
+            val intent = Intent(this, RubishCreationForm::class.java)
+            //intent.putExtra("MARKER_TITLE", marker.title)
+            //intent.putExtra("MARKER_DESCRIPTION", marker.snippet)
+            startActivity(intent)
             val depot = hashMapOf(
                 "name" to "Depots",
                 "lat" to latLng.latitude,
