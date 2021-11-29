@@ -16,12 +16,19 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
+import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.activity_boutique.*
 import kotlinx.android.synthetic.main.activity_boutique.boutique_before
 import kotlinx.android.synthetic.main.activity_panier.*
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
 import org.greenrobot.eventbus.ThreadMode
+import java.lang.StringBuilder
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
+import com.auth0.android.result.UserProfile
+import com.google.firebase.firestore.auth.User
+
 
 class BoutiqueActivity : AppCompatActivity(), IArticleLoadListener, ICartLoadListener {
 
@@ -118,6 +125,18 @@ class BoutiqueActivity : AppCompatActivity(), IArticleLoadListener, ICartLoadLis
     override fun onArticleLoadSuccess(articleModelList: List<ArticleModel>?) {
         val adapter = MyArticleAdapter(this,articleModelList!!, cartLoadListener)
         recycler_articles.adapter = adapter
+
+        // Affichage des points de la personne connectée
+        val x = 1
+        var firestore: FirebaseFirestore = FirebaseFirestore.getInstance()
+        firestore.collection("clients").document("louiscarlier123@gmail.com")
+            .get()
+            .addOnSuccessListener {
+                val points = it.data?.get("points")
+                boutiquePoints.text = StringBuilder("Boutique (").append(points).append(StringBuilder(")"))}
+            .addOnFailureListener{
+
+            }
     }
 
     override fun onArticleLoadFailed(message: String?) {
