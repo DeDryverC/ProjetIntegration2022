@@ -86,7 +86,7 @@ class PanierActivity : AppCompatActivity(), ICartLoadListener {
         for(cartModel in cartModelList!!){
             sum += cartModel!!.prixTotal
         }
-        txtTotal.text = sum.toString()
+        txtTotal.text = StringBuilder("Total : ").append(sum.toString())
         val adapter = MyPanierAdapter(this,cartModelList)
         recycler_panier!!.adapter = adapter
     }
