@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+
+    android:layout_width="160dp"
+    android:layout_height="200dp"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+
+
+    <TextView
+        android:id="@+id/titre_nom_du_depot"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@android:color/black"
+        android:textSize="12sp"
+        android:textStyle="bold"
+        android:text="@string/nom_depot" />
+
+    <TextView
+        android:id="@+id/nom_du_depot"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@android:color/black"
+        android:textSize="12sp"
+        android:text="@string/test_depot" />
+    <TextView
+        android:id="@+id/titre_description_depot"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@android:color/black"
+        android:textSize="12sp"
+        android:textStyle="bold"
+        android:text="@string/description_depot" />
+
+    <TextView
+        android:id="@+id/description_depot"
+        android:layout_width="110dp"
+        android:layout_height="wrap_content"
+        android:text="@string/lorem_ipsum"
+        android:textColor="@android:color/black"
+        android:textSize="12sp" />
+
+
+</LinearLayout>
