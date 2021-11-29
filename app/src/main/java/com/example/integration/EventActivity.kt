@@ -1,12 +1,18 @@
 package com.example.integration
 
+import android.app.DatePickerDialog
+import android.app.TimePickerDialog
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.provider.CalendarContract
+import android.widget.DatePicker
+import android.widget.TimePicker
 import androidx.fragment.app.Fragment
 import com.example.integration.fragments.AddCollecteFragment
 import com.example.integration.fragments.CollectionFragment
 import com.example.integration.fragments.ListingCollecteFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import java.util.*
 
 class EventActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -31,7 +37,6 @@ class EventActivity : AppCompatActivity() {
                 R.id.add_collecte_page -> {
                     loadFragment(AddCollecteFragment(this))
                     return@setOnNavigationItemReselectedListener
-                    true
                 }
                 else -> false
             }

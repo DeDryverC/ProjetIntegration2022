@@ -79,6 +79,12 @@ class CollectePopup(private val adapter: CollecteAdapter,
 
         // organisateur
         findViewById<TextView>(R.id.popup_collecte_organisateur_subtitle).text = currentCollecte.organisateur
+
+        // date
+        findViewById<TextView>(R.id.popup_collecte_date_subtitle).text = currentCollecte.date
+
+        // heure
+        findViewById<TextView>(R.id.popup_collecte_heure_subtitle).text = currentCollecte.heure
     }
 
 }
