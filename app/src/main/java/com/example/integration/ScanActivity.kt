@@ -3,7 +3,6 @@ package com.example.integration
 import android.Manifest
 import android.annotation.SuppressLint
 import android.app.Activity
-import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Bundle
 import android.os.PersistableBundle
@@ -22,10 +21,12 @@ import com.google.android.gms.vision.CameraSource
 import com.google.android.gms.vision.Detector
 import com.google.android.gms.vision.barcode.Barcode
 import com.google.android.gms.vision.barcode.BarcodeDetector
+import com.google.firebase.firestore.FirebaseFirestore
 import com.google.zxing.integration.android.IntentIntegrator
 import kotlinx.android.synthetic.main.activity_scan_ticket.*
 import java.util.*
 import kotlin.Exception
+import android.content.Intent as Intent
 
 
 private const val CAMERA_REQUEST_CODE = 101;
@@ -35,6 +36,8 @@ class ScanActivity : AppCompatActivity() {
     private val requestCodeCameraPermission = 1001;
     private lateinit var cameraSource: CameraSource
     private lateinit var detector: BarcodeDetector
+    val db = FirebaseFirestore.getInstance();
+    val tickets = db.collection("tickets");
 
     override fun onCreate(savedInstanceState: Bundle?){
         super.onCreate(savedInstanceState);
@@ -102,6 +105,11 @@ class ScanActivity : AppCompatActivity() {
 
     }
 
+
+    private fun switchActivity(){
+        val intent = Intent(this, PointsReceivedActivity::class.java)
+        startActivity(intent)
+    }
     private val processor = object : Detector.Processor<Barcode>{
         override fun release() {
 
@@ -112,6 +120,21 @@ class ScanActivity : AppCompatActivity() {
                 val qrCodes: SparseArray<Barcode> = detections.detectedItems;
                 val code = qrCodes.valueAt(0);
                 textScanResult.text = code.displayValue;
+                val docRef=db.collection("tickets").document(code.displayValue)
+                val tec = hashMapOf(
+                    "tec" to "SNCB"
+                )
+
+                docRef.get()
+                    .addOnSuccessListener { document ->
+                        if (!document.exists()) {
+                            tickets.document(code.displayValue).set(tec);
+                            switchActivity();
+                        } else {
+                            textScanResult.text = "Ce ticket a déjà été scanné";
+                        }
+                    }
+
             }else{
                 textScanResult.text=" ";
             }

@@ -59,5 +59,11 @@ dependencies {
     implementation 'com.budiyev.android:code-scanner:2.1.0'
     implementation "com.journeyapps:zxing-android-embedded:3.6.0"
     implementation "com.google.android.gms:play-services-vision:19.0.0"
+    implementation 'com.google.firebase:firebase-inappmessaging:19.1.5'
+    implementation 'com.google.firebase:firebase-database:20.0.2'
+    implementation 'com.google.firebase:firebase-database-ktx:20.0.2'
+    implementation 'com.google.firebase:firebase-storage:20.0.0'
+    implementation platform('com.google.firebase:firebase-bom:29.0.0')
+    implementation 'com.google.firebase:firebase-firestore-ktx'
 
 }

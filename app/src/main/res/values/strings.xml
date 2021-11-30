@@ -60,6 +60,8 @@
     <string name="TextView_enterTicket">Entrez les informations de votre ticket</string>
     <string name="ticketTec">Sélectionnez le service de transports en communs utilisé</string>
     <string name="send_ticket">Entrer le ticket</string>
+    <string name="vos_points_ont_bien_t_rajout_s_votre_compte">Vos points ont bien été rajoutés à votre compte</string>
+    <string name="continuer">Continuer</string>
 
     <string-array name="tec_array">
         <item>SNCB</item>

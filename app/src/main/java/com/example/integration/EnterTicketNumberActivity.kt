@@ -5,22 +5,12 @@ import android.os.Bundle
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
 
 class EnterTicketNumberActivity : AppCompatActivity() {
-    object Singleton {
-        // lien vers bucket storage
-        private val BUCKET_URL: String = "gs://projetintegration-83d97.appspot.com"
-
-        // se connecte à notre espace de stockage
-        val storageReference = FirebaseStorage.getInstance().getReferenceFromUrl(BUCKET_URL)
-
-        // se connecter à la référence collecte de la DB
-        val databaseRef = FirebaseDatabase.getInstance("https://projetintegration-83d97-default-rtdb.europe-west1.firebasedatabase.app").getReference("collectes")
-
-        // créer liste avec les collectes
-        val collecteList = arrayListOf<CollecteModel>()
-    }
+    val db = FirebaseFirestore.getInstance();
+    val tickets = db.collection("tickets");
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState);
@@ -32,10 +22,34 @@ class EnterTicketNumberActivity : AppCompatActivity() {
         val spinner: Spinner = findViewById(R.id.spinner_tec)
         val btn_envoyer_ticket = findViewById<Button>(R.id.button_envoyer_ticket);
         val editTextNumber = findViewById<EditText>(R.id.enter_ticket_number);
+
+
         btn_envoyer_ticket.setOnClickListener {
-            var ticker_number = editTextNumber.text.toString();
-            var spinner_value = spinner.selectedItem.toString()
-            Toast.makeText(this, spinner_value, Toast.LENGTH_SHORT).show();
+            val ticket_number = editTextNumber.text.toString();
+            val spinner_value = spinner.selectedItem.toString();
+
+            val ticket = hashMapOf(
+                    "tec" to spinner_value
+            )
+
+
+            val docRef = db.collection("tickets").document("$ticket_number");
+            docRef.get()
+                    .addOnSuccessListener { document ->
+                        if (!document.exists()) {
+                            tickets.document(ticket_number).set(ticket);
+                            val intent = Intent(this, PointsReceivedActivity::class.java)
+                            startActivity(intent)
+                        } else {
+                            Toast.makeText(this, "Ce ticket à déjà été enregistré", Toast.LENGTH_SHORT).show();
+
+                        }
+                    }
+                    .addOnFailureListener { exception ->
+                        Toast.makeText(this, "Erreur lors de l'enregistrement", Toast.LENGTH_SHORT).show();
+                    }
+
+
         }
 
         ArrayAdapter.createFromResource(
