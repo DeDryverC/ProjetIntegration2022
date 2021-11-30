@@ -2,6 +2,7 @@ package com.example.integration.fragments
 
 import android.annotation.SuppressLint
 import android.app.Activity
+import android.app.AlertDialog
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
 import android.content.Intent
@@ -19,6 +20,8 @@ import com.example.integration.CollecteRepository.Singleton.downloadUri
 import com.example.integration.EventActivity
 import com.example.integration.R
 import com.google.type.Date
+import kotlinx.android.synthetic.main.activity_event.*
+import kotlinx.android.synthetic.main.fragment_add_collecte.*
 import java.util.*
 
 class AddCollecteFragment(
@@ -47,7 +50,9 @@ class AddCollecteFragment(
 
         // récupérer boutton confirmer
         val confirmationButton = view.findViewById<Button>(R.id.confirm_button)
-        confirmationButton.setOnClickListener { sendForm(view) }
+        confirmationButton.setOnClickListener {
+            sendForm(view)
+            }
 
         return view
     }
@@ -74,8 +79,55 @@ class AddCollecteFragment(
                     collecteDate,
                     collecteHeure
             )
-            // envoyer en DB
-            repo.insertCollecte(collect)
+            if(collecteName.isEmpty()){
+                name_input.error = "Nom requis !"
+                return@uploadImage
+            }
+            else if (collecteDescription.isEmpty()){
+                description_input.error = "Description requise !"
+                return@uploadImage
+            }
+            else if (collecteLocalisation.isEmpty()){
+                adresse_input.error = "Localisation requise !"
+                return@uploadImage
+            }
+            else if (collecteOrganisateur.isEmpty()){
+                organisateur_input.error = "Organisateur requis !"
+                return@uploadImage
+            }
+            else if (collecteDate.isEmpty()){
+                jour_input.error = "Date requise !"
+                return@uploadImage
+            }
+            else if (collecteHeure.isEmpty()){
+                heure_input.error = "Heure requise !"
+                return@uploadImage
+            }
+            else if ((collecteDate.split("/")[0].toInt() !in 1..31)){
+                jour_input.error = "Jour incorrect ! (JJ/MM) "
+                return@uploadImage
+            }
+            else if ((collecteDate.split("/")[1].toInt() !in 1..12)){
+                jour_input.error = "Jour incorrect ! (JJ/MM) "
+                return@uploadImage
+            }
+            else if ((collecteHeure.split(":")[0].toInt() !in 1..24)){
+                heure_input.error = "Heure incorrecte ! (HH:MM) "
+                return@uploadImage
+            }
+            else if ((collecteHeure.split(":")[1].toInt() !in 1..60)){
+                heure_input.error = "Heure incorrecte ! (HH:MM) "
+                return@uploadImage
+            }
+            else {
+                // envoyer en DB
+                val intent = Intent(context, PopupWindow::class.java)
+                intent.putExtra("poputitle", "Envoi formulaire")
+                intent.putExtra("popuptext", "Votre formulaire est valide et va être envoyé")
+                intent.putExtra("popupbtn", "OK")
+                repo.insertCollecte(collect)
+
+                }
         }
     }
 

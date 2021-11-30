@@ -26,6 +26,7 @@
             android:src="@drawable/ic_nav_before" />
 
         <TextView
+            android:id="@+id/titre_event"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
