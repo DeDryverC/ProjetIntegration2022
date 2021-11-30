@@ -2,10 +2,12 @@ package com.example.integration
 
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
+import android.media.Image
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.CalendarContract
 import android.widget.DatePicker
+import android.widget.ImageView
 import android.widget.TimePicker
 import androidx.fragment.app.Fragment
 import com.example.integration.fragments.AddCollecteFragment
@@ -18,9 +20,9 @@ class EventActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_event)
-
         loadFragment(ListingCollecteFragment(this))
-
+        val bouton_retour = findViewById<ImageView>(R.id.collecte_before)
+        bouton_retour.setOnClickListener { finish() }
         val navigationView = findViewById<BottomNavigationView>(R.id.navigation_view)
         navigationView.setOnNavigationItemReselectedListener {
             when(it.itemId){
