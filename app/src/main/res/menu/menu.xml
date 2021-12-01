@@ -17,8 +17,7 @@
     <item
         android:id="@+id/action_ticket"
         android:title="Entrer un ticket" />
-</menu>
-
+    <item
         android:id="@+id/action_boutique"
         android:title="Boutique" />
     <item
