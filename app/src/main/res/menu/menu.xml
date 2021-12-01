@@ -11,6 +11,9 @@
         android:id="@+id/action_login"
         android:title="login" />
     <item
+        android:id="@+id/action_profile"
+        android:title="profile" />
+    <item
 
         android:id="@+id/action_collecte"
         android:title="Organiser Collecte" />

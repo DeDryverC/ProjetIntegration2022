@@ -173,6 +173,11 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback,
             startActivity(intent)
             true
         }
+        R.id.action_profile ->{
+            val intent = Intent(this, ProfileActivity::class.java)
+            startActivity(intent)
+        }
+
         R.id.action_boutique -> {
             val intent = Intent(this, BoutiqueActivity::class.java)
             // start your next activity
@@ -185,6 +190,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback,
             startActivity(intent)
             true
         }
+
 
 
         else -> {
