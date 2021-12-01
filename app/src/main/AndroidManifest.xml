@@ -13,7 +13,7 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.Login">
+        android:theme="@style/Theme.Design.Light">
         <activity
             android:name=".PanierActivity"
             android:exported="true" />
@@ -43,6 +43,7 @@
         </activity>
 
         <activity android:name=".MapsActivity" />
+        <activity android:name=".RubishDescription"/>
 
     </application>
 
