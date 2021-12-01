@@ -30,6 +30,8 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback,
 
     private lateinit var mMap: GoogleMap
     private val REQUEST_LOCATION_PERMISSION = 1
+    private var mail = ""
+
 
     private val db = Firebase.firestore
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -41,6 +43,8 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback,
         val mapFragment = supportFragmentManager
             .findFragmentById(R.id.map) as SupportMapFragment
         mapFragment.getMapAsync(this)
+        val extras = intent.extras
+        mail=intent.getStringExtra("key").toString()
 
     }
 
@@ -174,6 +178,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback,
         }
         R.id.action_boutique -> {
             val intent = Intent(this, BoutiqueActivity::class.java)
+            intent.putExtra("key",mail)
             // start your next activity
             startActivity(intent)
             true
@@ -230,4 +235,5 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback,
         msgShow("Close Info Window")
     }
 }
+
 

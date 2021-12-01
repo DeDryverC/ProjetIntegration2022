@@ -14,7 +14,10 @@ import com.example.integration.databinding.ActivityMainBinding
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.auth.User
 import com.google.firebase.firestore.ktx.firestore
+import kotlinx.android.synthetic.main.activity_boutique.*
+import java.lang.StringBuilder
 
 import java.time.LocalDateTime
 import java.util.*
@@ -29,6 +32,8 @@ class LoginActivity : AppCompatActivity() {
     private var cachedCredentials: Credentials? = null
     private var cachedUserProfile: UserProfile? = null
     private val db = Firebase.firestore
+
+    private var mail = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -71,6 +76,7 @@ class LoginActivity : AppCompatActivity() {
                     showUserProfile()
                 }
             })
+
     }
     private fun showUserProfile() {
         // Guard against showing the profile when no user is logged in
@@ -90,8 +96,21 @@ class LoginActivity : AppCompatActivity() {
 
                 override fun onSuccess(profile: UserProfile) {
                     cachedUserProfile = profile
-                    createUser(profile?.email)
-                    onConnection(profile?.email)
+                    mail=intent.getStringExtra("key").toString()
+                    db.collection("clients").document(profile?.email.toString())
+                        .get()
+                        .addOnSuccessListener { document ->
+                            if (document.exists()) {
+                                onConnection(profile?.email)
+                            }
+                            else {
+                                createUser(profile?.email)
+                                onConnection(profile?.email)
+                            }
+                            }
+                        .addOnFailureListener{
+
+                        }
                 }
 
             })

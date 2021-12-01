@@ -35,6 +35,8 @@ class BoutiqueActivity : AppCompatActivity(), IArticleLoadListener, ICartLoadLis
     lateinit var articleLoadListener: IArticleLoadListener
     lateinit var cartLoadListener: ICartLoadListener
 
+    private var mail = ""
+
     override fun onStart() {
         super.onStart()
         EventBus.getDefault().register(this)
@@ -127,9 +129,9 @@ class BoutiqueActivity : AppCompatActivity(), IArticleLoadListener, ICartLoadLis
         recycler_articles.adapter = adapter
 
         // Affichage des points de la personne connectée
-        val x = 1
+        mail=intent.getStringExtra("key").toString()
         var firestore: FirebaseFirestore = FirebaseFirestore.getInstance()
-        firestore.collection("clients").document("louiscarlier123@gmail.com")
+        firestore.collection("clients").document(mail)
             .get()
             .addOnSuccessListener {
                 val points = it.data?.get("points")
