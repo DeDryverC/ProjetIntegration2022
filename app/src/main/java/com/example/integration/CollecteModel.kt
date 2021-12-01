@@ -1,7 +1,13 @@
 package com.example.integration
 
 class CollecteModel (
-    val nom: String="Collecte BLC",
-    val localisation: String="Braine-le-Comte",
-    val imageUrl: String = "http://graven.yt/plante.jpg"
+    var description: String="",
+    var id: String = "collecte0",
+    var imageUrl: String = "",
+    var liked: Boolean=false,
+    var localisation: String="",
+    var nom: String="",
+    var organisateur: String="",
+    var date: String="",
+    var heure: String=""
         )

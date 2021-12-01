@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="15dp">
+
+    <LinearLayout
+        android:layout_marginTop="0dp"
+        android:id="@+id/linear"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <Button
+            android:id="@+id/upload_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Charger Image"
+            android:background="@color/upload"
+            style="@style/TextAppearance.AppCompat.Title"
+            android:textColor="@color/white"
+            android:padding="15dp"/>
+
+        <ImageView
+            android:id="@+id/preview_image"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+            android:src="@drawable/blc"/>
+    </LinearLayout>
+
+    <EditText
+        android:id="@+id/name_input"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:hint="Nom de la collecte"
+        android:paddingLeft="15dp"
+        android:layout_marginTop="10dp"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="80dp">
+
+        <EditText
+            android:id="@+id/organisateur_input"
+            android:layout_width="200dp"
+            android:layout_height="80dp"
+            android:hint="Organisateur"
+            android:paddingLeft="15dp"
+            android:layout_marginTop="10dp"/>
+
+        <EditText
+            android:id="@+id/adresse_input"
+            android:layout_width="149dp"
+            android:layout_height="80dp"
+            android:layout_marginTop="10dp"
+            android:hint="Adresse"
+            android:paddingLeft="15dp" />
+    </LinearLayout>
+    <EditText
+        android:id="@+id/description_input"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:hint="Description brève de la collecte"
+        android:paddingLeft="15dp"
+        android:layout_marginTop="10dp"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="80dp">
+
+        <EditText
+        android:layout_width="200dp"
+        android:layout_height="80dp"
+        android:hint="Date (JJ/MM)"
+        android:paddingLeft="15dp"
+        android:layout_marginTop="10dp"
+        android:inputType="datetime"
+        android:id="@+id/jour_input"/>
+
+        <EditText
+            android:id="@+id/heure_input"
+            android:layout_width="150dp"
+            android:layout_height="80dp"
+            android:layout_marginTop="10dp"
+            android:hint="Heure (HH:MM)"
+            android:inputType="time"
+            android:paddingLeft="15dp" />
+
+    </LinearLayout>
+
+
+    <Button
+        android:id="@+id/confirm_button"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:layout_marginTop="20dp"
+        android:background="@color/upload"
+        android:text="Confirmer Collecte"
+        android:textColor="@color/white"
+        android:textSize="24dp" />
+
+
+</LinearLayout>
