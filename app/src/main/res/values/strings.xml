@@ -52,6 +52,24 @@
     <string name="bottom_eco_item">Eco</string>
     <string name="bottom_other_item">Autre</string>
 
+
+    <string name="scan1">Scannez un code/ticket</string>
+    <string name="scan_qr">Scannez le barcode/QR code</string>
+    <string name="enter_ticket_number">Entrer le numéro de ticket manuellement</string>
+    <string name="numero_ticket">Numero de ticket</string>
+    <string name="TextView_enterTicket">Entrez les informations de votre ticket</string>
+    <string name="ticketTec">Sélectionnez le service de transports en communs utilisé</string>
+    <string name="send_ticket">Entrer le ticket</string>
+    <string name="vos_points_ont_bien_t_rajout_s_votre_compte">Vos points ont bien été rajoutés à votre compte</string>
+    <string name="continuer">Continuer</string>
+
+    <string-array name="tec_array">
+        <item>SNCB</item>
+        <item>TEC</item>
+        <item>STIB</item>
+        <item>De Lijn</item>
+    </string-array>
+
     <!-- popup window et page de detail-->
     <string name="description_depot">Description du dépôt</string>
     <string name="lorem_ipsum">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus ullamcorper accumsan porta. Nulla facilisi.</string>
