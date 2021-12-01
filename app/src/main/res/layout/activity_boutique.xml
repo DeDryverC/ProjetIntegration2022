@@ -24,13 +24,14 @@
             android:src="@drawable/ic_nav_before" />
 
         <TextView
+            android:id="@+id/boutiquePoints"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:layout_weight="11"
             android:gravity="center"
             android:text="Boutique"
-            android:textSize="30sp"
+            android:textSize="25sp"
             android:textStyle="bold" />
 
         <FrameLayout
@@ -61,6 +62,7 @@
     </LinearLayout>
 
 
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_articles"
         android:layout_width="match_parent"
@@ -68,5 +70,6 @@
         android:layout_below="@+id/panel"
         android:padding="8dp"
         android:background="@drawable/background_boutique"/>
+
     
 </RelativeLayout>
