@@ -27,7 +27,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
     private lateinit var mMap: GoogleMap
     private val REQUEST_LOCATION_PERMISSION = 1
-
+    private var mail = "";
 
 
 
@@ -40,7 +40,9 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         val mapFragment = supportFragmentManager
             .findFragmentById(R.id.map) as SupportMapFragment
         mapFragment.getMapAsync(this)
-
+        val extras = intent.extras
+        mail= intent.getStringExtra("key").toString()
+        msgShow(mail)
     }
 
     private fun setMapLongClick(map: GoogleMap) {
