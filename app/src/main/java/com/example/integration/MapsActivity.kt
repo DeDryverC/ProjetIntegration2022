@@ -1,5 +1,6 @@
 package com.example.integration
 
+
 import android.Manifest
 import android.content.ContentValues.TAG
 import android.content.Intent
@@ -179,6 +180,12 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback,
         R.id.action_boutique -> {
             val intent = Intent(this, BoutiqueActivity::class.java)
             intent.putExtra("key",mail)
+            // start your next activity
+            startActivity(intent)
+            true
+        }
+        R.id.action_ticket -> {
+            val intent = Intent(this, TicketActivity::class.java)
             // start your next activity
             startActivity(intent)
             true
