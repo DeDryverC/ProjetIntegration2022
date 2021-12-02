@@ -78,4 +78,11 @@
     <string name="legende_photo_de_depot">photo_du_depot</string>
     <string name="close_button">close_button</string>
 
+    <!-- strings profile -->
+
+    <string name="profile_historique">Historique</string>
+    <string name="profile_parametre">Paramètres</string>
+    <string name="moderator_alerts">Alerte Modération</string>
+    <string name="moderator_switch">Mode Modérateur</string>
+
 </resources>

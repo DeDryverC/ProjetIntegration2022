@@ -12,7 +12,8 @@
         android:layout_height="?android:attr/actionBarSize"
         android:background="#E7E7E7"
         android:orientation="horizontal"
-        android:weightSum="16">>
+        android:weightSum="16"
+        tools:ignore="MissingConstraints">>
 
         <ImageView
             android:id="@+id/boutique_before"
@@ -100,14 +101,14 @@
         app:layout_constraintTop_toBottomOf="@+id/profile_pic"
         tools:layout_editor_absoluteX="0dp" />
 
-    <TextView
-        android:id="@+id/profile_historique"
+    <Button
+        android:id="@+id/profile_btn_historique"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:fontFamily="@font/kanit"
-        android:text="Historique"
-        android:textSize="30dp"
+        android:text="@string/profile_historique"
+        android:textSize="30sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
@@ -121,16 +122,16 @@
         android:layout_marginLeft="15dp"
         android:layout_marginRight="15dp"
         android:background="@color/black"
-        app:layout_constraintTop_toBottomOf="@+id/profile_historique"
+        app:layout_constraintTop_toBottomOf="@+id/profile_btn_historique"
         tools:layout_editor_absoluteX="0dp" />
 
-    <TextView
-        android:id="@+id/profile_paramètre"
+    <Button
+        android:id="@+id/profile_btn_paramètre"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/kanit"
-        android:text="Paramètres"
-        android:textSize="30dp"
+        android:text="@string/profile_parametre"
+        android:textSize="30sp"
         android:layout_marginTop="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
