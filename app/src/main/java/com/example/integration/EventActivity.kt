@@ -43,6 +43,8 @@ class EventActivity : AppCompatActivity() {
                 else -> false
             }
         }
+        val actionBar = supportActionBar
+        actionBar!!.title = intent.getStringExtra("key").toString().replaceAfter("@", "").replace("@", "")
     }
 
     private fun loadFragment(fragment: Fragment) {

@@ -62,6 +62,9 @@ class BoutiqueActivity : AppCompatActivity(), IArticleLoadListener, ICartLoadLis
         loadArticleFromFirebase()
         countCartFromFirebase()
 
+        val actionBar = supportActionBar
+        actionBar!!.title = intent.getStringExtra("key").toString().replaceAfter("@", "").replace("@", "")
+
     }
 
     private fun countCartFromFirebase() {
@@ -120,7 +123,10 @@ class BoutiqueActivity : AppCompatActivity(), IArticleLoadListener, ICartLoadLis
         recycler_articles.layoutManager = gridLayoutManager
         recycler_articles.addItemDecoration(SpaceItemDecoration())
 
-        btnCart.setOnClickListener { startActivity(Intent(this,PanierActivity::class.java)) }
+        mail = intent.getStringExtra("key").toString()
+        val intent = Intent(this,PanierActivity::class.java)
+        intent.putExtra("key",mail)
+        btnCart.setOnClickListener { startActivity(intent) }
         boutique_before!!.setOnClickListener{ finish()}
     }
 
