@@ -79,55 +79,57 @@ class AddCollecteFragment(
                     collecteDate,
                     collecteHeure
             )
-            if(collecteName.isEmpty()){
-                name_input.error = "Nom requis !"
-                return@uploadImage
-            }
-            else if (collecteDescription.isEmpty()){
-                description_input.error = "Description requise !"
-                return@uploadImage
-            }
-            else if (collecteLocalisation.isEmpty()){
-                adresse_input.error = "Localisation requise !"
-                return@uploadImage
-            }
-            else if (collecteOrganisateur.isEmpty()){
-                organisateur_input.error = "Organisateur requis !"
-                return@uploadImage
-            }
-            else if (collecteDate.isEmpty()){
-                jour_input.error = "Date requise !"
-                return@uploadImage
-            }
-            else if (collecteHeure.isEmpty()){
-                heure_input.error = "Heure requise !"
-                return@uploadImage
-            }
-            else if ((collecteDate.split("/")[0].toInt() !in 1..31)){
-                jour_input.error = "Jour incorrect ! (JJ/MM) "
-                return@uploadImage
-            }
-            else if ((collecteDate.split("/")[1].toInt() !in 1..12)){
-                jour_input.error = "Jour incorrect ! (JJ/MM) "
-                return@uploadImage
-            }
-            else if ((collecteHeure.split(":")[0].toInt() !in 1..24)){
-                heure_input.error = "Heure incorrecte ! (HH:MM) "
-                return@uploadImage
-            }
-            else if ((collecteHeure.split(":")[1].toInt() !in 1..60)){
-                heure_input.error = "Heure incorrecte ! (HH:MM) "
-                return@uploadImage
-            }
-            else {
-                // envoyer en DB
-                val intent = Intent(context, PopupWindow::class.java)
-                intent.putExtra("poputitle", "Envoi formulaire")
-                intent.putExtra("popuptext", "Votre formulaire est valide et va être envoyé")
-                intent.putExtra("popupbtn", "OK")
-                repo.insertCollecte(collect)
+            when {
+                collecteName.isEmpty() -> {
+                    name_input.error = "Nom requis !"
+                    return@uploadImage
+                }
+                collecteDescription.isEmpty() -> {
+                    description_input.error = "Description requise !"
+                    return@uploadImage
+                }
+                collecteLocalisation.isEmpty() -> {
+                    adresse_input.error = "Localisation requise !"
+                    return@uploadImage
+                }
+                collecteOrganisateur.isEmpty() -> {
+                    organisateur_input.error = "Organisateur requis !"
+                    return@uploadImage
+                }
+                collecteDate.isEmpty() -> {
+                    jour_input.error = "Date requise !"
+                    return@uploadImage
+                }
+                collecteHeure.isEmpty() -> {
+                    heure_input.error = "Heure requise !"
+                    return@uploadImage
+                }
+                collecteDate.split("/")[0].toInt() !in 1..31 -> {
+                    jour_input.error = "Jour incorrect ! (JJ/MM) "
+                    return@uploadImage
+                }
+                collecteDate.split("/")[1].toInt() !in 1..12 -> {
+                    jour_input.error = "Jour incorrect ! (JJ/MM) "
+                    return@uploadImage
+                }
+                collecteHeure.split(":")[0].toInt() !in 1..24 -> {
+                    heure_input.error = "Heure incorrecte ! (HH:MM) "
+                    return@uploadImage
+                }
+                collecteHeure.split(":")[1].toInt() !in 1..60 -> {
+                    heure_input.error = "Heure incorrecte ! (HH:MM) "
+                    return@uploadImage
+                }
+                else -> {
+                    // envoyer en DB
+                    val intent = Intent(context, PopupWindow::class.java)
+                    intent.putExtra("poputitle", "Envoi formulaire")
+                    intent.putExtra("popuptext", "Votre formulaire est valide et va être envoyé")
+                    intent.putExtra("popupbtn", "OK")
+                    repo.insertCollecte(collect)
 
                 }
+            }
         }
     }
 
