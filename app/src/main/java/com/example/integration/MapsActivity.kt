@@ -47,6 +47,9 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback,
         val extras = intent.extras
         mail=intent.getStringExtra("key").toString()
 
+        val actionBar = supportActionBar
+        actionBar!!.title = mail.replaceAfter("@", "").replace("@", "")
+
     }
 
     private fun setMapLongClick(map: GoogleMap) {
@@ -160,12 +163,14 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback,
 
         R.id.action_collecte_listing -> {
             val intent = Intent(this, EventActivity::class.java)
+            intent.putExtra("key",mail)
             // start your next activity
             startActivity(intent)
             true
         }
         R.id.action_classement -> {
             val intent = Intent(this, ClassementActivity::class.java)
+            intent.putExtra("key",mail)
             // start your next activity
             startActivity(intent)
 
@@ -186,6 +191,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback,
         }
         R.id.action_ticket -> {
             val intent = Intent(this, TicketActivity::class.java)
+            intent.putExtra("key",mail)
             // start your next activity
             startActivity(intent)
             true
