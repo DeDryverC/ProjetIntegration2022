@@ -49,6 +49,9 @@ class PanierActivity : AppCompatActivity(), ICartLoadListener {
         setContentView(R.layout.activity_panier)
         init()
         loadCartFromFirebase()
+
+        val actionBar = supportActionBar
+        actionBar!!.title = intent.getStringExtra("key").toString().replaceAfter("@", "").replace("@", "")
     }
 
     private fun loadCartFromFirebase() {

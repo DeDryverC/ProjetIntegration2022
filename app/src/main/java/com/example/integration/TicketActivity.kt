@@ -16,6 +16,9 @@ class TicketActivity : AppCompatActivity() {
         val btn_scan = findViewById<Button>(R.id.button_scan);
         val btn_enter = findViewById<Button>(R.id.button_enter);
 
+        val actionBar = supportActionBar
+        actionBar!!.title = intent.getStringExtra("key").toString().replaceAfter("@", "").replace("@", "")
+
         btn_scan.setOnClickListener {
             val intent = Intent(this, ScanActivity::class.java)
             startActivity(intent)
