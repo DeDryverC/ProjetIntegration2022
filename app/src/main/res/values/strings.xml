@@ -66,5 +66,6 @@
     <string name="button_cancel">annuler</string>
     <string name="label_spinner_rubish_amount">Quantitée de déchet</string>
     <string name="send_form_rubish_button_label">Enregister le Dépôt sauvage</string>
+    <string name="Rubish_creation_form_image_desciption">photo(s) du depot</string>
 
 </resources>

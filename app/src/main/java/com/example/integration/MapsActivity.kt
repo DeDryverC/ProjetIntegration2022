@@ -16,12 +16,12 @@ import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
-import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+import kotlinx.android.synthetic.main.activity_maps.*
 import java.util.*
 
 
@@ -29,9 +29,10 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback,
     GoogleMap.OnInfoWindowLongClickListener, GoogleMap.OnInfoWindowCloseListener {
 
     private lateinit var mMap: GoogleMap
+    private var rubishCount: Int = 0
     private val REQUEST_LOCATION_PERMISSION = 1
-
     private val db = Firebase.firestore
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -44,55 +45,16 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback,
 
     }
 
-    private fun setMapLongClick(map: GoogleMap) {
-        map.setOnMapLongClickListener { latLng ->
-            // A Snippet is Additional text that's displayed below the title.
-            val snippet = String.format(
-                Locale.getDefault(),
-                "Lat: %1$.5f, Long: %2$.5f",
-                latLng.latitude,
-                latLng.longitude
-            )
-
-            //lancement de l'activité contentant le formulaire
-            val intent = Intent(this, RubishCreationForm::class.java)
-            //intent.putExtra("MARKER_TITLE", marker.title)
-            //intent.putExtra("MARKER_DESCRIPTION", marker.snippet)
-            startActivity(intent)
-            val depot = hashMapOf(
-                "name" to "Depots",
-                "lat" to latLng.latitude,
-                "long" to latLng.longitude,
-                "long" to latLng.longitude,
-                "description" to "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus ullamcorper accumsan porta. Nulla facilisi."
-            )
-            db.collection("depots").document("" + latLng.latitude)
-                .set(depot)
-            map.addMarker(
-                MarkerOptions()
-                    .position(latLng)
-                    .title("Decharge")
-                    .snippet(snippet)
-                    .draggable(true)
-                    .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_CYAN))
-            )
-        }
-
-
-    }
-
     override fun onMapReady(googleMap: GoogleMap) {
         mMap = googleMap
-
         // Add a marker in Ephec and move the camera
         val ephec = LatLng(50.66586937988797, 4.61221029898094)
         val zoomLevel = 15f
         //mMap.addMarker(MarkerOptions().position(ephec).title("Ephec"))
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(ephec, zoomLevel))
-        setMapLongClick(mMap)
         enableMyLocation()
-
         addDepots(mMap)
+        setMapLongClick(mMap)
 
         mMap.setOnInfoWindowLongClickListener(this@MapsActivity)
         mMap.setOnInfoWindowCloseListener(this@MapsActivity)
@@ -193,7 +155,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback,
         }
     }
 
-    fun msgShow(msg: String) {
+    private fun msgShow(msg: String) {
         Toast.makeText(this, msg, Toast.LENGTH_LONG).show()
     }
 
@@ -202,27 +164,77 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback,
         db.collection("depots")
             .get()
             .addOnSuccessListener { result ->
+                var compteur = 0
                 for (document in result) {
+                    var name = "vide"
+                    var desc = "vide"
                     val lat = document.data.getValue("lat")
                     val long = document.data.getValue("long")
-                    val name = document.data.getValue("name")
-                    val pos = LatLng(lat as Double, long as Double)
-                    val desc = document.data.getValue("description")
+                    if (document.data.containsKey("name")) {
+                        name = document.data.getValue("name").toString()
+                    }
+                    if (document.data.containsKey("description")) {
+                        desc = document.data.getValue("description").toString()
+                    }
+                    if (document.data.containsKey("amount")) {
+                        desc = document.data.getValue("amount").toString()
+                    }
+                    val latitudeAddDepot = (if (lat is String) lat.toDouble() else lat as Double)
+                    val longitudeAddDepot =
+                        (if (long is String) long.toDouble() else long as Double)
+                    val pos = LatLng(latitudeAddDepot, longitudeAddDepot)
 
+                    compteur += 1
                     mMap.addMarker(
                         MarkerOptions()
 
                             .position(pos)
-                            .title(name as String)
-                            .snippet(desc as String)
-                            .draggable(true)
+                            .title(name)
+                            .snippet(desc)
+                            .draggable(false)
                     )
-
                 }
+                db.collection("statistique").document("depots").update("compteur", compteur.plus(1))
             }
             .addOnFailureListener { exception ->
                 Log.d(TAG, "Error getting documents: ", exception)
             }
+    }
+
+    var depotId:String = " Depot n°$rubishCount"
+
+
+    private fun setMapLongClick(map: GoogleMap) {
+        var compteur: Int? = null
+        msgShow(depotId)
+        //msgShow(compteur.toString())
+        //depotId = "dépôt n° ${compteur?.plus(1)}"
+
+        map.setOnMapLongClickListener(fun(latLng: LatLng) {
+            //val snippet = String.format(
+            //    Locale.getDefault(),
+            //    "Lat: %1$.5f, Long: %2$.5f",
+            //  latLng.latitude,
+            //    latLng.longitude
+            //)
+            //val longitude: Double = latLng.longitude.absoluteValue
+            //val latitude: Double = latLng.latitude.absoluteValue
+            //position = LatLng(latitude, longitude)
+
+
+            val depot = hashMapOf(
+                "name" to "null",
+                "lat" to latLng.latitude,
+                "long" to latLng.longitude
+            )
+
+            //création du dépots dans la DB avant de lancer le formulaire
+            db.collection("depots").document(latLng.latitude.toString())
+                .set(depot)
+            //lancement de l'activité contentant le formulaire
+            val intent = Intent(this, RubishCreationForm::class.java)
+            startActivity(intent)
+        })
     }
 
     override fun onInfoWindowLongClick(marker: Marker) {

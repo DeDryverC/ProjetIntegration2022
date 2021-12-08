@@ -7,6 +7,7 @@
     android:padding="@dimen/item_margin">
 
     <Button
+        android:id="@+id/cancel_rubish_creation_form"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@color/upload"
@@ -88,7 +89,8 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:scaleType="centerCrop"
-            android:src="@drawable/blc" />
+            android:src="@drawable/blc"
+            android:contentDescription="@string/Rubish_creation_form_image_desciption" />
     </LinearLayout>
 
     <Button
