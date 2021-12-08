@@ -200,6 +200,12 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback,
             startActivity(intent)
             true
         }
+        R.id.action_profil ->{
+            val intent = Intent(this, ProfileActivity::class.java)
+            startActivity(intent)
+            true
+        }
+
         R.id.action_boutique -> {
             val intent = Intent(this, BoutiqueActivity::class.java)
             intent.putExtra("key",mail)
@@ -214,6 +220,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback,
             startActivity(intent)
             true
         }
+
 
 
         else -> {

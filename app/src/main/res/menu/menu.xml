@@ -11,6 +11,9 @@
         android:id="@+id/action_login"
         android:title="login" />
     <item
+        android:id="@+id/action_profil"
+        android:title="profil" />
+    <item
         android:id="@+id/action_ticket"
         android:title="Entrer un ticket" />
     <item
