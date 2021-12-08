@@ -5,23 +5,29 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Bundle
 import android.widget.Button
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.google.firebase.firestore.FirebaseFirestore
 
 class PointsReceivedActivity : AppCompatActivity() {
     val db = FirebaseFirestore.getInstance();
+    private var mail = ""
 
     override fun onCreate(savedInstanceState: Bundle?){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_points_received);
 
+        mail=intent.getStringExtra("key").toString()
+
+        plusUn()
+
         val btn_go_on = findViewById<Button>(R.id.btn_go_on);
         btn_go_on.setOnClickListener {
             val intent = Intent(this, MapsActivity::class.java)
+            intent.putExtra("key",mail)
             startActivity(intent)
         }
-
     }
     private fun updateActionBar(){
         val actionBar = supportActionBar
@@ -35,6 +41,7 @@ class PointsReceivedActivity : AppCompatActivity() {
                 }
             }
     }
+
     private fun plusUn() {
 
         val db2 = db.collection("clients").document(mail)
@@ -45,6 +52,7 @@ class PointsReceivedActivity : AppCompatActivity() {
             transaction.update(db2, "points", newScore)
         }
         Thread.sleep(500)
+        Toast.makeText(this, "Vous avez gagné un point", Toast.LENGTH_SHORT).show();
         updateActionBar()
     }
 
