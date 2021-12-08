@@ -85,4 +85,8 @@
     <string name="moderator_alerts">Alerte Modération</string>
     <string name="moderator_switch">Mode Modérateur</string>
 
+
+    <string name="setting_changename">Changer le nom</string>
+    <string name="setting_image">Téléverser une image de profil</string>
+
 </resources>

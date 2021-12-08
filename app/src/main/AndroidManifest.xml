@@ -33,6 +33,9 @@
             android:screenOrientation="fullSensor"
             tools:replace="android:screenOrientation"
             android:stateNotNeeded="true"/>
+        <activity android:name=".ProfileActivity"
+            android:exported="true"/>
+        <activity android:name=".ParametreActivity"/>
         <activity
             android:name="com.example.integration.TicketActivity" />
         <activity

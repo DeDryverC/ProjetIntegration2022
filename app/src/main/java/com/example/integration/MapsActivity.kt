@@ -173,9 +173,10 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback,
             startActivity(intent)
             true
         }
-        R.id.action_profile ->{
+        R.id.action_profil ->{
             val intent = Intent(this, ProfileActivity::class.java)
             startActivity(intent)
+            true
         }
 
         R.id.action_boutique -> {

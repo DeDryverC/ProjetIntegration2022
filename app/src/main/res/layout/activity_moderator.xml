@@ -16,7 +16,7 @@
         android:layout_marginLeft="15dp"
         android:layout_marginRight="15dp"/>
 
-    <SwitchCompat
+    <Switch
         android:id="@+id/moderator_btn_switch"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
