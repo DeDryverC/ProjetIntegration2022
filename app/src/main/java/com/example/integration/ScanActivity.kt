@@ -9,6 +9,8 @@ import android.os.PersistableBundle
 import android.util.Log
 import android.util.SparseArray
 import android.view.SurfaceHolder
+import android.widget.ArrayAdapter
+import android.widget.Spinner
 import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
@@ -38,16 +40,32 @@ class ScanActivity : AppCompatActivity() {
     private lateinit var detector: BarcodeDetector
     val db = FirebaseFirestore.getInstance();
     val tickets = db.collection("tickets");
+    private var mail = ""
+
+    var class_spinner : Spinner? = null
+
 
     override fun onCreate(savedInstanceState: Bundle?){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_scan_ticket);
 
+        mail=intent.getStringExtra("key").toString()
+        val spinner: Spinner = findViewById(R.id.spinner_tec_scan)
+        class_spinner = spinner
         if(ContextCompat.checkSelfPermission(this@ScanActivity, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED){
             askCameraPermission();
         }
         else{
             setupControls();
+        }
+
+        ArrayAdapter.createFromResource(
+            this,
+            R.array.tec_array,
+            android.R.layout.simple_spinner_item
+        ).also { adapter ->
+            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+            spinner.adapter = adapter
         }
 
     }
@@ -106,10 +124,22 @@ class ScanActivity : AppCompatActivity() {
     }
 
 
-    private fun switchActivity(){
+    private fun switchActivityPointsReceived(){
         val intent = Intent(this, PointsReceivedActivity::class.java)
+        intent.putExtra("key",mail)
         startActivity(intent)
     }
+
+    private fun alreadyScanned(){
+        val intent = Intent(this, TicketActivity::class.java)
+        intent.putExtra("key",mail)
+        startActivity(intent)
+        Toast.makeText(this, "Ce ticket a déjà été scanné", Toast.LENGTH_SHORT).show()
+    }
+    private fun getSpinnerValue(){
+
+    }
+
     private val processor = object : Detector.Processor<Barcode>{
         override fun release() {
 
@@ -121,17 +151,21 @@ class ScanActivity : AppCompatActivity() {
                 val code = qrCodes.valueAt(0);
                 textScanResult.text = code.displayValue;
                 val docRef=db.collection("tickets").document(code.displayValue)
+
+                val spinner_value = class_spinner?.selectedItem.toString()
                 val tec = hashMapOf(
-                    "tec" to "SNCB"
+                    "tec" to spinner_value
                 )
 
                 docRef.get()
                     .addOnSuccessListener { document ->
                         if (!document.exists()) {
+                            detector.release();
                             tickets.document(code.displayValue).set(tec);
-                            switchActivity();
+                            switchActivityPointsReceived();
                         } else {
-                            textScanResult.text = "Ce ticket a déjà été scanné";
+                            detector.release();
+                            alreadyScanned();
                         }
                     }
 
@@ -141,4 +175,6 @@ class ScanActivity : AppCompatActivity() {
         }
 
     }
+
+
 }

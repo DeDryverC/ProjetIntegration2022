@@ -11,12 +11,13 @@ import com.google.firebase.storage.FirebaseStorage
 class EnterTicketNumberActivity : AppCompatActivity() {
     val db = FirebaseFirestore.getInstance();
     val tickets = db.collection("tickets");
+    private var mail = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_enter_ticket);
 
-
+        mail=intent.getStringExtra("key").toString()
 
 
         val spinner: Spinner = findViewById(R.id.spinner_tec)
@@ -39,6 +40,7 @@ class EnterTicketNumberActivity : AppCompatActivity() {
                         if (!document.exists()) {
                             tickets.document(ticket_number).set(ticket);
                             val intent = Intent(this, PointsReceivedActivity::class.java)
+                            intent.putExtra("key",mail)
                             startActivity(intent)
                         } else {
                             Toast.makeText(this, "Ce ticket à déjà été enregistré", Toast.LENGTH_SHORT).show();
@@ -48,7 +50,6 @@ class EnterTicketNumberActivity : AppCompatActivity() {
                     .addOnFailureListener { exception ->
                         Toast.makeText(this, "Erreur lors de l'enregistrement", Toast.LENGTH_SHORT).show();
                     }
-
 
         }
 
