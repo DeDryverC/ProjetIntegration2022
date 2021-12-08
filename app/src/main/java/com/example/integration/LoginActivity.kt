@@ -117,15 +117,21 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun createUser(text: String?) {
-    val date = LocalDateTime.now()
-        val user = hashMapOf(
-            "email" to "$text",
-            "lastConnect" to "$date",
-            "points" to 1
-        )
-        db.collection("clients").document("$text")
-            .set(user)
-    }
+        db.collection("clients").document("$text").get()
+            .addOnSuccessListener {
+            }
+            .addOnFailureListener { exception ->
+                val date = LocalDateTime.now()
+                val user = hashMapOf(
+                    "email" to "$text",
+                    "lastConnect" to "$date",
+                    "points" to 1
+                )
+                db.collection("clients").document("$text")
+                    .set(user)
+            }
+            }
+
 
     private fun showSnackBar(text: String) {
         Snackbar

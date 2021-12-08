@@ -23,6 +23,7 @@ import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+import java.time.LocalDateTime
 import java.util.*
 
 
@@ -46,10 +47,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback,
         mapFragment.getMapAsync(this)
         val extras = intent.extras
         mail=intent.getStringExtra("key").toString()
-
-        val actionBar = supportActionBar
-        actionBar!!.title = mail.replaceAfter("@", "").replace("@", "")
-
+        updateActionBar()
     }
 
     private fun setMapLongClick(map: GoogleMap) {
@@ -78,11 +76,35 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback,
                     .draggable(true)
                     .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_CYAN))
             )
+            plusUn()
         }
 
 
     }
+    private fun updateActionBar(){
+        val actionBar = supportActionBar
 
+        val docRef = db.collection("clients").document(mail)
+        docRef.get()
+            .addOnSuccessListener { document ->
+                if (document != null) {
+                    val points =  document.data?.getValue("points")
+                    actionBar!!.title = mail.replaceAfter("@", "").replace("@", "") + " : $points points "
+                }
+            }
+    }
+    private fun plusUn() {
+
+        val db2 = db.collection("clients").document(mail)
+        var newScore: Int
+        db.runTransaction { transaction ->
+            val snapshot = transaction.get(db2)
+            newScore = (snapshot.getDouble("points")!! + 1).toInt()
+            transaction.update(db2, "points", newScore)
+        }
+        Thread.sleep(500)
+        updateActionBar()
+    }
     override fun onMapReady(googleMap: GoogleMap) {
         mMap = googleMap
 
@@ -169,11 +191,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback,
             true
         }
         R.id.action_classement -> {
-            val intent = Intent(this, ClassementActivity::class.java)
-            intent.putExtra("key",mail)
-            // start your next activity
-            startActivity(intent)
-
+            plusUn()
             true
         }
         R.id.action_login -> {
@@ -209,6 +227,8 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback,
         Toast.makeText(this, msg, Toast.LENGTH_LONG).show()
     }
 
+
+
     private fun addDepots(googleMap: GoogleMap) {
 
         db.collection("depots")
@@ -231,13 +251,16 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback,
                     )
 
                 }
+
             }
             .addOnFailureListener { exception ->
                 Log.d(TAG, "Error getting documents: ", exception)
             }
+
     }
 
     override fun onInfoWindowLongClick(marker: Marker) {
+
         val intent = Intent(this, RubishDescription::class.java)
         intent.putExtra("MARKER_TITLE", marker.title)
         intent.putExtra("MARKER_DESCRIPTION", marker.snippet)

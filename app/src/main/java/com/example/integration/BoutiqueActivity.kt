@@ -34,7 +34,7 @@ class BoutiqueActivity : AppCompatActivity(), IArticleLoadListener, ICartLoadLis
 
     lateinit var articleLoadListener: IArticleLoadListener
     lateinit var cartLoadListener: ICartLoadListener
-
+    private val db = Firebase.firestore
     private var mail = ""
 
     override fun onStart() {
@@ -61,12 +61,33 @@ class BoutiqueActivity : AppCompatActivity(), IArticleLoadListener, ICartLoadLis
         init()
         loadArticleFromFirebase()
         countCartFromFirebase()
-
-        val actionBar = supportActionBar
-        actionBar!!.title = intent.getStringExtra("key").toString().replaceAfter("@", "").replace("@", "")
+        updateActionBar()
 
     }
+    fun updateActionBar(){
+        val actionBar = supportActionBar
 
+        val docRef = db.collection("clients").document("$mail")
+        docRef.get()
+            .addOnSuccessListener { document ->
+                if (document != null) {
+                    val points =  document.data?.getValue("points")
+                    actionBar!!.title = mail.replaceAfter("@", "").replace("@", "") + " : $points points "
+                }
+            }
+    }
+    fun plusUn() {
+
+        val db2 = db.collection("clients").document(mail)
+        var newScore = 0
+        db.runTransaction { transaction ->
+            val snapshot = transaction.get(db2)
+            newScore = (snapshot.getDouble("points")!! + 1).toInt()
+            transaction.update(db2, "points", newScore)
+        }
+        Thread.sleep(500)
+        updateActionBar()
+    }
     private fun countCartFromFirebase() {
         val cartModels: MutableList<CartModel> = ArrayList()
         FirebaseDatabase.getInstance("https://projetintegration-83d97-default-rtdb.europe-west1.firebasedatabase.app")

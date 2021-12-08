@@ -20,7 +20,6 @@
         <entry key="..\:/Users/gael-/AndroidStudioProjects/login2/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.18981481481481483" />
         <entry key="..\:/Users/gael-/AndroidStudioProjects/login2/app/src/main/res/drawable/bin.xml" value="0.22037037037037038" />
         <entry key="..\:/Users/gael-/AndroidStudioProjects/login2/app/src/main/res/drawable/ic_launcher_background.xml" value="0.18981481481481483" />
-
         <entry key="..\:/Users/gael-/AndroidStudioProjects/login2/app/src/main/res/drawable/ic_prof.xml" value="0.2359375" />
         <entry key="..\:/Users/gael-/AndroidStudioProjects/login2/app/src/main/res/layout/activity_classement.xml" value="0.22083333333333333" />
         <entry key="..\:/Users/gael-/AndroidStudioProjects/login2/app/src/main/res/layout/activity_event.xml" value="0.21979166666666666" />
@@ -28,6 +27,8 @@
         <entry key="..\:/Users/gael-/AndroidStudioProjects/login2/app/src/main/res/layout/activity_maps.xml" value="0.33" />
         <entry key="..\:/Users/gael-/AndroidStudioProjects/login2/app/src/main/res/layout/activity_panier.xml" value="0.22083333333333333" />
         <entry key="..\:/Users/gael-/AndroidStudioProjects/login2/app/src/main/res/layout/e.xml" value="0.21979166666666666" />
+        <entry key="..\:/Users/gael-/AndroidStudioProjects/login2/app/src/main/res/layout/fragment_add_collecte.xml" value="0.22083333333333333" />
+        <entry key="..\:/Users/gael-/AndroidStudioProjects/login2/app/src/main/res/layout/fragment_collection.xml" value="0.22083333333333333" />
         <entry key="..\:/Users/gael-/AndroidStudioProjects/login2/app/src/main/res/layout/fragment_liste_collecte.xml" value="0.21979166666666666" />
         <entry key="..\:/Users/gael-/AndroidStudioProjects/login2/app/src/main/res/layout/info_window_layout.xml" value="0.21979166666666666" />
         <entry key="..\:/Users/gael-/AndroidStudioProjects/login2/app/src/main/res/layout/item_horizontal_collecte.xml" value="0.21979166666666666" />
