@@ -245,7 +245,6 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback,
                             .draggable(false)
                     )
                 }
-            US04formulaire_creation_depot
                 db.collection("statistique").document("depots").update("compteur", compteur.plus(1))
 
             }
