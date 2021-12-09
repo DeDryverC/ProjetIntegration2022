@@ -1,8 +1,10 @@
 package com.example.integration
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
+import android.os.Build
 import android.os.Bundle
+import androidx.annotation.RequiresApi
+import androidx.appcompat.app.AppCompatActivity
 import com.auth0.android.Auth0
 import com.auth0.android.authentication.AuthenticationAPIClient
 import com.auth0.android.authentication.AuthenticationException
@@ -12,12 +14,14 @@ import com.auth0.android.result.Credentials
 import com.auth0.android.result.UserProfile
 import com.example.integration.databinding.ActivityMainBinding
 import com.google.android.material.snackbar.Snackbar
-import com.google.firebase.ktx.Firebase
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.auth.User
 import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
+
 import kotlinx.android.synthetic.main.activity_boutique.*
 import java.lang.StringBuilder
+
 
 import java.time.LocalDateTime
 import java.util.*
@@ -94,6 +98,7 @@ class LoginActivity : AppCompatActivity() {
                         exception.getCode()))
                 }
 
+                @RequiresApi(Build.VERSION_CODES.O)
                 override fun onSuccess(profile: UserProfile) {
                     cachedUserProfile = profile
                     mail=intent.getStringExtra("key").toString()
@@ -116,6 +121,7 @@ class LoginActivity : AppCompatActivity() {
             })
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     private fun createUser(text: String?) {
         db.collection("clients").document("$text").get()
             .addOnSuccessListener {

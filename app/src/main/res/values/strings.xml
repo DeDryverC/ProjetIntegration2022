@@ -77,6 +77,14 @@
     <string name="test_depot">test depot</string>
     <string name="legende_photo_de_depot">photo_du_depot</string>
     <string name="close_button">close_button</string>
+    <string name="editText_rubish_name">indiquer ici le titre du depot</string>
+    <string name="editText_rubish_descritpion">décriver ici de depot</string>
+    <string name="image_button_label">Charger Image</string>
+    <string name="collecte_image_description">Collecte_image</string>
+    <string name="button_cancel">annuler</string>
+    <string name="label_spinner_rubish_amount">Quantitée de déchet</string>
+    <string name="send_form_rubish_button_label">Enregister le Dépôt sauvage</string>
+    <string name="Rubish_creation_form_image_desciption">photo(s) du depot</string>
 
     <!-- strings profile -->
 

@@ -22,7 +22,7 @@
             android:id="@+id/upload_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Charger Image"
+            android:text="@string/image_button_label"
             android:background="@color/upload"
             style="@style/TextAppearance.AppCompat.Title"
             android:textColor="@color/white"
@@ -33,7 +33,8 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:scaleType="centerCrop"
-            android:src="@drawable/blc"/>
+            android:src="@drawable/blc"
+            android:contentDescription="@string/collecte_image_description" />
     </LinearLayout>
 
     <EditText
