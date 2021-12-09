@@ -6,29 +6,38 @@
     android:layout_height="match_parent"
     tools:context=".EventActivity">
 
-    <TextView
-        android:id="@+id/textView"
-        style="@style/TextAppearance.AppCompat.Title"
-        android:layout_width="417dp"
-        android:layout_height="24dp"
-        android:text="CitoyApp"
-        android:textFontWeight="700"
-        app:layout_constraintBottom_toBottomOf="parent"
+    <LinearLayout
+        android:id="@+id/panel"
+        android:layout_width="match_parent"
+        android:layout_height="?android:attr/actionBarSize"
+        android:background="#E7E7E7"
+        android:orientation="horizontal"
+        android:weightSum="16"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.061"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.023"
-        android:layout_marginLeft="15dp"/>
+        app:layout_constraintTop_toTopOf="parent">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:text="Voici les collectes organisées"
-        app:layout_constraintBottom_toTopOf="@+id/fragment_listeCollectes"
-        app:layout_constraintHeight="25dp"
-        app:layout_constraintStart_toStartOf="@+id/textView"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
+        <ImageView
+            android:id="@+id/collecte_before"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start|center_vertical"
+            android:layout_weight="2"
+            android:src="@drawable/ic_nav_before" />
+
+        <TextView
+            android:id="@+id/titre_event"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="11"
+            android:gravity="center"
+            android:text="Collectes"
+            android:textSize="30sp"
+            android:textStyle="bold" />
+
+
+    </LinearLayout>
 
     <FrameLayout
         android:id="@+id/fragment_listeCollectes"
@@ -36,7 +45,7 @@
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toTopOf="@+id/navigation_view"
         app:layout_constraintHeight="600dp"
-        app:layout_constraintTop_toBottomOf="@+id/textView"
+        app:layout_constraintTop_toBottomOf="@+id/panel"
         app:layout_constraintVertical_bias="1.0"
         tools:layout_editor_absoluteX="0dp" />
 

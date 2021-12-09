@@ -16,17 +16,26 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
+import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.activity_boutique.*
 import kotlinx.android.synthetic.main.activity_boutique.boutique_before
 import kotlinx.android.synthetic.main.activity_panier.*
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
 import org.greenrobot.eventbus.ThreadMode
+import java.lang.StringBuilder
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
+import com.auth0.android.result.UserProfile
+import com.google.firebase.firestore.auth.User
+
 
 class BoutiqueActivity : AppCompatActivity(), IArticleLoadListener, ICartLoadListener {
 
     lateinit var articleLoadListener: IArticleLoadListener
     lateinit var cartLoadListener: ICartLoadListener
+    private val db = Firebase.firestore
+    private var mail = ""
 
     override fun onStart() {
         super.onStart()
@@ -52,9 +61,33 @@ class BoutiqueActivity : AppCompatActivity(), IArticleLoadListener, ICartLoadLis
         init()
         loadArticleFromFirebase()
         countCartFromFirebase()
+        updateActionBar()
 
     }
+    fun updateActionBar(){
+        val actionBar = supportActionBar
 
+        val docRef = db.collection("clients").document("$mail")
+        docRef.get()
+            .addOnSuccessListener { document ->
+                if (document != null) {
+                    val points =  document.data?.getValue("points")
+                    actionBar!!.title = mail.replaceAfter("@", "").replace("@", "") + " : $points points "
+                }
+            }
+    }
+    fun plusUn() {
+
+        val db2 = db.collection("clients").document(mail)
+        var newScore = 0
+        db.runTransaction { transaction ->
+            val snapshot = transaction.get(db2)
+            newScore = (snapshot.getDouble("points")!! + 1).toInt()
+            transaction.update(db2, "points", newScore)
+        }
+        Thread.sleep(500)
+        updateActionBar()
+    }
     private fun countCartFromFirebase() {
         val cartModels: MutableList<CartModel> = ArrayList()
         FirebaseDatabase.getInstance("https://projetintegration-83d97-default-rtdb.europe-west1.firebasedatabase.app")
@@ -111,13 +144,28 @@ class BoutiqueActivity : AppCompatActivity(), IArticleLoadListener, ICartLoadLis
         recycler_articles.layoutManager = gridLayoutManager
         recycler_articles.addItemDecoration(SpaceItemDecoration())
 
-        btnCart.setOnClickListener { startActivity(Intent(this,PanierActivity::class.java)) }
+        mail = intent.getStringExtra("key").toString()
+        val intent = Intent(this,PanierActivity::class.java)
+        intent.putExtra("key",mail)
+        btnCart.setOnClickListener { startActivity(intent) }
         boutique_before!!.setOnClickListener{ finish()}
     }
 
     override fun onArticleLoadSuccess(articleModelList: List<ArticleModel>?) {
         val adapter = MyArticleAdapter(this,articleModelList!!, cartLoadListener)
         recycler_articles.adapter = adapter
+
+        // Affichage des points de la personne connectée
+        mail=intent.getStringExtra("key").toString()
+        var firestore: FirebaseFirestore = FirebaseFirestore.getInstance()
+        firestore.collection("clients").document(mail)
+            .get()
+            .addOnSuccessListener {
+                val points = it.data?.get("points")
+                boutiquePoints.text = StringBuilder("Boutique (").append(points).append(StringBuilder(")"))}
+            .addOnFailureListener{
+
+            }
     }
 
     override fun onArticleLoadFailed(message: String?) {

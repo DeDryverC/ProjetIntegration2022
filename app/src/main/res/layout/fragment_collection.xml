@@ -4,6 +4,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        android:text="Voici les collectes favorites"
+        android:layout_marginTop="30dp"
+        android:layout_marginLeft="20dp"
+        android:paddingBottom="10dp"
+        android:textSize="20dp"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/collection_recycler_list"

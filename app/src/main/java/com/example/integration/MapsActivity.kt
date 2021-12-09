@@ -1,5 +1,6 @@
 package com.example.integration
 
+
 import android.Manifest
 import android.content.ContentValues.TAG
 import android.content.Intent
@@ -21,7 +22,11 @@ import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+
 import kotlinx.android.synthetic.main.activity_maps.*
+
+import java.time.LocalDateTime
+
 import java.util.*
 
 
@@ -31,6 +36,10 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback,
     private lateinit var mMap: GoogleMap
     private var rubishCount: Int = 0
     private val REQUEST_LOCATION_PERMISSION = 1
+    private var mail = ""
+
+
+
     private val db = Firebase.firestore
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -42,7 +51,34 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback,
         val mapFragment = supportFragmentManager
             .findFragmentById(R.id.map) as SupportMapFragment
         mapFragment.getMapAsync(this)
+        val extras = intent.extras
+        mail=intent.getStringExtra("key").toString()
+        updateActionBar()
+    }
 
+    private fun updateActionBar(){
+        val actionBar = supportActionBar
+
+        val docRef = db.collection("clients").document(mail)
+        docRef.get()
+            .addOnSuccessListener { document ->
+                if (document != null) {
+                    val points =  document.data?.getValue("points")
+                    actionBar!!.title = mail.replaceAfter("@", "").replace("@", "") + " : $points points "
+                }
+            }
+    }
+    private fun plusUn() {
+
+        val db2 = db.collection("clients").document(mail)
+        var newScore: Int
+        db.runTransaction { transaction ->
+            val snapshot = transaction.get(db2)
+            newScore = (snapshot.getDouble("points")!! + 1).toInt()
+            transaction.update(db2, "points", newScore)
+        }
+        Thread.sleep(500)
+        updateActionBar()
     }
 
     override fun onMapReady(googleMap: GoogleMap) {
@@ -123,15 +159,13 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback,
 
         R.id.action_collecte_listing -> {
             val intent = Intent(this, EventActivity::class.java)
+            intent.putExtra("key",mail)
             // start your next activity
             startActivity(intent)
             true
         }
         R.id.action_classement -> {
-            val intent = Intent(this, ClassementActivity::class.java)
-            // start your next activity
-            startActivity(intent)
-
+            plusUn()
             true
         }
         R.id.action_login -> {
@@ -140,12 +174,27 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback,
             startActivity(intent)
             true
         }
+        R.id.action_profil ->{
+            val intent = Intent(this, ProfileActivity::class.java)
+            startActivity(intent)
+            true
+        }
+
         R.id.action_boutique -> {
             val intent = Intent(this, BoutiqueActivity::class.java)
+            intent.putExtra("key",mail)
             // start your next activity
             startActivity(intent)
             true
         }
+        R.id.action_ticket -> {
+            val intent = Intent(this, TicketActivity::class.java)
+            intent.putExtra("key",mail)
+            // start your next activity
+            startActivity(intent)
+            true
+        }
+
 
 
         else -> {
@@ -158,6 +207,8 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback,
     private fun msgShow(msg: String) {
         Toast.makeText(this, msg, Toast.LENGTH_LONG).show()
     }
+
+
 
     private fun addDepots(googleMap: GoogleMap) {
 
@@ -194,11 +245,14 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback,
                             .draggable(false)
                     )
                 }
+            US04formulaire_creation_depot
                 db.collection("statistique").document("depots").update("compteur", compteur.plus(1))
+
             }
             .addOnFailureListener { exception ->
                 Log.d(TAG, "Error getting documents: ", exception)
             }
+
     }
 
     var depotId:String = " Depot n°$rubishCount"
@@ -227,7 +281,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback,
                 "lat" to latLng.latitude,
                 "long" to latLng.longitude
             )
-
+            plusUn()
             //création du dépots dans la DB avant de lancer le formulaire
             db.collection("depots").document(latLng.latitude.toString())
                 .set(depot)
@@ -238,6 +292,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback,
     }
 
     override fun onInfoWindowLongClick(marker: Marker) {
+
         val intent = Intent(this, RubishDescription::class.java)
         intent.putExtra("MARKER_TITLE", marker.title)
         intent.putExtra("MARKER_DESCRIPTION", marker.snippet)
@@ -248,4 +303,5 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback,
         msgShow("Close Info Window")
     }
 }
+
 

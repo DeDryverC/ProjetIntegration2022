@@ -31,7 +31,7 @@
             android:layout_weight="11"
             android:gravity="center"
             android:text="Panier"
-            android:textSize="30sp"
+            android:textSize="25sp"
             android:textStyle="bold" />
 
         <ImageView
@@ -51,6 +51,27 @@
         android:layout_below="@+id/panel"
         android:padding="8dp"
         android:background="@drawable/background_boutique"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <TextView
+            android:id="@+id/btnPay"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:drawableLeft="@drawable/ic_baseline_shopping_cart_checkout_24"
+            android:text="  Dépenser \n  mes points"
+            android:textStyle="bold"
+            android:background="#E7E7E7"
+            android:padding="10dp"
+            android:layout_marginBottom="50dp"
+            android:alpha="0.85">
+
+        </TextView>
+    </LinearLayout>
 
 
 </RelativeLayout>

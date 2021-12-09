@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.example.integration">
 
+    <uses-permission android:name="android.permission.CAMERA"/>
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.INTERNET" />
@@ -10,10 +12,10 @@
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
-        android:label="@string/app_name"
+        android:label=""
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.Login">
+        android:theme="@style/Theme.Design.Light">
         <activity
             android:name=".PanierActivity"
             android:exported="true" />
@@ -26,7 +28,20 @@
         <activity
             android:name=".EventActivity"
             android:exported="true" />
-
+        <activity
+            android:name="com.example.integration.ScanActivity"
+            android:screenOrientation="fullSensor"
+            tools:replace="android:screenOrientation"
+            android:stateNotNeeded="true"/>
+        <activity android:name=".ProfileActivity"
+            android:exported="true"/>
+        <activity android:name=".ParametreActivity"/>
+        <activity
+            android:name="com.example.integration.TicketActivity" />
+        <activity
+            android:name="com.example.integration.EnterTicketNumberActivity" />
+        <activity
+            android:name="com.example.integration.PointsReceivedActivity" />
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
@@ -46,6 +61,8 @@
         <activity android:name=".RubishDescription"/>
         <activity android:name=".RubishCreationForm"/>
 
+
     </application>
+
 
 </manifest>

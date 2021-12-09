@@ -11,6 +11,9 @@ class ClassementActivity : AppCompatActivity() {
         setContentView(R.layout.activity_classement)
         // finding the UI elements
 
+        val actionBar = supportActionBar
+        actionBar!!.title = intent.getStringExtra("key").toString().replaceAfter("@", "").replace("@", "")
+
 
     }
 }

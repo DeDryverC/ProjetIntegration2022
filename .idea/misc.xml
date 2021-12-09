@@ -3,7 +3,44 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Users/gael-/AndroidStudioProjects/login2/app/src/main/res/drawable-anydpi/ic_account.xml" value="0.23489583333333333" />
+        <entry key="..\:/Users/Dany/Documents/Projet_integration/app/src/main/res/layout/activity_enter_ticket.xml" value="0.31302083333333336" />
+        <entry key="..\:/Users/Dany/Documents/Projet_integration/app/src/main/res/layout/activity_event.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/Dany/Documents/Projet_integration/app/src/main/res/layout/activity_main.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/Dany/Documents/Projet_integration/app/src/main/res/layout/activity_maps.xml" value="0.20520833333333333" />
+        <entry key="..\:/Users/Dany/Documents/Projet_integration/app/src/main/res/layout/activity_scan_ticket.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/Dany/Documents/Projet_integration/app/src/main/res/layout/activity_ticket.xml" value="0.3220108695652174" />
+        <entry key="..\:/Users/Dany/Documents/Projet_integration/app/src/main/res/layout/fragment_liste_collecte.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/Dany/Documents/Projet_integration/app/src/main/res/layout/item_horizontal_collecte.xml" value="0.20520833333333333" />
+        <entry key="..\:/Users/Dany/Documents/Projet_integration/app/src/main/res/layout/item_vertical_collecte.xml" value="0.20520833333333333" />
+        <entry key="..\:/Users/Dany/Documents/Projet_integration/app/src/main/res/menu/bottom_navigation_menu.xml" value="0.20520833333333333" />
+        <entry key="..\:/Users/Dany/Documents/Projet_integration/app/src/main/res/menu/menu.xml" value="0.2657407407407407" />
+        <entry key="..\:/Users/abomb/Documents/Projet-integration/ProjetIntegration2022/app/src/main/res/layout/activity_enter_ticket.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/abomb/Documents/Projet-integration/ProjetIntegration2022/app/src/main/res/layout/activity_points_received.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/dedry/AndroidStudioProjects/PIntegration/app/src/main/res/layout/activity_boutique.xml" value="0.3307291666666667" />
+        <entry key="..\:/Users/dedry/AndroidStudioProjects/PIntegration/app/src/main/res/layout/activity_classement.xml" value="0.3265625" />
+        <entry key="..\:/Users/dedry/AndroidStudioProjects/PIntegration/app/src/main/res/layout/activity_enter_ticket.xml" value="0.3307291666666667" />
+        <entry key="..\:/Users/dedry/AndroidStudioProjects/PIntegration/app/src/main/res/layout/activity_event.xml" value="0.3307291666666667" />
+        <entry key="..\:/Users/dedry/AndroidStudioProjects/PIntegration/app/src/main/res/layout/activity_main.xml" value="0.3265625" />
+        <entry key="..\:/Users/dedry/AndroidStudioProjects/PIntegration/app/src/main/res/layout/activity_maps.xml" value="0.3265625" />
+        <entry key="..\:/Users/dedry/AndroidStudioProjects/PIntegration/app/src/main/res/layout/activity_moderator.xml" value="0.3307291666666667" />
+        <entry key="..\:/Users/dedry/AndroidStudioProjects/PIntegration/app/src/main/res/layout/activity_panier.xml" value="0.3265625" />
+        <entry key="..\:/Users/dedry/AndroidStudioProjects/PIntegration/app/src/main/res/layout/activity_parametre.xml" value="0.25" />
+        <entry key="..\:/Users/dedry/AndroidStudioProjects/PIntegration/app/src/main/res/layout/activity_points_received.xml" value="0.3265625" />
+        <entry key="..\:/Users/dedry/AndroidStudioProjects/PIntegration/app/src/main/res/layout/activity_profile.xml" value="0.5" />
+        <entry key="..\:/Users/dedry/AndroidStudioProjects/PIntegration/app/src/main/res/layout/activity_scan_ticket.xml" value="0.3307291666666667" />
+        <entry key="..\:/Users/dedry/AndroidStudioProjects/PIntegration/app/src/main/res/layout/activity_ticket.xml" value="0.3265625" />
+        <entry key="..\:/Users/dedry/AndroidStudioProjects/PIntegration/app/src/main/res/layout/fragment_add_collecte.xml" value="0.3265625" />
+        <entry key="..\:/Users/dedry/AndroidStudioProjects/PIntegration/app/src/main/res/layout/fragment_collection.xml" value="0.3265625" />
+        <entry key="..\:/Users/dedry/AndroidStudioProjects/PIntegration/app/src/main/res/layout/fragment_liste_collecte.xml" value="0.3307291666666667" />
+        <entry key="..\:/Users/dedry/AndroidStudioProjects/PIntegration/app/src/main/res/layout/item_horizontal_collecte.xml" value="0.3265625" />
+        <entry key="..\:/Users/dedry/AndroidStudioProjects/PIntegration/app/src/main/res/layout/item_vertical_collecte.xml" value="0.3265625" />
+        <entry key="..\:/Users/dedry/AndroidStudioProjects/PIntegration/app/src/main/res/layout/layout_article_item.xml" value="0.3307291666666667" />
+        <entry key="..\:/Users/dedry/AndroidStudioProjects/PIntegration/app/src/main/res/layout/layout_panier_item.xml" value="0.3265625" />
+        <entry key="..\:/Users/dedry/AndroidStudioProjects/PIntegration/app/src/main/res/layout/marker_info_contents.xml" value="0.3265625" />
+        <entry key="..\:/Users/dedry/AndroidStudioProjects/PIntegration/app/src/main/res/layout/popup_collecte_details.xml" value="0.3307291666666667" />
+        <entry key="..\:/Users/dedry/AndroidStudioProjects/PIntegration/app/src/main/res/layout/rubish_description_page.xml" value="0.3307291666666667" />
+        <entry key="..\:/Users/dedry/AndroidStudioProjects/PIntegration/app/src/main/res/menu/bottom_navigation_menu.xml" value="0.3307291666666667" />
+        <entry key="..\:/Users/dedry/AndroidStudioProjects/PIntegration/app/src/main/res/menu/menu.xml" value="0.3307291666666667" />
         <entry key="..\:/Users/gael-/AndroidStudioProjects/login2/app/src/main/res/drawable-v24/bin.xml" value="0.22037037037037038" />
         <entry key="..\:/Users/gael-/AndroidStudioProjects/login2/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.18981481481481483" />
         <entry key="..\:/Users/gael-/AndroidStudioProjects/login2/app/src/main/res/drawable/bin.xml" value="0.22037037037037038" />
@@ -15,6 +52,8 @@
         <entry key="..\:/Users/gael-/AndroidStudioProjects/login2/app/src/main/res/layout/activity_maps.xml" value="0.33" />
         <entry key="..\:/Users/gael-/AndroidStudioProjects/login2/app/src/main/res/layout/activity_panier.xml" value="0.22083333333333333" />
         <entry key="..\:/Users/gael-/AndroidStudioProjects/login2/app/src/main/res/layout/e.xml" value="0.21979166666666666" />
+        <entry key="..\:/Users/gael-/AndroidStudioProjects/login2/app/src/main/res/layout/fragment_add_collecte.xml" value="0.22083333333333333" />
+        <entry key="..\:/Users/gael-/AndroidStudioProjects/login2/app/src/main/res/layout/fragment_collection.xml" value="0.22083333333333333" />
         <entry key="..\:/Users/gael-/AndroidStudioProjects/login2/app/src/main/res/layout/fragment_liste_collecte.xml" value="0.21979166666666666" />
         <entry key="..\:/Users/gael-/AndroidStudioProjects/login2/app/src/main/res/layout/info_window_layout.xml" value="0.21979166666666666" />
         <entry key="..\:/Users/gael-/AndroidStudioProjects/login2/app/src/main/res/layout/item_horizontal_collecte.xml" value="0.21979166666666666" />
@@ -24,8 +63,6 @@
         <entry key="..\:/Users/gael-/AndroidStudioProjects/login2/app/src/main/res/layout/meu_main.xml" value="0.21875" />
         <entry key="..\:/Users/gael-/AndroidStudioProjects/login2/app/src/main/res/menu/map_options.xml" value="0.3074074074074074" />
         <entry key="..\:/Users/gael-/AndroidStudioProjects/login2/app/src/main/res/menu/menu_main.xml" value="0.22" />
-        <entry key="..\:/Users/gael-/AndroidStudioProjects/login2/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.15092592592592594" />
-        <entry key="..\:/Users/gael-/AndroidStudioProjects/login2/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.15092592592592594" />
         <entry key="..\:/Users/louis/OneDrive/Bureau/1)Cours-Ephec/BAC3/ProjetIntegration/code/ProjetIntegration2022/app/src/main/res/drawable-anydpi/ic_account.xml" value="0.29322916666666665" />
         <entry key="..\:/Users/louis/OneDrive/Bureau/1)Cours-Ephec/BAC3/ProjetIntegration/code/ProjetIntegration2022/app/src/main/res/drawable-anydpi/ic_eco.xml" value="0.2703125" />
         <entry key="..\:/Users/louis/OneDrive/Bureau/1)Cours-Ephec/BAC3/ProjetIntegration/code/ProjetIntegration2022/app/src/main/res/drawable-anydpi/ic_nav_before.xml" value="0.2708333333333333" />
@@ -34,11 +71,12 @@
         <entry key="..\:/Users/louis/OneDrive/Bureau/1)Cours-Ephec/BAC3/ProjetIntegration/code/ProjetIntegration2022/app/src/main/res/drawable/bottom_nav_color.xml" value="0.3828125" />
         <entry key="..\:/Users/louis/OneDrive/Bureau/1)Cours-Ephec/BAC3/ProjetIntegration/code/ProjetIntegration2022/app/src/main/res/drawable/ic_launcher_foreground.xml" value="0.29322916666666665" />
         <entry key="..\:/Users/louis/OneDrive/Bureau/1)Cours-Ephec/BAC3/ProjetIntegration/code/ProjetIntegration2022/app/src/main/res/drawable/money.xml" value="0.2708333333333333" />
-        <entry key="..\:/Users/louis/OneDrive/Bureau/1)Cours-Ephec/BAC3/ProjetIntegration/code/ProjetIntegration2022/app/src/main/res/layout/activity_boutique.xml" value="0.22" />
+        <entry key="..\:/Users/louis/OneDrive/Bureau/1)Cours-Ephec/BAC3/ProjetIntegration/code/ProjetIntegration2022/app/src/main/res/layout/activity_boutique.xml" value="0.25" />
+        <entry key="..\:/Users/louis/OneDrive/Bureau/1)Cours-Ephec/BAC3/ProjetIntegration/code/ProjetIntegration2022/app/src/main/res/layout/activity_classement.xml" value="0.253125" />
         <entry key="..\:/Users/louis/OneDrive/Bureau/1)Cours-Ephec/BAC3/ProjetIntegration/code/ProjetIntegration2022/app/src/main/res/layout/activity_event.xml" value="0.23489583333333333" />
         <entry key="..\:/Users/louis/OneDrive/Bureau/1)Cours-Ephec/BAC3/ProjetIntegration/code/ProjetIntegration2022/app/src/main/res/layout/activity_main.xml" value="0.41368584758942456" />
         <entry key="..\:/Users/louis/OneDrive/Bureau/1)Cours-Ephec/BAC3/ProjetIntegration/code/ProjetIntegration2022/app/src/main/res/layout/activity_maps.xml" value="0.19972826086956522" />
-        <entry key="..\:/Users/louis/OneDrive/Bureau/1)Cours-Ephec/BAC3/ProjetIntegration/code/ProjetIntegration2022/app/src/main/res/layout/activity_panier.xml" value="0.18" />
+        <entry key="..\:/Users/louis/OneDrive/Bureau/1)Cours-Ephec/BAC3/ProjetIntegration/code/ProjetIntegration2022/app/src/main/res/layout/activity_panier.xml" value="0.22" />
         <entry key="..\:/Users/louis/OneDrive/Bureau/1)Cours-Ephec/BAC3/ProjetIntegration/code/ProjetIntegration2022/app/src/main/res/layout/fragment_liste_collecte.xml" value="0.23489583333333333" />
         <entry key="..\:/Users/louis/OneDrive/Bureau/1)Cours-Ephec/BAC3/ProjetIntegration/code/ProjetIntegration2022/app/src/main/res/layout/layout_article_item.xml" value="0.25" />
         <entry key="..\:/Users/louis/OneDrive/Bureau/1)Cours-Ephec/BAC3/ProjetIntegration/code/ProjetIntegration2022/app/src/main/res/layout/layout_panier_item.xml" value="0.22" />
@@ -47,11 +85,12 @@
         <entry key="..\:/Users/louis/OneDrive/Bureau/1)Cours-Ephec/BAC3/ProjetIntegration/code/ProjetIntegration2022/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.3828125" />
         <entry key="..\:/Users/scham/Desktop/ProjetIntegration2022/app/src/main/res/drawable-anydpi/ic_home.xml" value="0.24270833333333333" />
         <entry key="..\:/Users/scham/Desktop/ProjetIntegration2022/app/src/main/res/drawable/bottom_nav_color.xml" value="0.3828125" />
-        <entry key="..\:/Users/scham/Desktop/ProjetIntegration2022/app/src/main/res/layout/activity_event.xml" value="0.33" />
+        <entry key="..\:/Users/scham/Desktop/ProjetIntegration2022/app/src/main/res/layout/activity_boutique.xml" value="0.2703804347826087" />
+        <entry key="..\:/Users/scham/Desktop/ProjetIntegration2022/app/src/main/res/layout/activity_event.xml" value="0.22" />
         <entry key="..\:/Users/scham/Desktop/ProjetIntegration2022/app/src/main/res/layout/activity_main.xml" value="0.18009118541033434" />
         <entry key="..\:/Users/scham/Desktop/ProjetIntegration2022/app/src/main/res/layout/activity_maps.xml" value="0.33" />
         <entry key="..\:/Users/scham/Desktop/ProjetIntegration2022/app/src/main/res/layout/fragment_add_collecte.xml" value="0.33" />
-        <entry key="..\:/Users/scham/Desktop/ProjetIntegration2022/app/src/main/res/layout/fragment_collection.xml" value="0.475" />
+        <entry key="..\:/Users/scham/Desktop/ProjetIntegration2022/app/src/main/res/layout/fragment_collection.xml" value="0.33" />
         <entry key="..\:/Users/scham/Desktop/ProjetIntegration2022/app/src/main/res/layout/fragment_liste_collecte.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/scham/Desktop/ProjetIntegration2022/app/src/main/res/layout/item_horizontal_collecte.xml" value="0.25" />
         <entry key="..\:/Users/scham/Desktop/ProjetIntegration2022/app/src/main/res/layout/item_vertical_collecte.xml" value="0.5" />

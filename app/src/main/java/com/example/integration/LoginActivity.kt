@@ -15,12 +15,16 @@ import com.auth0.android.result.UserProfile
 import com.example.integration.databinding.ActivityMainBinding
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.auth.User
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+
+import kotlinx.android.synthetic.main.activity_boutique.*
+import java.lang.StringBuilder
+
+
 import java.time.LocalDateTime
 import java.util.*
-
-
 
 
 class LoginActivity : AppCompatActivity() {
@@ -32,6 +36,8 @@ class LoginActivity : AppCompatActivity() {
     private var cachedCredentials: Credentials? = null
     private var cachedUserProfile: UserProfile? = null
     private val db = Firebase.firestore
+
+    private var mail = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -45,7 +51,7 @@ class LoginActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         binding.buttonLogin.setOnClickListener { login() }
-        dbinstance()
+
 
     }
 
@@ -54,61 +60,6 @@ class LoginActivity : AppCompatActivity() {
         val intent = Intent(this, MapsActivity::class.java)
         intent.putExtra("key",text)
         startActivity(intent)
-    }
-
-    private fun dbinstance(){
-        val db = FirebaseFirestore.getInstance()
-        val cities = db.collection("cities")
-
-        val data1 = hashMapOf(
-            "name" to "San Francisco",
-            "state" to "CA",
-            "country" to "USA",
-            "capital" to false,
-            "population" to 860000,
-            "regions" to listOf("west_coast", "norcal")
-        )
-        cities.document("SF").set(data1)
-
-        val data2 = hashMapOf(
-            "name" to "Los Angeles",
-            "state" to "CA",
-            "country" to "USA",
-            "capital" to false,
-            "population" to 3900000,
-            "regions" to listOf("west_coast", "socal")
-        )
-        cities.document("LA").set(data2)
-
-        val data3 = hashMapOf(
-            "name" to "Washington D.C.",
-            "state" to null,
-            "country" to "USA",
-            "capital" to true,
-            "population" to 680000,
-            "regions" to listOf("east_coast")
-        )
-        cities.document("DC").set(data3)
-
-        val data4 = hashMapOf(
-            "name" to "Tokyo",
-            "state" to null,
-            "country" to "Japan",
-            "capital" to true,
-            "population" to 9000000,
-            "regions" to listOf("kanto", "honshu")
-        )
-        cities.document("TOK").set(data4)
-
-        val data5 = hashMapOf(
-            "name" to "Beijing",
-            "state" to null,
-            "country" to "China",
-            "capital" to true,
-            "population" to 21500000,
-            "regions" to listOf("jingjinji", "hebei")
-        )
-        cities.document("BJ").set(data5)
     }
 
     private fun login() {
@@ -129,6 +80,7 @@ class LoginActivity : AppCompatActivity() {
                     showUserProfile()
                 }
             })
+
     }
     private fun showUserProfile() {
         // Guard against showing the profile when no user is logged in
@@ -149,8 +101,21 @@ class LoginActivity : AppCompatActivity() {
                 @RequiresApi(Build.VERSION_CODES.O)
                 override fun onSuccess(profile: UserProfile) {
                     cachedUserProfile = profile
-                    createUser(profile?.email)
-                    onConnection(profile?.email)
+                    mail=intent.getStringExtra("key").toString()
+                    db.collection("clients").document(profile?.email.toString())
+                        .get()
+                        .addOnSuccessListener { document ->
+                            if (document.exists()) {
+                                onConnection(profile?.email)
+                            }
+                            else {
+                                createUser(profile?.email)
+                                onConnection(profile?.email)
+                            }
+                            }
+                        .addOnFailureListener{
+
+                        }
                 }
 
             })
@@ -158,15 +123,21 @@ class LoginActivity : AppCompatActivity() {
 
     @RequiresApi(Build.VERSION_CODES.O)
     private fun createUser(text: String?) {
-    val date = LocalDateTime.now()
-        val user = hashMapOf(
-            "email" to "$text",
-            "lastConnect" to "$date",
-            "points" to 1
-        )
-        db.collection("clients").document("$text")
-            .set(user)
-    }
+        db.collection("clients").document("$text").get()
+            .addOnSuccessListener {
+            }
+            .addOnFailureListener { exception ->
+                val date = LocalDateTime.now()
+                val user = hashMapOf(
+                    "email" to "$text",
+                    "lastConnect" to "$date",
+                    "points" to 1
+                )
+                db.collection("clients").document("$text")
+                    .set(user)
+            }
+            }
+
 
     private fun showSnackBar(text: String) {
         Snackbar

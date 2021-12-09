@@ -102,12 +102,51 @@
         app:layout_constraintStart_toStartOf="@+id/popup_collecte_localisation"
         app:layout_constraintTop_toBottomOf="@+id/popup_collecte_localisation" />
 
+    <TextView
+        android:id="@+id/popup_collecte_date_heure"
+        style="@style/TextAppearance.AppCompat.Title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:text="Date et Heure"
+        app:layout_constraintStart_toStartOf="@+id/popup_collecte_localite"
+        app:layout_constraintTop_toBottomOf="@+id/popup_collecte_localite" />
+
+    <TextView
+        android:id="@+id/popup_collecte_heure_subtitle"
+        android:layout_marginLeft="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="12:00"
+        app:layout_constraintStart_toEndOf="@+id/popup_collecte_date_subtitle"
+        app:layout_constraintTop_toBottomOf="@+id/popup_collecte_date_heure" />
+
+    <TextView
+        android:id="@+id/popup_collecte_date_subtitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="15/05"
+        app:layout_constraintStart_toStartOf="@+id/popup_collecte_date_heure"
+        app:layout_constraintTop_toTopOf="@+id/popup_collecte_heure_subtitle" />
+
+
+    <ImageView
+        android:id="@+id/star_button"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="56dp"
+        android:src="@drawable/ic_unstar"
+        app:layout_constraintBottom_toBottomOf="@+id/view_separation"
+        app:layout_constraintStart_toEndOf="@+id/view_separation"
+        app:layout_constraintTop_toTopOf="@+id/view_separation" />
+
     <View
         android:id="@+id/view_separation"
         android:layout_width="1dp"
         android:layout_height="10dp"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="120dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.491"
         app:layout_constraintStart_toStartOf="@+id/popup_collecte_localite"
         app:layout_constraintTop_toBottomOf="@+id/popup_collecte_localite" />
 
@@ -115,21 +154,11 @@
         android:id="@+id/delete_button"
         android:layout_width="40dp"
         android:layout_height="40dp"
+        android:layout_marginEnd="40dp"
         android:src="@drawable/ic_trash"
         app:layout_constraintBottom_toBottomOf="@+id/view_separation"
         app:layout_constraintEnd_toStartOf="@+id/view_separation"
-        app:layout_constraintTop_toTopOf="@+id/view_separation"
-        android:layout_marginRight="50dp"/>
-
-    <ImageView
-        android:id="@+id/star_button"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:src="@drawable/ic_unstar"
-        app:layout_constraintBottom_toBottomOf="@+id/view_separation"
-        app:layout_constraintStart_toEndOf="@+id/view_separation"
-        app:layout_constraintTop_toTopOf="@+id/view_separation"
-        android:layout_marginLeft="50dp"/>
+        app:layout_constraintTop_toTopOf="@+id/view_separation" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
