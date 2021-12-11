@@ -62,6 +62,7 @@ dependencies {
    
     implementation platform('com.google.firebase:firebase-bom:29.0.0')
     implementation 'com.google.firebase:firebase-firestore-ktx'
+    implementation 'androidx.cardview:cardview:1.0.0'
 
     testImplementation 'com.google.truth:truth:1.0.1'
     androidTestImplementation 'com.google.truth:truth:1.0.1'

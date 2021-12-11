@@ -26,6 +26,7 @@ import com.google.android.gms.vision.barcode.BarcodeDetector
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.zxing.integration.android.IntentIntegrator
 import kotlinx.android.synthetic.main.activity_scan_ticket.*
+import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.Exception
 import android.content.Intent as Intent
@@ -151,10 +152,15 @@ class ScanActivity : AppCompatActivity() {
                 val code = qrCodes.valueAt(0);
                 textScanResult.text = code.displayValue;
                 val docRef=db.collection("tickets").document(code.displayValue)
+                val sdf = SimpleDateFormat("dd/M/yyyy")
+                val currentDate = sdf.format(Date())
 
                 val spinner_value = class_spinner?.selectedItem.toString()
                 val tec = hashMapOf(
-                    "tec" to spinner_value
+                    "tec" to spinner_value,
+                    "user" to mail,
+                    "date" to currentDate,
+                    "points" to 1
                 )
 
                 docRef.get()

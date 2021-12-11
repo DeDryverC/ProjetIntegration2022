@@ -7,6 +7,8 @@ import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
+import java.text.SimpleDateFormat
+import java.util.*
 
 class EnterTicketNumberActivity : AppCompatActivity() {
     val db = FirebaseFirestore.getInstance();
@@ -29,8 +31,14 @@ class EnterTicketNumberActivity : AppCompatActivity() {
             val ticket_number = editTextNumber.text.toString();
             val spinner_value = spinner.selectedItem.toString();
 
+            val sdf = SimpleDateFormat("dd/M/yyyy")
+            val currentDate = sdf.format(Date())
+
             val ticket = hashMapOf(
-                    "tec" to spinner_value
+                    "tec" to spinner_value,
+                    "user" to mail,
+                    "date" to currentDate,
+                    "points" to 1
             )
 
 

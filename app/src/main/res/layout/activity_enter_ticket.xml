@@ -12,7 +12,7 @@
         android:ems="10"
         android:importantForAutofill="no"
         android:inputType="number"
-        android:text="@string/numero_ticket"
+        android:hint="@string/numero_ticket"
 
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
