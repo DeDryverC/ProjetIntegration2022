@@ -30,7 +30,7 @@ class PanierActivity : AppCompatActivity(), ICartLoadListener {
 
     var cartLoadListener:ICartLoadListener?=null
 
-    override fun onStart() {
+    override fun onStart() { 
         super.onStart()
         EventBus.getDefault().register(this)
     }
@@ -151,20 +151,31 @@ class PanierActivity : AppCompatActivity(), ICartLoadListener {
                     .addOnSuccessListener {
                         var points = it.data?.get("points").toString()
                         var x = points.toDouble()
-                        firestore.collection("clients").document(mail).update("points", (x - sum).toString()
-                            .replaceAfter(".", "").replace(".", ""))
+                        if (x >= sum) {
+                            firestore.collection("clients").document(mail).update("points", (x - sum).toString()
+                                .replaceAfter(".", "").replace(".", ""))
+
+                            val dialog2 = AlertDialog.Builder(this)
+                                .setTitle("Achat bien effectué !")
+                                .setPositiveButton("Retourner à la Carte") { _, _ ->
+                                    startActivity(intent) }
+                                .create()
+                            dialog2.show()
+                        }
+                        else {
+                            val dialog3 = AlertDialog.Builder(this)
+                                .setTitle("Solde insuffisant")
+                                .setPositiveButton("Ok") {dialog,_ -> dialog.dismiss() }
+                                .create()
+                            dialog3.show()
+
+                        }
                     }
                     .addOnFailureListener{
 
                     }
 
 
-                val dialog2 = AlertDialog.Builder(this)
-                    .setTitle("Achat bien effectué !")
-                    .setPositiveButton("Retourner à la Carte") { _, _ ->
-                startActivity(intent) }
-                    .create()
-                dialog2.show()
             }
             .create()
         dialog.show()
