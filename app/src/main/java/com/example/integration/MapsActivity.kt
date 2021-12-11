@@ -176,6 +176,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback,
         }
         R.id.action_profil ->{
             val intent = Intent(this, ProfileActivity::class.java)
+            intent.putExtra("key",mail)
             startActivity(intent)
             true
         }

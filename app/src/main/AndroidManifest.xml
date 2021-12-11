@@ -29,6 +29,9 @@
             android:name=".EventActivity"
             android:exported="true" />
         <activity
+            android:name=".HistoryActivity"
+            android:exported="true" />
+        <activity
             android:name="com.example.integration.ScanActivity"
             android:screenOrientation="fullSensor"
             tools:replace="android:screenOrientation"
