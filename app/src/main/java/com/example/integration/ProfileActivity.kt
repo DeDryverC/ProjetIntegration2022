@@ -20,10 +20,10 @@ class ProfileActivity : AppCompatActivity() {
         val btn_moderator_act = findViewById<Button>(R.id.moderator_btn_activity)
 
 
-        /*btn_historique.setOnClickListener{
-            val intent = Intent(this, HistoriqueActivity::class.java)
+        btn_historique.setOnClickListener{
+            val intent = Intent(this, HistoryActivity::class.java)
             startActivity(intent)
-        }*/
+        }
         btn_parametre.setOnClickListener{
             val intent = Intent(this, ParametreActivity::class.java)
             startActivity(intent)
