@@ -302,6 +302,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback,
     override fun onInfoWindowClose(marker: Marker) {
         msgShow("Close Info Window")
     }
+
 }
 
 
