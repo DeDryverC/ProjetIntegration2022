@@ -136,68 +136,54 @@ class PanierActivity : AppCompatActivity(), ICartLoadListener {
             sum += cartModel!!.prixTotal
         }
 
-        var firestore: FirebaseFirestore = FirebaseFirestore.getInstance()
-
-        if (sum.toInt() == 0) {
-            val dialog4 = AlertDialog.Builder(this)
-                .setTitle("Votre Panier est vide !")
-                .setPositiveButton("Ok") { dialog, _ -> dialog.dismiss() }
-                .create()
-            dialog4.show()
-        }
-        else {
-            val sumValidate = StringBuilder("Valider pour :\n").append(
-                sum.toString()
-                    .replaceAfter(".", "").replace(".", "").plus(" points")
-            )
-            val dialog = AlertDialog.Builder(this)
-                .setTitle("Acheter cette contrepartie ?")
-                .setMessage("Voulez vous vraiment valider votre achat ?")
-                .setNegativeButton("Annuler") { dialog, _ -> dialog.dismiss() }
-                .setPositiveButton(sumValidate) { _, _ ->
+        val sumValidate = StringBuilder("Valider pour :\n").append(sum.toString()
+            .replaceAfter(".", "").replace(".", "").plus(" points"))
+        val dialog = AlertDialog.Builder(this)
+            .setTitle("Acheter cette contrepartie ?")
+            .setMessage("Voulez vous vraiment valider votre achat ?")
+            .setNegativeButton("Annuler") {dialog,_ -> dialog.dismiss() }
+            .setPositiveButton(sumValidate) { _, _ ->
 
 
-                    firestore.collection("clients").document(mail)
-                        .get()
-                        .addOnSuccessListener {
-                            var points = it.data?.get("points").toString()
-                            var x = points.toDouble()
-                            if (x >= sum) {
-                                firestore.collection("clients").document(mail).update(
-                                    "points", (x - sum).toString()
-                                        .replaceAfter(".", "").replace(".", "")
-                                )
+                var firestore: FirebaseFirestore = FirebaseFirestore.getInstance()
+                firestore.collection("clients").document(mail)
+                    .get()
+                    .addOnSuccessListener {
+                        var points = it.data?.get("points").toString()
+                        var x = points.toDouble()
+                        if (x >= sum) {
+                            firestore.collection("clients").document(mail).update("points", (x - sum).toString()
+                                .replaceAfter(".", "").replace(".", ""))
 
-                                FirebaseDatabase.getInstance("https://projetintegration-83d97-default-rtdb.europe-west1.firebasedatabase.app")
-                                    .getReference("panier-boutique")
-                                    .child("UNIQUE_USER_ID")
-                                    .removeValue()
+                            FirebaseDatabase.getInstance("https://projetintegration-83d97-default-rtdb.europe-west1.firebasedatabase.app")
+                                .getReference("panier-boutique")
+                                .child("UNIQUE_USER_ID")
+                                .removeValue()
 
-                                val dialog2 = AlertDialog.Builder(this)
-                                    .setTitle("Achat bien effectué !")
-                                    .setPositiveButton("Retourner à la Carte") { _, _ ->
-                                        startActivity(intent)
-                                    }
-                                    .create()
-                                dialog2.show()
-                            } else {
-                                val dialog3 = AlertDialog.Builder(this)
-                                    .setTitle("Solde insuffisant")
-                                    .setPositiveButton("Ok") { dialog, _ -> dialog.dismiss() }
-                                    .create()
-                                dialog3.show()
-
-                            }
+                            val dialog2 = AlertDialog.Builder(this)
+                                .setTitle("Achat bien effectué !")
+                                .setPositiveButton("Retourner à la Carte") { _, _ ->
+                                    startActivity(intent) }
+                                .create()
+                            dialog2.show()
                         }
-                        .addOnFailureListener {
+                        else {
+                            val dialog3 = AlertDialog.Builder(this)
+                                .setTitle("Solde insuffisant")
+                                .setPositiveButton("Ok") {dialog,_ -> dialog.dismiss() }
+                                .create()
+                            dialog3.show()
 
                         }
+                    }
+                    .addOnFailureListener{
+
+                    }
 
 
-                }
-                .create()
-            dialog.show()
-        }
+            }
+            .create()
+        dialog.show()
     }
 
 
