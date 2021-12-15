@@ -168,6 +168,11 @@ class PanierActivity : AppCompatActivity(), ICartLoadListener {
                                         .replaceAfter(".", "").replace(".", "")
                                 )
 
+                                FirebaseDatabase.getInstance("https://projetintegration-83d97-default-rtdb.europe-west1.firebasedatabase.app")
+                                    .getReference("panier-boutique")
+                                    .child("UNIQUE_USER_ID")
+                                    .removeValue()
+
                                 val dialog2 = AlertDialog.Builder(this)
                                     .setTitle("Achat bien effectué !")
                                     .setPositiveButton("Retourner à la Carte") { _, _ ->
