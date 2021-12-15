@@ -1,12 +1,14 @@
 package com.example.integration
 
 import android.Manifest
+import android.content.ContentValues.TAG
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
 import android.widget.LinearLayout
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -43,23 +45,23 @@ class HistoryActivity : AppCompatActivity() {
     private fun EventChangeListener() {
 
         db = FirebaseFirestore.getInstance()
-        db.collection("tickets").addSnapshotListener(object: EventListener<QuerySnapshot>{
-            override fun onEvent(value: QuerySnapshot?, error: FirebaseFirestoreException?) {
-                if(error != null){
-                    Log.e("firestore error", error.message.toString())
-                    return
-                }
+        db.collection("tickets")
+            .whereEqualTo("user", mail)
+            .get()
+            .addOnSuccessListener { documents ->
+                for (document in documents) {
+                    Log.d(TAG, "TEST2 : ${document.toObject(History::class.java)}")
+                    historyArrayList.add(document.toObject(History::class.java));
 
-                for(dc: DocumentChange in value?.documentChanges!!){
-                    if (dc.type == DocumentChange.Type.ADDED){
-                        historyArrayList.add(dc.document.toObject(History::class.java))
-                    }
                 }
-
+                Log.d(TAG, "TEST_inside2 : ${historyArrayList}")
                 historyAdapter.notifyDataSetChanged()
             }
+            .addOnFailureListener { exception ->
+                Toast.makeText(this, "erreur requete base de donnée", Toast.LENGTH_SHORT).show()
+            }
+        Log.d(TAG, "TEST_outside2 : ${historyArrayList}")
 
-        })
     }
 
     private fun updateActionBar(){
