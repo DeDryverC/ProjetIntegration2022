@@ -10,10 +10,10 @@
         android:title="Classement" />
     <item
         android:id="@+id/action_login"
-        android:title="login" />
+        android:title="Login" />
     <item
         android:id="@+id/action_profil"
-        android:title="profil" />
+        android:title="Profil" />
     <item
         android:id="@+id/action_ticket"
         android:title="Entrer un ticket" />
