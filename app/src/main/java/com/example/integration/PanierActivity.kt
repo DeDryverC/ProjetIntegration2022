@@ -30,7 +30,7 @@ class PanierActivity : AppCompatActivity(), ICartLoadListener {
 
     var cartLoadListener:ICartLoadListener?=null
 
-    override fun onStart() { 
+    override fun onStart() {
         super.onStart()
         EventBus.getDefault().register(this)
     }
