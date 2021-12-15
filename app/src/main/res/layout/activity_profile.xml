@@ -138,5 +138,28 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/profile_sidebar2" />
 
+    <View
+        android:id="@+id/profile_sidebar3"
+        android:layout_width="match_parent"
+        android:layout_height="4dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:background="@color/black"
+        app:layout_constraintTop_toBottomOf="@+id/profile_btn_paramètre"
+        tools:layout_editor_absoluteX="0dp" />
+
+    <Button
+        android:id="@+id/supp_btn_user"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/kanit"
+        android:text="Supprimer"
+        android:textSize="30sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/profile_sidebar3" />
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
