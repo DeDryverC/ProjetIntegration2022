@@ -144,6 +144,7 @@ class PanierActivity : AppCompatActivity(), ICartLoadListener {
                 .setPositiveButton("Ok") { dialog, _ -> dialog.dismiss() }
                 .create()
             dialog4.show()
+            
         }
         else {
             val sumValidate = StringBuilder("Valider pour :\n").append(
