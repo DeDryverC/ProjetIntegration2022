@@ -38,6 +38,7 @@ class ProfileActivity : AppCompatActivity() {
             val intent = Intent(this, ParametreActivity::class.java)
             startActivity(intent)
         }
+
         setupCompontents()
     }
 
@@ -58,6 +59,10 @@ class ProfileActivity : AppCompatActivity() {
                                 findViewById<Button>(R.id.moderator_btn_activity)
                             moderator_sidebar.visibility = View.VISIBLE
                             moderator_activity.visibility = View.VISIBLE
+                            moderator_activity.setOnClickListener{
+                                val intent = Intent(this, ModerationActivity::class.java)
+                                startActivity(intent)
+                            }
                         }
                     }
                 }

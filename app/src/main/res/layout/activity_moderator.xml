@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activityModerator"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ModeratorActivity">
+
+    <LinearLayout
+        android:id="@+id/moderator_actionbar_background"
+        android:layout_width="match_parent"
+        android:layout_height="?android:attr/actionBarSize"
+        android:background="#E7E7E7"
+        android:orientation="horizontal"
+        android:weightSum="16">
+
+        <TextView
+            android:id="@+id/moderator_actionbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="11"
+            android:gravity="center"
+            android:text="Signalements"
+            android:textSize="25sp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_panier"
+        android:layout_width="match_parent"
+        android:layout_height="697dp"
+        android:layout_below="@+id/moderator_actionbar_background"
+        android:layout_alignParentBottom="true"
+        android:padding="8dp" />
+
+
+</RelativeLayout>
