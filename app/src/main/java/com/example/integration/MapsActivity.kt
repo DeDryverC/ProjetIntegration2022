@@ -22,6 +22,8 @@ import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+import java.text.SimpleDateFormat
+
 import kotlinx.android.synthetic.main.activity_maps.*
 import java.util.*
 
@@ -258,8 +260,11 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback,
 
         map.setOnMapLongClickListener(fun(latLng: LatLng) {
 
+            val sdf = SimpleDateFormat("dd/M/yyyy")
+            val currentDate = sdf.format(Date())
 
             val depot = hashMapOf(
+                "date" to currentDate,
                 "name" to "null",
                 "lat" to latLng.latitude,
                 "long" to latLng.longitude,

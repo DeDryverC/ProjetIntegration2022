@@ -157,6 +157,7 @@ class ScanActivity : AppCompatActivity() {
 
                 val spinner_value = class_spinner?.selectedItem.toString()
                 val tec = hashMapOf(
+                    "action" to "ticket",
                     "tec" to spinner_value,
                     "user" to mail,
                     "date" to currentDate,

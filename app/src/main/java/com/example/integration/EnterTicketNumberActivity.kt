@@ -35,6 +35,7 @@ class EnterTicketNumberActivity : AppCompatActivity() {
             val currentDate = sdf.format(Date())
 
             val ticket = hashMapOf(
+                    "action" to "ticket",
                     "tec" to spinner_value,
                     "user" to mail,
                     "date" to currentDate,
