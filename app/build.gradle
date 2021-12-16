@@ -74,7 +74,11 @@ dependencies {
     implementation 'com.budiyev.android:code-scanner:2.1.0'
     implementation "com.journeyapps:zxing-android-embedded:3.6.0"
     implementation "com.google.android.gms:play-services-vision:20.1.3"
+<<<<<<< HEAD
 
+=======
+    
+>>>>>>> 88fff7c5f5c18c4f932643e7ec0882bf745ace39
     implementation 'com.google.firebase:firebase-storage:20.0.0'
     implementation 'com.google.firebase:firebase-firestore-ktx'
     implementation 'com.jakewharton:butterknife:10.2.3'
@@ -87,4 +91,10 @@ dependencies {
     implementation "org.jetbrains.kotlin:kotlin-script-runtime:1.5.31"
     androidTestImplementation("androidx.test.espresso.espresso-core:3.2.0")
 
+<<<<<<< HEAD
 }
+=======
+    androidTestImplementation("androidx.test.espresso.espresso-core:3.2.0")
+
+}
+>>>>>>> 88fff7c5f5c18c4f932643e7ec0882bf745ace39
