@@ -100,7 +100,7 @@
 
     <string name="historique">Historique</string>
     <string name="history_action">Action:</string>
-    <string name="history_date">Date</string>
-    <string name="history_points">Points récoltés</string>
+    <string name="history_date">Date:</string>
+    <string name="history_points">Points récoltés:</string>
 
 </resources>

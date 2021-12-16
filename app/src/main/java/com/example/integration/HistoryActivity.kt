@@ -1,26 +1,27 @@
 package com.example.integration
 
-import android.Manifest
 import android.content.ContentValues.TAG
-import android.content.Intent
-import android.content.pm.PackageManager
 import android.os.Bundle
 import android.util.Log
-import android.widget.Button
-import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.google.firebase.database.*
+import com.example.integration.adapter.HistoryDepotAdapter
+import com.example.integration.adapter.HistoryTicketAdapter
 import com.google.firebase.firestore.*
 
 class HistoryActivity : AppCompatActivity() {
     private var mail = ""
-    private lateinit var recyclerView: RecyclerView
-    private lateinit var historyArrayList: ArrayList<History>
-    private lateinit var historyAdapter: HistoryAdapter
+    private lateinit var recyclerViewTicket: RecyclerView
+    private lateinit var recyclerViewDepot: RecyclerView
+
+    private lateinit var historyTicketArrayList: ArrayList<HistoryTicket>
+    private lateinit var historyTicketAdapter: HistoryTicketAdapter
+
+    private lateinit var historyDepotArrayList: ArrayList<HistoryDepot>
+    private lateinit var historyDepotAdapter: HistoryDepotAdapter
+
     private lateinit var db: FirebaseFirestore
 
 
@@ -30,12 +31,28 @@ class HistoryActivity : AppCompatActivity() {
 
         mail=intent.getStringExtra("key").toString()
 
-        recyclerView = findViewById(R.id.history_recycler)
-        recyclerView.layoutManager = LinearLayoutManager(this)
-        recyclerView.setHasFixedSize(true)
-        historyArrayList = arrayListOf()
-        historyAdapter = HistoryAdapter(historyArrayList)
-        recyclerView.adapter = historyAdapter
+        recyclerViewTicket = findViewById(R.id.history_recycler)
+
+        recyclerViewTicket.layoutManager = LinearLayoutManager(this)
+        recyclerViewTicket.setHasFixedSize(true)
+
+        //recyclerViewDepot = findViewById(R.id.history_recycler_depot)
+
+        //recyclerViewDepot.layoutManager = LinearLayoutManager(this)
+        //recyclerViewDepot.setHasFixedSize(true)
+
+        historyTicketArrayList = arrayListOf()
+        //historyDepotArrayList = arrayListOf()
+
+
+        historyTicketAdapter = HistoryTicketAdapter(historyTicketArrayList)
+        recyclerViewTicket.adapter = historyTicketAdapter
+
+
+        //historyDepotAdapter = HistoryDepotAdapter((historyDepotArrayList))
+        //recyclerViewDepot.adapter = historyDepotAdapter
+
+
         updateActionBar()
         EventChangeListener()
 
@@ -43,25 +60,38 @@ class HistoryActivity : AppCompatActivity() {
     }
 
     private fun EventChangeListener() {
-
+        //Getting tickets from the user
         db = FirebaseFirestore.getInstance()
         db.collection("tickets")
             .whereEqualTo("user", mail)
             .get()
             .addOnSuccessListener { documents ->
                 for (document in documents) {
-                    Log.d(TAG, "TEST2 : ${document.toObject(History::class.java)}")
-                    historyArrayList.add(document.toObject(History::class.java));
-
+                    historyTicketArrayList.add(document.toObject(HistoryTicket::class.java));
                 }
-                Log.d(TAG, "TEST_inside2 : ${historyArrayList}")
-                historyAdapter.notifyDataSetChanged()
+                Log.d(TAG, "TEST_inside2 : ${historyTicketArrayList}")
+                historyTicketAdapter.notifyDataSetChanged()
             }
             .addOnFailureListener { exception ->
                 Toast.makeText(this, "erreur requete base de donnée", Toast.LENGTH_SHORT).show()
             }
-        Log.d(TAG, "TEST_outside2 : ${historyArrayList}")
 
+        //getting depots from the user
+        /*
+        db.collection("depots")
+            .whereEqualTo("creator", mail)
+            .get()
+            .addOnSuccessListener { documents ->
+                for (document in documents) {
+                    historyDepotArrayList.add(document.toObject(HistoryDepot::class.java));
+                }
+                Log.d(TAG, "TEST_inside2 : ${historyDepotArrayList}")
+                historyDepotAdapter.notifyDataSetChanged()
+            }
+            .addOnFailureListener { exception ->
+                Toast.makeText(this, "erreur requete base de donnée", Toast.LENGTH_SHORT).show()
+            }
+        */
     }
 
     private fun updateActionBar(){
