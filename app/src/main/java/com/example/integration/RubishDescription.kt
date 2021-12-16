@@ -95,7 +95,11 @@ class RubishDescription : AppCompatActivity() {
             .addOnSuccessListener { result ->
                 for (document in result) {
                     if (document.data.getValue("name") == markerTitle){
-                        val data = hashMapOf( "exam" to false, "user" to userId, "mod" to "none")
+                        val data = hashMapOf(
+                            "name" to markerTitle,
+                            "pinned" to false,
+                            "user" to userId,
+                            "mod" to "none")
                         db.collection("reports").document(document.id)
                             .set(data, SetOptions.merge())
                             .addOnSuccessListener {

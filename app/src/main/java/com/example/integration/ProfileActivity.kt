@@ -60,7 +60,7 @@ class ProfileActivity : AppCompatActivity() {
                             moderator_sidebar.visibility = View.VISIBLE
                             moderator_activity.visibility = View.VISIBLE
                             moderator_activity.setOnClickListener{
-                                val intent = Intent(this, ModerationActivity::class.java)
+                                val intent = Intent(this, ModeratorActivity::class.java)
                                 startActivity(intent)
                             }
                         }

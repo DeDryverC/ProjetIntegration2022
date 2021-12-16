@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activityModerator"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".ModeratorActivity">
+    android:layout_height="match_parent">
 
     <LinearLayout
         android:id="@+id/moderator_actionbar_background"
@@ -13,7 +13,8 @@
         android:layout_height="?android:attr/actionBarSize"
         android:background="#E7E7E7"
         android:orientation="horizontal"
-        android:weightSum="16">
+        android:weightSum="16"
+        app:layout_constraintTop_toTopOf="parent">
 
         <TextView
             android:id="@+id/moderator_actionbar"
@@ -27,13 +28,12 @@
             android:textStyle="bold" />
     </LinearLayout>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recycler_panier"
+    <FrameLayout
+        android:id="@+id/fragment_container"
         android:layout_width="match_parent"
-        android:layout_height="697dp"
-        android:layout_below="@+id/moderator_actionbar_background"
-        android:layout_alignParentBottom="true"
-        android:padding="8dp" />
+        android:layout_height="match_parent"
+        android:layout_marginTop="60dp"/>
 
 
-</RelativeLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
