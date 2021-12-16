@@ -3,10 +3,12 @@ package com.example.integration
 import android.content.ContentValues.TAG
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.google.firebase.firestore.SetOptions
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 
@@ -33,10 +35,15 @@ class RubishDescription : AppCompatActivity() {
         //configuration des TextView et du bouton delRubish
         findViewById<TextView>(R.id.rubish_title_content).text = markerTitle
         findViewById<TextView>(R.id.rubish_description_content).text = markerDescription
+        findViewById<ImageView>(R.id.rubish_report_button).setOnClickListener {
+            repRubish(markerTitle, userId)
+        }
         findViewById<ImageView>(R.id.close_rubish_button).setOnClickListener {
             delRubish(markerTitle, userId)
         }
+
     }
+
 
     private fun delRubish(markerTitle: String?, userId: String?) {
         // Appel de la méthode .delete() avec les résultat du get() si l'utilisateur est bien le créateur de la méthode
@@ -79,4 +86,38 @@ class RubishDescription : AppCompatActivity() {
                 }
             }
     }
+
+    private fun repRubish(markerTitle: String?, userId: String?){
+
+
+        db.collection("depots")
+            .get()
+            .addOnSuccessListener { result ->
+                for (document in result) {
+                    if (document.data.getValue("name") == markerTitle){
+                        val data = hashMapOf( "exam" to false, "user" to userId, "mod" to "none")
+                        db.collection("reports").document(document.id)
+                            .set(data, SetOptions.merge())
+                            .addOnSuccessListener {
+                                Log.d(
+                                    TAG,
+                                    "DocumentCreated successfully"
+                                )
+                            }
+                            .addOnFailureListener { e ->
+                                Log.w(
+                                    TAG,
+                                    "Error creating document",
+                                    e
+                                )
+                            }
+                        Toast.makeText(this, "Le dépôt a bien été signalé !", Toast.LENGTH_LONG).show()
+                        finish()
+                    }
+                }
+            }
+
+    }
+
+
 }

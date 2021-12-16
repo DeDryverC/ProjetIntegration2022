@@ -6,34 +6,15 @@
     android:layout_height="wrap_content"
     android:orientation="vertical">
 
-    <LinearLayout
-        android:id="@+id/profile_title"
-        android:layout_width="match_parent"
-        android:layout_height="?android:attr/actionBarSize"
-        android:background="#E7E7E7"
-        android:orientation="horizontal"
-        android:weightSum="16"
-        tools:ignore="MissingConstraints">>
-
-        <ImageView
-            android:id="@+id/boutique_before"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="start|center_vertical"
-            android:layout_weight="2"
-            android:src="@drawable/ic_nav_before" />
-    </LinearLayout>
 
     <androidx.cardview.widget.CardView
         android:id="@+id/profile_pic"
         android:layout_width="80dp"
         android:layout_height="80dp"
-        app:cardUseCompatPadding="false"
         app:cardCornerRadius="15dp"
         app:cardElevation="5dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginLeft="10dp"
-        app:layout_constraintTop_toBottomOf="@+id/profile_title">
+        app:cardUseCompatPadding="false"
+        app:layout_constraintStart_toStartOf="parent">
 
         <ImageView
             android:layout_width="match_parent"
@@ -46,24 +27,24 @@
         android:id="@+id/view"
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:visibility="invisible"
+        android:layout_marginBottom="40dp"
 
+        android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="@+id/profile_pic"
-        app:layout_constraintTop_toBottomOf="@+id/profile_title" />
+        tools:layout_editor_absoluteX="0dp" />
 
     <TextView
         android:id="@+id/profile_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
+        android:layout_marginLeft="10dp"
         android:fontFamily="@font/kanit"
         android:text="Cedric De Dryver"
         android:textSize="27dp"
-        android:layout_marginLeft="10dp"
 
         app:layout_constraintBottom_toTopOf="@+id/view"
         app:layout_constraintStart_toEndOf="@+id/profile_pic"
-        app:layout_constraintTop_toBottomOf="@+id/profile_title"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0" />
 
     <TextView
@@ -154,12 +135,36 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/kanit"
-        android:text="Supprimer"
+        android:text="@string/profile_supprimer"
+        android:layout_marginTop="10dp"
         android:textSize="30sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/profile_sidebar3" />
 
+    <View
+        android:id="@+id/moderator_sidebar"
+        android:visibility="invisible"
+        android:layout_width="match_parent"
+        android:layout_height="4dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:background="@color/black"
+        app:layout_constraintTop_toBottomOf="@+id/supp_btn_user"
+        tools:layout_editor_absoluteX="-26dp" />
 
+    <Button
+        android:id="@+id/moderator_btn_activity"
+        android:visibility="invisible"
+        android:layout_width="377dp"
+        android:layout_height="65dp"
+        android:layout_marginTop="10dp"
+        android:fontFamily="@font/kanit"
+        android:text="@string/moderator_alerts"
+        android:textSize="30sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/moderator_sidebar" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

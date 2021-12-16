@@ -90,7 +90,8 @@
 
     <string name="profile_historique">Historique</string>
     <string name="profile_parametre">Paramètres</string>
-    <string name="moderator_alerts">Alerte Modération</string>
+    <string name="profile_supprimer">Supprimer le compte</string>
+    <string name="moderator_alerts">Alertes Modération</string>
     <string name="moderator_switch">Mode Modérateur</string>
 
 
@@ -102,5 +103,7 @@
     <string name="history_action">Action:</string>
     <string name="history_date">Date</string>
     <string name="history_points">Points récoltés</string>
+    <string name="report_button">report button</string>
+
 
 </resources>
