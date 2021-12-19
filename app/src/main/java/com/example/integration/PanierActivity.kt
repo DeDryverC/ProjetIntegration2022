@@ -22,9 +22,8 @@ import kotlinx.android.synthetic.main.activity_panier.boutique_before
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
 import org.greenrobot.eventbus.ThreadMode
-import java.lang.NumberFormatException
 import java.lang.StringBuilder
-import java.util.function.LongToDoubleFunction
+
 
 class PanierActivity : AppCompatActivity(), ICartLoadListener {
 
@@ -62,7 +61,7 @@ class PanierActivity : AppCompatActivity(), ICartLoadListener {
         val cartModels: MutableList<CartModel> = ArrayList()
         FirebaseDatabase.getInstance("https://projetintegration-83d97-default-rtdb.europe-west1.firebasedatabase.app")
             .getReference("panier-boutique")
-            .child("UNIQUE_USER_ID")
+            .child(unique())
             .addListenerForSingleValueEvent(object: ValueEventListener {
                 override fun onDataChange(snapshot: DataSnapshot) {
                     for(cartSnapShot in snapshot.children) {
@@ -92,7 +91,7 @@ class PanierActivity : AppCompatActivity(), ICartLoadListener {
         val cartModels: MutableList<CartModel> = ArrayList()
         FirebaseDatabase.getInstance("https://projetintegration-83d97-default-rtdb.europe-west1.firebasedatabase.app")
             .getReference("panier-boutique")
-            .child("UNIQUE_USER_ID")
+            .child(unique())
             .addListenerForSingleValueEvent(object: ValueEventListener {
                 override fun onDataChange(snapshot: DataSnapshot) {
                     for(cartSnapShot in snapshot.children) {
@@ -170,7 +169,7 @@ class PanierActivity : AppCompatActivity(), ICartLoadListener {
 
                                 FirebaseDatabase.getInstance("https://projetintegration-83d97-default-rtdb.europe-west1.firebasedatabase.app")
                                     .getReference("panier-boutique")
-                                    .child("UNIQUE_USER_ID")
+                                    .child(unique())
                                     .removeValue()
 
                                 val dialog2 = AlertDialog.Builder(this)
