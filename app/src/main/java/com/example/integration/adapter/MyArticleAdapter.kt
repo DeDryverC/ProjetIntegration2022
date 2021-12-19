@@ -8,6 +8,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.example.integration.BoutiqueActivity
 import com.example.integration.R
 import com.example.integration.eventbus.UpdateCartEvent
 import com.example.integration.listener.ICartLoadListener
@@ -23,7 +24,7 @@ import org.greenrobot.eventbus.EventBus
 import java.lang.StringBuilder
 
 
-
+var boutiqueClass = BoutiqueActivity()
 class MyArticleAdapter(
     private val context: Context,
     private val list: List<ArticleModel>,

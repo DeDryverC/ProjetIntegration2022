@@ -48,6 +48,14 @@ class BoutiqueActivity : AppCompatActivity(), IArticleLoadListener, ICartLoadLis
         }
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        FirebaseDatabase.getInstance("https://projetintegration-83d97-default-rtdb.europe-west1.firebasedatabase.app")
+            .getReference("panier-boutique")
+            .child(unique())
+            .removeValue()
+    }
+
 
     @Subscribe(threadMode = ThreadMode.MAIN, sticky = true)
     fun onUpdateCartEvent(event:UpdateCartEvent) {
@@ -148,7 +156,12 @@ class BoutiqueActivity : AppCompatActivity(), IArticleLoadListener, ICartLoadLis
         intent.putExtra("key",mail)
         btnCart.setOnClickListener { startActivity(intent) }
 
-        boutique_before!!.setOnClickListener{ finish()}
+        boutique_before!!.setOnClickListener{
+            FirebaseDatabase.getInstance("https://projetintegration-83d97-default-rtdb.europe-west1.firebasedatabase.app")
+                .getReference("panier-boutique")
+                .child(unique())
+                .removeValue()
+            finish()}
     }
 
     override fun onArticleLoadSuccess(articleModelList: List<ArticleModel>?) {
