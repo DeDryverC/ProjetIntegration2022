@@ -161,7 +161,7 @@ class PanierActivity : AppCompatActivity(), ICartLoadListener {
                         .get()
                         .addOnSuccessListener {
                             var points = it.data?.get("points").toString()
-                            var x = points.toDouble()
+                            var x = points.toInt()
                             if (x >= sum) {
                                 firestore.collection("clients").document(mail).update(
                                     "points", (x - sum).toString()
