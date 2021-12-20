@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+
     xmlns:tools="http://schemas.android.com/tools"
     package="com.example.integration">
-
+    <uses-sdk android:minSdkVersion="23" android:targetSdkVersion="31" />
     <uses-permission android:name="android.permission.CAMERA"/>
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
@@ -35,16 +36,24 @@
             android:name="com.example.integration.ScanActivity"
             android:screenOrientation="fullSensor"
             tools:replace="android:screenOrientation"
-            android:stateNotNeeded="true"/>
+            android:stateNotNeeded="true"
+            android:exported="true"/>
         <activity android:name=".ProfileActivity"
             android:exported="true"/>
-        <activity android:name=".ParametreActivity"/>
+        <activity android:name=".ParametreActivity"
+            android:exported="true"/>
         <activity
-            android:name="com.example.integration.TicketActivity" />
+            android:name="com.example.integration.TicketActivity"
+            android:exported="true"/>
         <activity
-            android:name="com.example.integration.EnterTicketNumberActivity" />
+            android:name="com.example.integration.EnterTicketNumberActivity"
+            android:exported="true"/>
         <activity
-            android:name="com.example.integration.PointsReceivedActivity" />
+            android:name="com.example.integration.DetectActivity"
+            android:exported="true"/>
+        <activity
+            android:name="com.example.integration.PointsReceivedActivity"
+            android:exported="true"/>
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
@@ -60,9 +69,12 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".MapsActivity" />
-        <activity android:name=".RubishDescription"/>
-        <activity android:name=".RubishCreationForm"/>
+        <activity android:name=".MapsActivity"
+            android:exported="true"/>
+        <activity android:name=".RubishDescription"
+            android:exported="true"/>
+        <activity android:name=".RubishCreationForm"
+            android:exported="true"/>
 
 
     </application>

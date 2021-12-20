@@ -9,8 +9,8 @@
         android:id="@+id/action_classement"
         android:title="Classement" />
     <item
-        android:id="@+id/action_login"
-        android:title="Login" />
+        android:id="@+id/action_detect_trash"
+        android:title="Analyse Déchet" />
     <item
         android:id="@+id/action_profil"
         android:title="Profil" />
