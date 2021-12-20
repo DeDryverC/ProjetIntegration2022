@@ -19,15 +19,13 @@ import com.google.firebase.database.ValueEventListener
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.activity_boutique.*
 import kotlinx.android.synthetic.main.activity_boutique.boutique_before
-import kotlinx.android.synthetic.main.activity_panier.*
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
 import org.greenrobot.eventbus.ThreadMode
 import java.lang.StringBuilder
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
-import com.auth0.android.result.UserProfile
-import com.google.firebase.firestore.auth.User
+
 
 
 class BoutiqueActivity : AppCompatActivity(), IArticleLoadListener, ICartLoadListener {
@@ -49,6 +47,15 @@ class BoutiqueActivity : AppCompatActivity(), IArticleLoadListener, ICartLoadLis
             EventBus.getDefault().unregister(this)
         }
     }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        FirebaseDatabase.getInstance("https://projetintegration-83d97-default-rtdb.europe-west1.firebasedatabase.app")
+            .getReference("panier-boutique")
+            .child(unique())
+            .removeValue()
+    }
+
 
     @Subscribe(threadMode = ThreadMode.MAIN, sticky = true)
     fun onUpdateCartEvent(event:UpdateCartEvent) {
@@ -92,7 +99,7 @@ class BoutiqueActivity : AppCompatActivity(), IArticleLoadListener, ICartLoadLis
         val cartModels: MutableList<CartModel> = ArrayList()
         FirebaseDatabase.getInstance("https://projetintegration-83d97-default-rtdb.europe-west1.firebasedatabase.app")
             .getReference("panier-boutique")
-            .child("UNIQUE_USER_ID")
+            .child(unique())
             .addListenerForSingleValueEvent(object:ValueEventListener {
                 override fun onDataChange(snapshot: DataSnapshot) {
                     for(cartSnapShot in snapshot.children) {
@@ -148,15 +155,22 @@ class BoutiqueActivity : AppCompatActivity(), IArticleLoadListener, ICartLoadLis
         val intent = Intent(this,PanierActivity::class.java)
         intent.putExtra("key",mail)
         btnCart.setOnClickListener { startActivity(intent) }
-        boutique_before!!.setOnClickListener{ finish()}
+
+        boutique_before!!.setOnClickListener{
+            FirebaseDatabase.getInstance("https://projetintegration-83d97-default-rtdb.europe-west1.firebasedatabase.app")
+                .getReference("panier-boutique")
+                .child(unique())
+                .removeValue()
+            finish()}
     }
 
     override fun onArticleLoadSuccess(articleModelList: List<ArticleModel>?) {
+        mail=intent.getStringExtra("key").toString()
+
         val adapter = MyArticleAdapter(this,articleModelList!!, cartLoadListener)
         recycler_articles.adapter = adapter
 
         // Affichage des points de la personne connectée
-        mail=intent.getStringExtra("key").toString()
         var firestore: FirebaseFirestore = FirebaseFirestore.getInstance()
         firestore.collection("clients").document(mail)
             .get()
