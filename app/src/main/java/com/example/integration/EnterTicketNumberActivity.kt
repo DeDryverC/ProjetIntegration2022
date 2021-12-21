@@ -10,6 +10,7 @@ import com.google.firebase.storage.FirebaseStorage
 import java.text.SimpleDateFormat
 import java.util.*
 
+
 class EnterTicketNumberActivity : AppCompatActivity() {
     val db = FirebaseFirestore.getInstance();
     val tickets = db.collection("tickets");
@@ -35,10 +36,19 @@ class EnterTicketNumberActivity : AppCompatActivity() {
             val currentDate = sdf.format(Date())
 
             val ticket = hashMapOf(
+                    "action" to "ticket",
                     "tec" to spinner_value,
                     "user" to mail,
                     "date" to currentDate,
                     "points" to 1
+            )
+
+            val action = hashMapOf(
+                "action" to "ticket",
+                "date" to currentDate,
+                "location" to "/",
+                "points" to 1,
+                "user" to mail
             )
 
 
@@ -47,11 +57,12 @@ class EnterTicketNumberActivity : AppCompatActivity() {
                     .addOnSuccessListener { document ->
                         if (!document.exists()) {
                             tickets.document(ticket_number).set(ticket);
+                            db.collection("action").document().set(action)
                             val intent = Intent(this, PointsReceivedActivity::class.java)
                             intent.putExtra("key",mail)
                             startActivity(intent)
                         } else {
-                            Toast.makeText(this, "Ce ticket à déjà été enregistré", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(this, "Ce ticket a déjà été enregistré", Toast.LENGTH_SHORT).show();
 
                         }
                     }

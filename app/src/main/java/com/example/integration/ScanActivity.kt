@@ -157,10 +157,18 @@ class ScanActivity : AppCompatActivity() {
 
                 val spinner_value = class_spinner?.selectedItem.toString()
                 val tec = hashMapOf(
+                    "action" to "ticket",
                     "tec" to spinner_value,
                     "user" to mail,
                     "date" to currentDate,
                     "points" to 1
+                )
+                val action = hashMapOf(
+                    "action" to "ticket",
+                    "date" to currentDate,
+                    "location" to "/",
+                    "points" to 1,
+                    "user" to mail
                 )
 
                 docRef.get()
@@ -168,6 +176,7 @@ class ScanActivity : AppCompatActivity() {
                         if (!document.exists()) {
                             detector.release();
                             tickets.document(code.displayValue).set(tec);
+                            db.collection("action").document().set(action);
                             switchActivityPointsReceived();
                         } else {
                             detector.release();

@@ -13,7 +13,12 @@
         android:layout_marginRight="15dp"
         android:background="@color/black"
         tools:layout_editor_absoluteX="0dp"
+
         tools:ignore="MissingConstraints" />
+
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
 
     <Button
         android:id="@+id/setting_btn_changename"

@@ -22,9 +22,11 @@ class CollecteRepository {
     object Singleton {
         // lien vers bucket storage
         private val BUCKET_URL: String = "gs://projetintegration-83d97.appspot.com"
+        private val BUCKET_URL_SIGNAL = "gs://projetintegration-83d97.appspot.com/ImageBase"
 
         // se connecte à notre espace de stockage
         val storageReference = FirebaseStorage.getInstance().getReferenceFromUrl(BUCKET_URL)
+        val storageReferencesignal = FirebaseStorage.getInstance().getReferenceFromUrl(BUCKET_URL_SIGNAL)
 
         // se connecter à la référence collecte de la DB
         val databaseRef = FirebaseDatabase.getInstance("https://projetintegration-83d97-default-rtdb.europe-west1.firebasedatabase.app").getReference("collectes")

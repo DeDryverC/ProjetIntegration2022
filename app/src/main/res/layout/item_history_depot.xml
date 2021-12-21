@@ -33,7 +33,7 @@
                 android:textStyle="bold"/>
 
             <TextView
-                android:id="@+id/tvhistory_action"
+                android:id="@+id/tvhistory_action_depot"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
@@ -59,7 +59,7 @@
                 android:textStyle="bold"/>
 
             <TextView
-                android:id="@+id/tvhistory_date"
+                android:id="@+id/tvhistory_date_depot"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
@@ -85,7 +85,7 @@
                 android:textStyle="bold"/>
 
             <TextView
-                android:id="@+id/tvhistory_points"
+                android:id="@+id/tvhistory_points_depot"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
@@ -93,30 +93,7 @@
                 android:textColor="@color/black"
                 android:textSize="20sp"/>
         </LinearLayout>
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:orientation="horizontal"
-            >
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/location"
-                android:textColor="@color/black"
-                android:textSize="26sp"
-                android:textStyle="bold"/>
-
-            <TextView
-                android:id="@+id/tvhistory_location"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:text="points"
-                android:textColor="@color/black"
-                android:textSize="20sp"/>
-        </LinearLayout>
 
 
 
