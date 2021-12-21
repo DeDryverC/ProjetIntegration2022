@@ -163,12 +163,20 @@ class ScanActivity : AppCompatActivity() {
                     "date" to currentDate,
                     "points" to 1
                 )
+                val action = hashMapOf(
+                    "action" to "ticket",
+                    "date" to currentDate,
+                    "location" to "/",
+                    "points" to 1,
+                    "user" to mail
+                )
 
                 docRef.get()
                     .addOnSuccessListener { document ->
                         if (!document.exists()) {
                             detector.release();
                             tickets.document(code.displayValue).set(tec);
+                            db.collection("action").document().set(action);
                             switchActivityPointsReceived();
                         } else {
                             detector.release();
