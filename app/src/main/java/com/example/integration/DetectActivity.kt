@@ -25,7 +25,6 @@ class DetectActivity : AppCompatActivity() {
     val REQUEST_CODE = 2000
     private lateinit var imageView: ImageView
     private lateinit var btnEnvoi: Button
-    private lateinit var btnImageCapture : Button
     private var file: Uri? = null
     private var uploadedImage: ImageView? = null
 
@@ -39,12 +38,6 @@ class DetectActivity : AppCompatActivity() {
         uploadedImage = findViewById<ImageView>(R.id.imageView2)
 
         imageView = findViewById<ImageView>(R.id.imageView2)
-        btnImageCapture = findViewById<Button>(R.id.button_camera)
-
-        btnImageCapture.setOnClickListener {
-            val cameraIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
-            startActivityForResult(cameraIntent, REQUEST_CODE)
-        }
 
         btnEnvoi = findViewById<Button>(R.id.button_envoi)
         btnEnvoi.setOnClickListener {
