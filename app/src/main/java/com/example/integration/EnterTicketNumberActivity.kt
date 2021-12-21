@@ -60,7 +60,9 @@ class EnterTicketNumberActivity : AppCompatActivity() {
                             db.collection("action").document().set(action)
                             val intent = Intent(this, PointsReceivedActivity::class.java)
                             intent.putExtra("key",mail)
+                            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                             startActivity(intent)
+                            finish()
                         } else {
                             Toast.makeText(this, "Ce ticket a déjà été enregistré", Toast.LENGTH_SHORT).show();
 

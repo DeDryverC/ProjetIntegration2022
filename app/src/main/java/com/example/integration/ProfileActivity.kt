@@ -25,6 +25,7 @@ class ProfileActivity : AppCompatActivity() {
         btn_historique.setOnClickListener{
             val intent = Intent(this, HistoryActivity::class.java)
             intent.putExtra("key",mail)
+
             startActivity(intent)
         }
         btn_parametre.setOnClickListener{

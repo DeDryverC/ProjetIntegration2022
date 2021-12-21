@@ -128,13 +128,17 @@ class ScanActivity : AppCompatActivity() {
     private fun switchActivityPointsReceived(){
         val intent = Intent(this, PointsReceivedActivity::class.java)
         intent.putExtra("key",mail)
+        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
         startActivity(intent)
+        finish()
     }
 
     private fun alreadyScanned(){
         val intent = Intent(this, TicketActivity::class.java)
         intent.putExtra("key",mail)
+        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
         startActivity(intent)
+        finish()
         Toast.makeText(this, "Ce ticket a déjà été scanné", Toast.LENGTH_SHORT).show()
     }
     private fun getSpinnerValue(){
