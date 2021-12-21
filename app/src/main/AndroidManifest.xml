@@ -76,6 +76,8 @@
         <activity android:name=".RubishCreationForm"
             android:exported="true"/>
 
+        <activity android:name=".ModeratorActivity"/>
+
 
     </application>
 

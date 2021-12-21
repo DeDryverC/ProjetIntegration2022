@@ -123,8 +123,11 @@ class LoginActivity : AppCompatActivity() {
             }
             .addOnFailureListener { exception ->
                 val date = LocalDateTime.now()
+                val name = "$text".replaceAfter("@", "").replace("@", "")
                 val user = hashMapOf(
                     "email" to "$text",
+                    "name" to "$name",
+                    "moderator" to false,
                     "lastConnect" to "$date",
                     "points" to 1
                 )
