@@ -11,6 +11,7 @@ import com.google.firebase.ktx.Firebase
 
 
 class ModeratorActivity : AppCompatActivity() {
+
     private val reportList = arrayListOf<ModeratorModel>()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

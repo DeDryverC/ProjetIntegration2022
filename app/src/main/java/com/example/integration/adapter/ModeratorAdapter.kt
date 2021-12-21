@@ -8,6 +8,8 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.integration.ModeratorActivity
+import com.example.integration.ModeratorRepository
+import com.example.integration.ModeratorRepository.Singleton.databaseRef
 import com.example.integration.R
 import com.example.integration.model.ModeratorModel
 import com.google.firebase.firestore.ktx.firestore
@@ -40,37 +42,22 @@ class ModeratorAdapter(
     override fun onBindViewHolder(holder: ModeratorAdapter.ViewHolder, position: Int) {
 
         val currentReport = reportList[position]
+        val repo = ModeratorRepository()
+
         holder.ModDepot.text = currentReport.nomDepot
         holder.ModUser.text = currentReport.email
         holder.ModAssignment?.text = currentReport.modAssignement
 
-        holder.ModCheckout.setOnClickListener {
-            db.collection("reports")
-                .get()
-                .addOnSuccessListener { result ->
-                    for (document in result) {
-                        if (document.data.getValue("name") === currentReport.nomDepot) {
-                            db.collection("reports").document(document.id).delete()
-                        }
-                    }
 
-                }
+        holder.ModCheckout.setOnClickListener {
+            databaseRef.child(currentReport.id).removeValue()
+            repo.updateData {  }
         }
         holder.ModPinned.setOnClickListener{
-            db.collection("reports")
-                .get()
-                .addOnSuccessListener { result ->
-                    for(document in result) {
-                        if(document.data.getValue("name") === currentReport.nomDepot){
-                            val data = hashMapOf(
-                                "name" to currentReport.nomDepot,
-                                "user" to currentReport.email,
-                                "mod" to "dedryver.cedric@gmail.com",
-                                "pinned" to true
-                            )
-                        }
-                    }
-                }
+            currentReport.pinned = !currentReport.pinned
+            //currentReport.modAssignement =
+
+            repo.updateReport(currentReport)
         }
         holder.ModTrash.setOnClickListener{
             db.collection("depot")
@@ -82,6 +69,8 @@ class ModeratorAdapter(
                         }
                     }
                 }
+            databaseRef.child(currentReport.id).removeValue()
+            repo.updateData {  }
         }
 
 

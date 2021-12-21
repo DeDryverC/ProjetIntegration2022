@@ -49,4 +49,7 @@ class ModeratorRepository {
 
     }
 
+    fun updateReport(report : ModeratorModel){
+        databaseRef.child(report.id).setValue(report)
+    }
 }
