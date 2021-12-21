@@ -56,23 +56,6 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback,
         mail=intent.getStringExtra("key").toString()
         updateActionBar()
 
-
-        //GET Récompense
-        /*
-        val bountyRef = db.collection("recompences").document("MapsActivity")
-
-        bountyRef.get()
-            .addOnSuccessListener { document ->
-                if (document != null) {
-                    val bountyLocal = document.data?.get("nombre")
-                    modifBounty(bountyLocal as Long)
-
-
-                }
-            }
-        Log.d(TAG,"TEST ==============================${bounty}")
-        */
-
     }
 
 

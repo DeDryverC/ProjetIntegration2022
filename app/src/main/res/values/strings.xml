@@ -103,5 +103,6 @@
     <string name="history_date">Date:</string>
     <string name="history_points">Points récoltés:</string>
     <string name="location">Endroit de l\'action :</string>
+    <string name="history_empty">Votre historique est vide!</string>
 
 </resources>
