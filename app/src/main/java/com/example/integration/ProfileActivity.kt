@@ -18,16 +18,17 @@ class ProfileActivity : AppCompatActivity() {
 
     val db = Firebase.firestore
     private var mail = ""
-
-
+  
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_profile)
         mail = intent.getStringExtra("key").toString()
 
-        val btn_parametre = findViewById<Button>(R.id.profile_btn_parametre)
+        val btn_parametre = findViewById<Button>(R.id.profile_btn_paramètre)
         val btn_historique = findViewById<Button>(R.id.profile_btn_historique)
-
+        val switch_moderator = findViewById<Switch>(R.id.moderator_btn_switch)
+        val btn_moderator_act = findViewById<Button>(R.id.moderator_btn_activity)
+        val btn_supprimer = findViewById<Button>(R.id.supp_btn_user)
 
         btn_historique.setOnClickListener{
             val intent = Intent(this, HistoryActivity::class.java)
@@ -37,6 +38,11 @@ class ProfileActivity : AppCompatActivity() {
         }
         btn_parametre.setOnClickListener{
             val intent = Intent(this, ParametreActivity::class.java)
+            startActivity(intent)
+        }
+        btn_supprimer.setOnClickListener{
+            suppProfileinfo()
+            val intent = Intent(this, LoginActivity::class.java)
             startActivity(intent)
         }
 
@@ -68,6 +74,10 @@ class ProfileActivity : AppCompatActivity() {
                     }
                 }
             }
+    }
+    fun suppProfileinfo(){
+        db.collection("clients").document(mail)
+            .delete()
     }
 
 }

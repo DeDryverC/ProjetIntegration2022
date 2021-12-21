@@ -21,7 +21,8 @@ import com.google.firebase.ktx.Firebase
 import java.time.LocalDateTime
 
 
-class LoginActivity : AppCompatActivity() {
+open class LoginActivity : AppCompatActivity() {
+
 
     private lateinit var binding: ActivityMainBinding
 
@@ -31,7 +32,7 @@ class LoginActivity : AppCompatActivity() {
     private var cachedUserProfile: UserProfile? = null
     private val db = Firebase.firestore
 
-    private var mail = ""
+    var mail = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -49,15 +50,14 @@ class LoginActivity : AppCompatActivity() {
 
     }
 
-    private fun onConnection(text: String?) {
-
+    fun onConnection(text: String?) {
         val intent = Intent(this, MapsActivity::class.java)
-        intent.putExtra("key",text)
+        intent.putExtra("key", text)
         startActivity(intent)
 
     }
 
-    private fun login() {
+    fun login(): Boolean {
         WebAuthProvider
             .login(account)
             .withScheme(getString(R.string.com_auth0_scheme))
@@ -71,53 +71,59 @@ class LoginActivity : AppCompatActivity() {
 
                 override fun onSuccess(result: Credentials) {
                     cachedCredentials = result
-                    showSnackBar(getString(R.string.login_success_message, result.accessToken))
                     showUserProfile()
+
                 }
             })
-
+        return true
     }
-    private fun showUserProfile() {
+
+    fun showUserProfile(): String {
         // Guard against showing the profile when no user is logged in
         if (cachedCredentials == null) {
-            return
+            return ""
         }
 
         val client = AuthenticationAPIClient(account)
         client
-            .userInfo(cachedCredentials!!.accessToken!!)
+            .userInfo(cachedCredentials!!.accessToken)
             .start(object : Callback<UserProfile, AuthenticationException> {
 
-                override fun onFailure(exception: AuthenticationException) {
-                    showSnackBar(getString(R.string.general_failure_with_exception_code,
-                        exception.getCode()))
+                override fun onFailure(error: AuthenticationException) {
+                    showSnackBar(
+                        getString(
+                            R.string.general_failure_with_exception_code,
+                            error.getCode()
+                        )
+                    )
                 }
 
                 @RequiresApi(Build.VERSION_CODES.O)
-                override fun onSuccess(profile: UserProfile) {
-                    cachedUserProfile = profile
-                    mail=intent.getStringExtra("key").toString()
-                    db.collection("clients").document(profile?.email.toString())
+                override fun onSuccess(result: UserProfile) {
+                    cachedUserProfile = result
+                    mail = intent.getStringExtra("key").toString()
+                    db.collection("clients").document(result.email.toString())
                         .get()
                         .addOnSuccessListener { document ->
                             if (document.exists()) {
-                                onConnection(profile?.email)
+                                onConnection(result.email)
+                            } else {
+                                createUser(result.email)
+                                onConnection(result.email)
                             }
-                            else {
-                                createUser(profile?.email)
-                                onConnection(profile?.email)
-                            }
-                            }
-                        .addOnFailureListener{
+                        }
+                        .addOnFailureListener {
 
                         }
                 }
 
             })
+        return account.toString()
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
     private fun createUser(text: String?) {
+
         db.collection("clients").document("$text").get()
             .addOnSuccessListener {
             }

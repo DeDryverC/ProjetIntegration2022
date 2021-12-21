@@ -20,7 +20,7 @@ class PointsReceivedActivity : AppCompatActivity() {
 
         mail=intent.getStringExtra("key").toString()
 
-        plusUn()
+        plusUn(mail,"PointsReceivedActivity")
 
         val btn_go_on = findViewById<Button>(R.id.btn_go_on);
         btn_go_on.setOnClickListener {
@@ -44,18 +44,15 @@ class PointsReceivedActivity : AppCompatActivity() {
             }
     }
 
-    private fun plusUn() {
-
+     private fun plusUn(mail: String, name: String) {
         val db2 = db.collection("clients").document(mail)
         var newScore: Int
         db.runTransaction { transaction ->
             val snapshot = transaction.get(db2)
-            newScore = (snapshot.getDouble("points")!! + 1).toInt()
+            newScore = (snapshot.getDouble("points")!! + Combien.combien(name)).toInt()
             transaction.update(db2, "points", newScore)
         }
-        Thread.sleep(500)
-        Toast.makeText(this, "Vous avez gagné un point", Toast.LENGTH_SHORT).show();
-        updateActionBar()
+
     }
 
 
