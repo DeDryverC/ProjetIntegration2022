@@ -128,13 +128,17 @@ class ScanActivity : AppCompatActivity() {
     private fun switchActivityPointsReceived(){
         val intent = Intent(this, PointsReceivedActivity::class.java)
         intent.putExtra("key",mail)
+        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
         startActivity(intent)
+        finish()
     }
 
     private fun alreadyScanned(){
         val intent = Intent(this, TicketActivity::class.java)
         intent.putExtra("key",mail)
+        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
         startActivity(intent)
+        finish()
         Toast.makeText(this, "Ce ticket a déjà été scanné", Toast.LENGTH_SHORT).show()
     }
     private fun getSpinnerValue(){
@@ -157,10 +161,18 @@ class ScanActivity : AppCompatActivity() {
 
                 val spinner_value = class_spinner?.selectedItem.toString()
                 val tec = hashMapOf(
+                    "action" to "ticket",
                     "tec" to spinner_value,
                     "user" to mail,
                     "date" to currentDate,
                     "points" to 1
+                )
+                val action = hashMapOf(
+                    "action" to "ticket",
+                    "date" to currentDate,
+                    "location" to "/",
+                    "points" to 1,
+                    "user" to mail
                 )
 
                 docRef.get()
@@ -168,6 +180,7 @@ class ScanActivity : AppCompatActivity() {
                         if (!document.exists()) {
                             detector.release();
                             tickets.document(code.displayValue).set(tec);
+                            db.collection("action").document().set(action);
                             switchActivityPointsReceived();
                         } else {
                             detector.release();

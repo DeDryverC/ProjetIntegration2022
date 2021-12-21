@@ -54,6 +54,7 @@ open class LoginActivity : AppCompatActivity() {
         val intent = Intent(this, MapsActivity::class.java)
         intent.putExtra("key", text)
         startActivity(intent)
+
     }
 
     fun login(): Boolean {
@@ -123,16 +124,23 @@ open class LoginActivity : AppCompatActivity() {
     @RequiresApi(Build.VERSION_CODES.O)
     private fun createUser(text: String?) {
 
-        val date = LocalDateTime.now()
-        val user = hashMapOf(
-            "email" to "$text",
-            "lastConnect" to "$date",
-            "points" to 0
-        )
-        db.collection("clients").document("$text")
-            .set(user)
-
-    }
+        db.collection("clients").document("$text").get()
+            .addOnSuccessListener {
+            }
+            .addOnFailureListener { exception ->
+                val date = LocalDateTime.now()
+                val name = "$text".replaceAfter("@", "").replace("@", "")
+                val user = hashMapOf(
+                    "email" to "$text",
+                    "name" to "$name",
+                    "moderator" to false,
+                    "lastConnect" to "$date",
+                    "points" to 1
+                )
+                db.collection("clients").document("$text")
+                    .set(user)
+            }
+            }
 
 
     private fun showSnackBar(text: String) {

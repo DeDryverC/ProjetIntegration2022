@@ -4,11 +4,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     >
     <item
-        android:id="@+id/action_login"
-        android:title="login" />
+        android:id="@+id/action_detect_trash"
+        android:title="Analyse Déchet" />
     <item
         android:id="@+id/action_profil"
-        android:title="profil" />
+        android:title="Profil" />
     <item
         android:id="@+id/action_ticket"
         android:title="Entrer un ticket" />
