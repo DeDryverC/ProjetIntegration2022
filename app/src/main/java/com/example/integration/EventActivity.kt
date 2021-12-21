@@ -14,10 +14,16 @@ import com.example.integration.fragments.AddCollecteFragment
 import com.example.integration.fragments.CollectionFragment
 import com.example.integration.fragments.ListingCollecteFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 import java.util.*
 
 class EventActivity : AppCompatActivity() {
+    private var mail = ""
+    private val db = Firebase.firestore
+
     override fun onCreate(savedInstanceState: Bundle?) {
+        mail = intent.getStringExtra("key").toString()
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_event)
         loadFragment(ListingCollecteFragment(this))
@@ -37,6 +43,7 @@ class EventActivity : AppCompatActivity() {
                     true
                 }
                 R.id.add_collecte_page -> {
+                    plusUn(mail,"EventActivity")
                     loadFragment(AddCollecteFragment(this))
                     return@setOnNavigationItemReselectedListener
                 }
@@ -58,5 +65,15 @@ class EventActivity : AppCompatActivity() {
             transaction.addToBackStack(null)
             transaction.commit()
         }
+    }
+    private fun plusUn(mail: String, name: String) {
+        val db2 = db.collection("clients").document(mail)
+        var newScore: Int
+        db.runTransaction { transaction ->
+            val snapshot = transaction.get(db2)
+            newScore = (snapshot.getDouble("points")!! + Combien.combien(name)).toInt()
+            transaction.update(db2, "points", newScore)
+        }
+
     }
 }

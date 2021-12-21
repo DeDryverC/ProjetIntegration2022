@@ -90,19 +90,27 @@
 
     <string name="profile_historique">Historique</string>
     <string name="profile_parametre">Paramètres</string>
-    <string name="moderator_alerts">Alerte Modération</string>
+    <string name="profile_supprimer">Supprimer le compte</string>
+    <string name="moderator_alerts">Alertes Modération</string>
     <string name="moderator_switch">Mode Modérateur</string>
 
 
     <string name="setting_changename">Changer le nom</string>
-    <string name="setting_image">Téléverser une image de profil</string>
+    <string name="setting_image">Changer d\'image de profil</string>
 
 
     <string name="historique">Historique</string>
     <string name="history_action">Action:</string>
+
+    <string name="report_button">report button</string>
+
+
     <string name="history_date">Date:</string>
     <string name="history_points">Points récoltés:</string>
+    <string name="entrer_votre_ticket_de_transport_en_commun_valide_et_vous_recevrez_des_points_d_penser">Entrer votre ticket de transport en commun valide et vous recevrez des points à dépenser !</string>
+
     <string name="location">Endroit de l\'action :</string>
     <string name="history_empty">Votre historique est vide!</string>
+
 
 </resources>

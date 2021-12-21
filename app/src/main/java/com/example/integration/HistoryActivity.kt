@@ -1,5 +1,6 @@
 package com.example.integration
 
+
 import android.content.ContentValues.TAG
 import android.os.Bundle
 import android.util.Log
@@ -74,5 +75,6 @@ class HistoryActivity : AppCompatActivity() {
 
         actionBar!!.title = mail.replaceAfter("@", "").replace("@", "")
     }
+
 
 }
