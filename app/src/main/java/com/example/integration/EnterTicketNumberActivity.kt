@@ -7,6 +7,9 @@ import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
+import java.text.SimpleDateFormat
+import java.util.*
+
 
 class EnterTicketNumberActivity : AppCompatActivity() {
     val db = FirebaseFirestore.getInstance();
@@ -29,8 +32,23 @@ class EnterTicketNumberActivity : AppCompatActivity() {
             val ticket_number = editTextNumber.text.toString();
             val spinner_value = spinner.selectedItem.toString();
 
+            val sdf = SimpleDateFormat("dd/M/yyyy")
+            val currentDate = sdf.format(Date())
+
             val ticket = hashMapOf(
-                    "tec" to spinner_value
+                    "action" to "ticket",
+                    "tec" to spinner_value,
+                    "user" to mail,
+                    "date" to currentDate,
+                    "points" to 1
+            )
+
+            val action = hashMapOf(
+                "action" to "ticket",
+                "date" to currentDate,
+                "location" to "/",
+                "points" to 1,
+                "user" to mail
             )
 
 
@@ -39,13 +57,14 @@ class EnterTicketNumberActivity : AppCompatActivity() {
                     .addOnSuccessListener { document ->
                         if (!document.exists()) {
                             tickets.document(ticket_number).set(ticket);
+                            db.collection("action").document().set(action)
                             val intent = Intent(this, PointsReceivedActivity::class.java)
                             intent.putExtra("key",mail)
                             intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                             startActivity(intent)
                             finish()
                         } else {
-                            Toast.makeText(this, "Ce ticket à déjà été enregistré", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(this, "Ce ticket a déjà été enregistré", Toast.LENGTH_SHORT).show();
 
                         }
                     }

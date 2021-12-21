@@ -14,11 +14,8 @@ import android.view.ViewGroup
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import com.example.integration.CollecteModel
-import com.example.integration.CollecteRepository
+import com.example.integration.*
 import com.example.integration.CollecteRepository.Singleton.downloadUri
-import com.example.integration.EventActivity
-import com.example.integration.R
 import com.google.type.Date
 import kotlinx.android.synthetic.main.activity_event.*
 import kotlinx.android.synthetic.main.fragment_add_collecte.*

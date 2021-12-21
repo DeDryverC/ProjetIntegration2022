@@ -10,9 +10,11 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 
 class ProfileActivity : AppCompatActivity() {
+    private var mail = ""
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_profile)
+        mail=intent.getStringExtra("key").toString()
 
         val btn_parametre = findViewById<Button>(R.id.profile_btn_paramètre)
         val btn_historique = findViewById<Button>(R.id.profile_btn_historique)
@@ -22,6 +24,8 @@ class ProfileActivity : AppCompatActivity() {
 
         btn_historique.setOnClickListener{
             val intent = Intent(this, HistoryActivity::class.java)
+            intent.putExtra("key",mail)
+
             startActivity(intent)
         }
         btn_parametre.setOnClickListener{

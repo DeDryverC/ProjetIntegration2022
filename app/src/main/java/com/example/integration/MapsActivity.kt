@@ -20,13 +20,14 @@ import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.ValueEventListener
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+import java.text.SimpleDateFormat
 
 import kotlinx.android.synthetic.main.activity_maps.*
-
-import java.time.LocalDateTime
-
 import java.util.*
 
 
@@ -36,7 +37,8 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback,
     private lateinit var mMap: GoogleMap
     private var rubishCount: Int = 0
     private val REQUEST_LOCATION_PERMISSION = 1
-    private var mail = ""
+    private var mail = "";
+    private var bounty = 0L
 
 
 
@@ -51,10 +53,28 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback,
         val mapFragment = supportFragmentManager
             .findFragmentById(R.id.map) as SupportMapFragment
         mapFragment.getMapAsync(this)
-        val extras = intent.extras
         mail=intent.getStringExtra("key").toString()
         updateActionBar()
+
+
+        //GET Récompense
+        /*
+        val bountyRef = db.collection("recompences").document("MapsActivity")
+
+        bountyRef.get()
+            .addOnSuccessListener { document ->
+                if (document != null) {
+                    val bountyLocal = document.data?.get("nombre")
+                    modifBounty(bountyLocal as Long)
+
+
+                }
+            }
+        Log.d(TAG,"TEST ==============================${bounty}")
+        */
+
     }
+
 
     private fun updateActionBar(){
         val actionBar = supportActionBar
@@ -168,14 +188,15 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback,
             plusUn()
             true
         }
-        R.id.action_login -> {
-            val intent = Intent(this, LoginActivity::class.java)
+        R.id.action_detect_trash -> {
+            val intent = Intent(this, DetectActivity::class.java)
             // start your next activity
             startActivity(intent)
             true
         }
         R.id.action_profil ->{
             val intent = Intent(this, ProfileActivity::class.java)
+            intent.putExtra("key",mail)
             startActivity(intent)
             true
         }
@@ -219,6 +240,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback,
                 for (document in result) {
                     var name = "vide"
                     var desc = "vide"
+                    var amount = "vide"
                     val lat = document.data.getValue("lat")
                     val long = document.data.getValue("long")
                     if (document.data.containsKey("name")) {
@@ -228,7 +250,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback,
                         desc = document.data.getValue("description").toString()
                     }
                     if (document.data.containsKey("amount")) {
-                        desc = document.data.getValue("amount").toString()
+                        amount = document.data.getValue("amount").toString()
                     }
                     val latitudeAddDepot = (if (lat is String) lat.toDouble() else lat as Double)
                     val longitudeAddDepot =
@@ -258,32 +280,34 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback,
 
 
     private fun setMapLongClick(map: GoogleMap) {
-        var compteur: Int? = null
-        msgShow(depotId)
-        //msgShow(compteur.toString())
-        //depotId = "dépôt n° ${compteur?.plus(1)}"
 
         map.setOnMapLongClickListener(fun(latLng: LatLng) {
-            //val snippet = String.format(
-            //    Locale.getDefault(),
-            //    "Lat: %1$.5f, Long: %2$.5f",
-            //  latLng.latitude,
-            //    latLng.longitude
-            //)
-            //val longitude: Double = latLng.longitude.absoluteValue
-            //val latitude: Double = latLng.latitude.absoluteValue
-            //position = LatLng(latitude, longitude)
+
+            val sdf = SimpleDateFormat("dd/M/yyyy")
+            val currentDate = sdf.format(Date())
+
+
 
 
             val depot = hashMapOf(
+                "date" to currentDate,
                 "name" to "null",
                 "lat" to latLng.latitude,
-                "long" to latLng.longitude
+                "long" to latLng.longitude,
+                "creator" to mail
+            )
+            val action = hashMapOf(
+                "action" to "depot",
+                "date" to currentDate,
+                "location" to "/",
+                "points" to 20,
+                "user" to mail
             )
             plusUn()
             //création du dépots dans la DB avant de lancer le formulaire
             db.collection("depots").document(latLng.latitude.toString())
                 .set(depot)
+            db.collection("action").document().set(action)
             //lancement de l'activité contentant le formulaire
             val intent = Intent(this, RubishCreationForm::class.java)
             startActivity(intent)
@@ -291,16 +315,19 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback,
     }
 
     override fun onInfoWindowLongClick(marker: Marker) {
-
+        val titre = marker.title.toString()
+        val description = marker.snippet.toString()
         val intent = Intent(this, RubishDescription::class.java)
-        intent.putExtra("MARKER_TITLE", marker.title)
-        intent.putExtra("MARKER_DESCRIPTION", marker.snippet)
+        intent.putExtra("MARKER_TITLE", titre)
+        intent.putExtra("MARKER_DESCRIPTION", description)
+        intent.putExtra("ID_USER", mail)
         startActivity(intent)
     }
 
     override fun onInfoWindowClose(marker: Marker) {
-        msgShow("Close Info Window")
+        //msgShow("Close Info Window")
     }
+
 }
 
 

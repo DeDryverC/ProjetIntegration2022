@@ -8,12 +8,14 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.example.integration.BoutiqueActivity
 import com.example.integration.R
 import com.example.integration.eventbus.UpdateCartEvent
 import com.example.integration.listener.ICartLoadListener
 import com.example.integration.listener.IRecyclerClickListener
 import com.example.integration.model.ArticleModel
 import com.example.integration.model.CartModel
+import com.example.integration.unique
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
@@ -21,10 +23,12 @@ import com.google.firebase.database.ValueEventListener
 import org.greenrobot.eventbus.EventBus
 import java.lang.StringBuilder
 
+
+var boutiqueClass = BoutiqueActivity()
 class MyArticleAdapter(
     private val context: Context,
-    private val list:List<ArticleModel>,
-    private val cartListener: ICartLoadListener
+    private val list: List<ArticleModel>,
+    private val cartListener: ICartLoadListener,
 ): RecyclerView.Adapter<MyArticleAdapter.MyArticleViewHolder>() {
 
     class MyArticleViewHolder(itemView:View) : RecyclerView.ViewHolder(itemView),
@@ -77,7 +81,7 @@ class MyArticleAdapter(
     private fun addToCart(articleModel: ArticleModel) {
         val userCart = FirebaseDatabase.getInstance("https://projetintegration-83d97-default-rtdb.europe-west1.firebasedatabase.app")
             .getReference("panier-boutique")
-            .child("UNIQUE_USER_ID")
+            .child(unique())
 
         userCart.child(articleModel.key!!)
             .addListenerForSingleValueEvent(object:ValueEventListener{

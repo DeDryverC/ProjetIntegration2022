@@ -8,6 +8,7 @@
 .idea/navEditor.xml
 .idea/assetWizardSettings.xml
 .idea
+.idea\misc.xml
 .DS_Store
 /build
 /captures
@@ -15,3 +16,4 @@
 .cxx
 local.properties
 .idea
+app/src/main/res/values/google_maps_api.xml
