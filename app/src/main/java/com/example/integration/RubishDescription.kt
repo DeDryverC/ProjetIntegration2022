@@ -2,12 +2,17 @@ package com.example.integration
 
 import android.content.ContentValues.TAG
 import android.os.Bundle
+import android.os.ProxyFileDescriptorCallback
 import android.util.Log
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.example.integration.ModeratorRepository.Singleton.repList
+import com.example.integration.RubishDescription.Singleton.count
+import com.example.integration.model.ModeratorModel
+import com.google.firebase.database.*
 import com.google.firebase.firestore.SetOptions
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
@@ -16,6 +21,10 @@ import com.google.firebase.ktx.Firebase
 class RubishDescription : AppCompatActivity() {
     //fun onLoad() {Toast.makeText(this, "msg", Toast.LENGTH_LONG).show()}
     val db = Firebase.firestore
+    object Singleton {
+
+        var count = 0
+    }
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -41,7 +50,7 @@ class RubishDescription : AppCompatActivity() {
         findViewById<ImageView>(R.id.close_rubish_button).setOnClickListener {
             delRubish(markerTitle, userId)
         }
-
+        getSize{}
     }
 
 
@@ -89,40 +98,40 @@ class RubishDescription : AppCompatActivity() {
 
     private fun repRubish(markerTitle: String?, userId: String?){
 
+        getSize {
+            val strId = "report"+ String.format("%02d", count+1)
+            val report = ModeratorModel(strId, markerTitle.toString(), userId.toString(), "none", false)
+            val database = FirebaseDatabase
+                .getInstance("https://projetintegration-83d97-default-rtdb.europe-west1.firebasedatabase.app")
+                .getReference("report")
+            database.child(strId).setValue(report)
+            Toast.makeText(this, "Le dépôt a bien été signalé !", Toast.LENGTH_LONG).show()
 
-        db.collection("depots")
-            .get()
-            .addOnSuccessListener { result ->
-                for (document in result) {
-                    if (document.data.getValue("name") == markerTitle){
-                        val data = hashMapOf(
-                            "nomDepot" to markerTitle,
-                            "email" to userId,
-                            "modAssignment" to "none",
-                            "pinned" to false
-                        )
-                        db.collection("reports").document(document.id)
-                            .set(data, SetOptions.merge())
-                            .addOnSuccessListener {
-                                Log.d(
-                                    TAG,
-                                    "DocumentCreated successfully"
-                                )
-                            }
-                            .addOnFailureListener { e ->
-                                Log.w(
-                                    TAG,
-                                    "Error creating document",
-                                    e
-                                )
-                            }
-                        Toast.makeText(this, "Le dépôt a bien été signalé !", Toast.LENGTH_LONG).show()
-                        finish()
-                    }
-                }
-            }
+            finish()
+        }
+
 
     }
 
+    private fun getSize(callback: () -> Unit){
+        val database = FirebaseDatabase
+            .getInstance("https://projetintegration-83d97-default-rtdb.europe-west1.firebasedatabase.app")
+            .getReference("report")
+
+        database.addValueEventListener(object: ValueEventListener{
+            override fun onDataChange(snapshot: DataSnapshot) {
+                count = 0
+                for(ds in snapshot.children) {
+                    count += 1
+                    Log.d("COUNT", count.toString())
+                }
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                TODO("Not yet implemented")
+            }
+        })
+        callback()
+    }
 
 }

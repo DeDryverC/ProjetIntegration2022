@@ -15,7 +15,7 @@ import com.google.firebase.ktx.Firebase
 
 class ModeratorAdapter(
     private val context : ModeratorActivity,
-    private val reportList : List<ModeratorModel>,
+    private val reportList : ArrayList<ModeratorModel>,
     private val layoutId: Int) : RecyclerView.Adapter<ModeratorAdapter.ViewHolder>(){
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
@@ -43,6 +43,7 @@ class ModeratorAdapter(
         holder.ModDepot.text = currentReport.nomDepot
         holder.ModUser.text = currentReport.email
         holder.ModAssignment?.text = currentReport.modAssignement
+
         holder.ModCheckout.setOnClickListener {
             db.collection("reports")
                 .get()
