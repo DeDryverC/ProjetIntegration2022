@@ -35,7 +35,6 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback,
     private var mail = ""
 
 
-
     private val db = Firebase.firestore
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -47,33 +46,36 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback,
         val mapFragment = supportFragmentManager
             .findFragmentById(R.id.map) as SupportMapFragment
         mapFragment.getMapAsync(this)
-        mail=intent.getStringExtra("key").toString()
+        mail = intent.getStringExtra("key").toString()
         updateActionBar()
     }
 
-    private fun updateActionBar(){
+    override fun onResume() {
+        super.onResume()
+        updateActionBar()
+    }
+
+    private fun plusUn(mail: String, name: String) {
+        val db2 = db.collection("clients").document(mail)
+        var newScore: Int
+        db.runTransaction { transaction ->
+            val snapshot = transaction.get(db2)
+            newScore = (snapshot.getDouble("points")!! + Combien.combien(name)).toInt()
+            transaction.update(db2, "points", newScore)
+        }
+
+    }
+
+    private fun updateActionBar() {
         val actionBar = supportActionBar
 
         val docRef = db.collection("clients").document(mail)
         docRef.get()
             .addOnSuccessListener { document ->
-                if (document != null) {
-                    val points =  document.data?.getValue("points")
-                    actionBar!!.title = mail.replaceAfter("@", "").replace("@", "") + " : $points points "
-                }
+                val points = document.data?.getValue("points")
+                actionBar!!.title =
+                    mail.replaceAfter("@", "").replace("@", "") + " : $points points "
             }
-    }
-    private fun plusUn() {
-
-        val db2 = db.collection("clients").document(mail)
-        var newScore: Int
-        db.runTransaction { transaction ->
-            val snapshot = transaction.get(db2)
-            newScore = (snapshot.getDouble("points")!! + 1).toInt()
-            transaction.update(db2, "points", newScore)
-        }
-        Thread.sleep(500)
-        updateActionBar()
     }
 
     override fun onMapReady(googleMap: GoogleMap) {
@@ -154,13 +156,9 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback,
 
         R.id.action_collecte_listing -> {
             val intent = Intent(this, EventActivity::class.java)
-            intent.putExtra("key",mail)
+            intent.putExtra("key", mail)
             // start your next activity
             startActivity(intent)
-            true
-        }
-        R.id.action_classement -> {
-            plusUn()
             true
         }
         R.id.action_login -> {
@@ -169,28 +167,27 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback,
             startActivity(intent)
             true
         }
-        R.id.action_profil ->{
+        R.id.action_profil -> {
             val intent = Intent(this, ProfileActivity::class.java)
-            intent.putExtra("key",mail)
+            intent.putExtra("key", mail)
             startActivity(intent)
             true
         }
 
         R.id.action_boutique -> {
             val intent = Intent(this, BoutiqueActivity::class.java)
-            intent.putExtra("key",mail)
+            intent.putExtra("key", mail)
             // start your next activity
             startActivity(intent)
             true
         }
         R.id.action_ticket -> {
             val intent = Intent(this, TicketActivity::class.java)
-            intent.putExtra("key",mail)
+            intent.putExtra("key", mail)
             // start your next activity
             startActivity(intent)
             true
         }
-
 
 
         else -> {
@@ -203,7 +200,6 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback,
     private fun msgShow(msg: String) {
         Toast.makeText(this, msg, Toast.LENGTH_LONG).show()
     }
-
 
 
     private fun addDepots(googleMap: GoogleMap) {
@@ -251,7 +247,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback,
 
     }
 
-    var depotId:String = " Depot n°$rubishCount"
+    var depotId: String = " Depot n°$rubishCount"
 
 
     private fun setMapLongClick(map: GoogleMap) {
@@ -265,7 +261,8 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback,
                 "long" to latLng.longitude,
                 "creator" to mail
             )
-            plusUn()
+            plusUn(mail, "MapsActivity")
+            updateActionBar()
             //création du dépots dans la DB avant de lancer le formulaire
             db.collection("depots").document(latLng.latitude.toString())
                 .set(depot)

@@ -76,17 +76,15 @@ class BoutiqueActivity : AppCompatActivity(), IArticleLoadListener, ICartLoadLis
                 }
             }
     }
-    fun plusUn() {
-
+    private fun plusUn(mail: String, name: String) {
         val db2 = db.collection("clients").document(mail)
-        var newScore = 0
+        var newScore: Int
         db.runTransaction { transaction ->
             val snapshot = transaction.get(db2)
-            newScore = (snapshot.getDouble("points")!! + 1).toInt()
+            newScore = (snapshot.getDouble("points")!! + Combien.combien(name)).toInt()
             transaction.update(db2, "points", newScore)
         }
-        Thread.sleep(500)
-        updateActionBar()
+
     }
     private fun countCartFromFirebase() {
         val cartModels: MutableList<CartModel> = ArrayList()

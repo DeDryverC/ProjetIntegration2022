@@ -3,11 +3,6 @@
 
     xmlns:app="http://schemas.android.com/apk/res-auto"
     >
-
-
-    <item
-        android:id="@+id/action_classement"
-        android:title="Classement" />
     <item
         android:id="@+id/action_login"
         android:title="login" />
