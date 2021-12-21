@@ -10,6 +10,7 @@ import com.google.firebase.storage.FirebaseStorage
 import java.text.SimpleDateFormat
 import java.util.*
 
+
 class EnterTicketNumberActivity : AppCompatActivity() {
     val db = FirebaseFirestore.getInstance();
     val tickets = db.collection("tickets");
@@ -42,12 +43,21 @@ class EnterTicketNumberActivity : AppCompatActivity() {
                     "points" to 1
             )
 
+            val action = hashMapOf(
+                "action" to "ticket",
+                "date" to currentDate,
+                "location" to "/",
+                "points" to 1,
+                "user" to mail
+            )
+
 
             val docRef = db.collection("tickets").document("$ticket_number");
             docRef.get()
                     .addOnSuccessListener { document ->
                         if (!document.exists()) {
                             tickets.document(ticket_number).set(ticket);
+                            db.collection("action").document().set(action)
                             val intent = Intent(this, PointsReceivedActivity::class.java)
                             intent.putExtra("key",mail)
                             startActivity(intent)
