@@ -62,7 +62,7 @@ class EnterTicketNumberActivity : AppCompatActivity() {
                             intent.putExtra("key",mail)
                             startActivity(intent)
                         } else {
-                            Toast.makeText(this, "Ce ticket à déjà été enregistré", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(this, "Ce ticket a déjà été enregistré", Toast.LENGTH_SHORT).show();
 
                         }
                     }

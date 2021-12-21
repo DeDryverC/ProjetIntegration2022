@@ -102,6 +102,8 @@
     <string name="history_action">Action:</string>
     <string name="history_date">Date:</string>
     <string name="history_points">Points récoltés:</string>
+    <string name="entrer_votre_ticket_de_transport_en_commun_valide_et_vous_recevrez_des_points_d_penser">Entrer votre ticket de transport en commun valide et vous recevrez des points à dépenser !</string>
+
     <string name="location">Endroit de l\'action :</string>
 
 </resources>
