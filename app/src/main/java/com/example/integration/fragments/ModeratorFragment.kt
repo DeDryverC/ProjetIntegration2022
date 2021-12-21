@@ -5,6 +5,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import android.widget.Toast.LENGTH_SHORT
+import android.widget.Toast.makeText
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import com.example.integration.ModeratorActivity
@@ -25,34 +27,18 @@ class ModeratorFragment(private val context: ModeratorActivity ) : Fragment() {
         val view = inflater.inflate(R.layout.fragment_moderator, container, false)
         val db = Firebase.firestore
         val reportList = arrayListOf<ModeratorModel>()
-        val allName : MutableList<String> = ArrayList()
-        val allUser : MutableList<String> = ArrayList()
-        val allMod : MutableList<String> = ArrayList()
-        val allPinned: MutableList<Boolean> = ArrayList()
+
         db.collection("reports")
             .get()
             .addOnSuccessListener { result ->
                 for (document in result) {
-                    reportList.add(
-                        ModeratorModel(
-                            document.data.getValue("name").toString(),
-                            document.data.getValue("user").toString(),
-                            document.data.getValue("mod").toString(),
-                            document.data.getValue("pinned") as Boolean))
+                    reportList.add(document.toObject(ModeratorModel::class.java))
                 }
 
             }
-        reportList.add(
-            ModeratorModel(
-
-                "yfrd",
-                "dedryver.cedric@gmail.com",
-                "none",
-
-                false
-
-
-            ))
+            .addOnFailureListener { exception ->
+                Toast.makeText(context, "erreur requete base de donnée", LENGTH_SHORT).show()
+            }
 
         val modRecyclerView = view.findViewById<RecyclerView>(R.id.mod_recycle_view)
         modRecyclerView.adapter = ModeratorAdapter(context, reportList, R.layout.layout_moderator_report)

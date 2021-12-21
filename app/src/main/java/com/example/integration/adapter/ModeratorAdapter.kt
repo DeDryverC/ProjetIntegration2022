@@ -40,7 +40,7 @@ class ModeratorAdapter(
     override fun onBindViewHolder(holder: ModeratorAdapter.ViewHolder, position: Int) {
 
         val currentReport = reportList[position]
-        holder.ModDepot.text = currentReport.nom_depot
+        holder.ModDepot.text = currentReport.nomDepot
         holder.ModUser.text = currentReport.email
         holder.ModAssignment?.text = currentReport.modAssignement
         holder.ModCheckout.setOnClickListener {
@@ -48,10 +48,11 @@ class ModeratorAdapter(
                 .get()
                 .addOnSuccessListener { result ->
                     for (document in result) {
-                        if (document.data.getValue("name") === currentReport.nom_depot) {
+                        if (document.data.getValue("name") === currentReport.nomDepot) {
                             db.collection("reports").document(document.id).delete()
                         }
                     }
+
                 }
         }
         holder.ModPinned.setOnClickListener{
@@ -59,9 +60,9 @@ class ModeratorAdapter(
                 .get()
                 .addOnSuccessListener { result ->
                     for(document in result) {
-                        if(document.data.getValue("name") === currentReport.nom_depot){
+                        if(document.data.getValue("name") === currentReport.nomDepot){
                             val data = hashMapOf(
-                                "name" to currentReport.nom_depot,
+                                "name" to currentReport.nomDepot,
                                 "user" to currentReport.email,
                                 "mod" to "dedryver.cedric@gmail.com",
                                 "pinned" to true
@@ -75,7 +76,7 @@ class ModeratorAdapter(
                 .get()
                 .addOnSuccessListener { result ->
                     for(document in result){
-                        if(document.data.getValue("name") === currentReport.nom_depot){
+                        if(document.data.getValue("name") === currentReport.nomDepot){
                             db.collection("depot").document(document.id).delete()
                         }
                     }
