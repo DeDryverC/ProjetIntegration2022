@@ -189,6 +189,8 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback,
 
         R.id.action_login -> {
             val intent = Intent(this, LoginActivity::class.java)
+            startActivity(intent)
+            true
         }
         R.id.action_detect_trash -> {
             val intent = Intent(this, DetectActivity::class.java)

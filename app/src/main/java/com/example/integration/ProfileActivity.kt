@@ -24,9 +24,9 @@ class ProfileActivity : AppCompatActivity() {
         setContentView(R.layout.activity_profile)
         mail = intent.getStringExtra("key").toString()
 
-        val btn_parametre = findViewById<Button>(R.id.profile_btn_paramètre)
+        val btn_parametre = findViewById<Button>(R.id.profile_btn_parametre)
         val btn_historique = findViewById<Button>(R.id.profile_btn_historique)
-        val switch_moderator = findViewById<Switch>(R.id.moderator_btn_switch)
+
         val btn_moderator_act = findViewById<Button>(R.id.moderator_btn_activity)
         val btn_supprimer = findViewById<Button>(R.id.supp_btn_user)
 

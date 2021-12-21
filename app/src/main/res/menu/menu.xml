@@ -4,6 +4,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     >
     <item
+        android:id="@+id/action_login"
+        android:title="Déconnexion" />
+    <item
         android:id="@+id/action_detect_trash"
         android:title="Analyse Déchet" />
     <item
