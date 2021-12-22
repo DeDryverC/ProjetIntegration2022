@@ -21,7 +21,7 @@ class PointsReceivedActivity : AppCompatActivity() {
         mail=intent.getStringExtra("key").toString()
 
         plusUn(mail,"PointsReceivedActivity")
-
+        updateActionBar()
         val btn_go_on = findViewById<Button>(R.id.btn_go_on);
         btn_go_on.setOnClickListener {
             val intent = Intent(this, MapsActivity::class.java)
