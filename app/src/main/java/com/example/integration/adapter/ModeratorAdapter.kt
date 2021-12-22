@@ -64,11 +64,12 @@ class ModeratorAdapter(
             repo.updateReport(currentReport)
         }
         holder.ModTrash.setOnClickListener{
-            db.collection("depot")
+            db.collection("depots")
                 .get()
                 .addOnSuccessListener { result ->
                     for(document in result){
-                        if(document.data.getValue("name").toString() == currentReport.nomDepot){
+                        if((document.data.getValue("name") == currentReport.nomDepot)
+                        and(document.data.getValue("creator") == currentReport.email)){
                             db.collection("depots").document(document.id).delete()
                                 .addOnSuccessListener {
                                     Log.d(

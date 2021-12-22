@@ -35,7 +35,11 @@ class ModeratorRepository {
 
                     Log.d("RETR", report.toString())
                     if(report != null){
-                        repList.add(report)
+                        if(report.id == "test"){
+
+                        } else {
+                            repList.add(report)
+                        }
                     }
                 }
                 callback()
