@@ -14,6 +14,12 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import com.auth0.android.Auth0
+import com.auth0.android.authentication.AuthenticationException
+import com.auth0.android.callback.Callback
+import com.auth0.android.provider.WebAuthProvider
+import com.auth0.android.result.Credentials
+import com.auth0.android.result.UserProfile
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
@@ -36,7 +42,10 @@ import java.util.*
 class MapsActivity : AppCompatActivity(), OnMapReadyCallback,
     GoogleMap.OnInfoWindowLongClickListener, GoogleMap.OnInfoWindowCloseListener {
 
+    private lateinit var account: Auth0
     private lateinit var mMap: GoogleMap
+    private var cachedCredentials: Credentials? = null
+    private var cachedUserProfile: UserProfile? = null
     private var rubishCount: Int = 0
     private val REQUEST_LOCATION_PERMISSION = 1
     private var mail = ""
@@ -53,6 +62,10 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback,
         mapFragment.getMapAsync(this)
         mail = intent.getStringExtra("key").toString()
         updateActionBar()
+        account = Auth0(
+            getString(R.string.com_auth0_client_id),
+            getString(R.string.com_auth0_domain)
+        )
 
     }
 
@@ -148,7 +161,24 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback,
         inflater.inflate(R.menu.menu, menu)
         return true
     }
+    private fun logout() {
+        WebAuthProvider
+            .logout(account)
+            .withScheme(getString(R.string.com_auth0_scheme))
+            .start(this, object : Callback<Void?, AuthenticationException> {
 
+                override fun onFailure(exception: AuthenticationException) {
+
+                }
+
+                override fun onSuccess(payload: Void?) {
+                    cachedCredentials = null
+                    cachedUserProfile = null
+
+                }
+
+            })
+    }
     // actions on click menu items
     override fun onOptionsItemSelected(item: MenuItem) = when (item.itemId) {
 
@@ -164,6 +194,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback,
         R.id.action_login -> {
             val intent = Intent(this, LoginActivity::class.java)
             startActivity(intent)
+            logout()
             true
         }
         R.id.action_detect_trash -> {

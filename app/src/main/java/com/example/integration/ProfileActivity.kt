@@ -75,6 +75,7 @@ class ProfileActivity : AppCompatActivity() {
                 }
             }
     }
+
     fun suppProfileinfo(){
         db.collection("clients").document(mail)
             .delete()

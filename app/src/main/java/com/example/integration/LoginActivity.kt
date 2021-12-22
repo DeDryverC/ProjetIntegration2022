@@ -57,6 +57,9 @@ open class LoginActivity : AppCompatActivity() {
 
     }
 
+
+
+
     fun login(): Boolean {
         WebAuthProvider
             .login(account)
