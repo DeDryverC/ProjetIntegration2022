@@ -20,8 +20,8 @@ class PointsReceivedActivity : AppCompatActivity() {
 
         mail=intent.getStringExtra("key").toString()
 
-        plusUn(mail,"PointsReceivedActivity")
-        updateActionBar()
+        plusUn()
+
         val btn_go_on = findViewById<Button>(R.id.btn_go_on);
         btn_go_on.setOnClickListener {
             val intent = Intent(this, MapsActivity::class.java)
@@ -44,15 +44,17 @@ class PointsReceivedActivity : AppCompatActivity() {
             }
     }
 
-     private fun plusUn(mail: String, name: String) {
+    private fun plusUn() {
+
         val db2 = db.collection("clients").document(mail)
         var newScore: Int
         db.runTransaction { transaction ->
             val snapshot = transaction.get(db2)
-            newScore = (snapshot.getDouble("points")!! + Combien.combien(name)).toInt()
+            newScore = (snapshot.getDouble("points")!! + 15).toInt()
             transaction.update(db2, "points", newScore)
         }
-
+        Thread.sleep(500)
+        updateActionBar()
     }
 
 

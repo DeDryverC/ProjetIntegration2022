@@ -81,6 +81,7 @@ open class LoginActivity : AppCompatActivity() {
         return true
     }
 
+
     fun showUserProfile(): String {
         // Guard against showing the profile when no user is logged in
         if (cachedCredentials == null) {

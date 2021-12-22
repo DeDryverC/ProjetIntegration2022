@@ -301,7 +301,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback,
                 "creator" to mail
             )
 
-            
+
 
             val action = hashMapOf(
                 "action" to "depot",
@@ -338,5 +338,4 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback,
     }
 
 }
-
 

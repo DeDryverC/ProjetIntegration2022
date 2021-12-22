@@ -1,7 +1,6 @@
 package com.example.integration.adapter
 
 import android.content.Intent
-import com.example.integration.ScanActivityUtil
 import com.google.common.truth.Truth.assertThat
 import org.junit.Test
 import java.text.SimpleDateFormat

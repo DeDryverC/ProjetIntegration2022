@@ -1,6 +1,7 @@
 package com.example.integration
 
 import android.content.ContentValues.TAG
+import android.content.Intent
 import android.os.Bundle
 import android.os.ProxyFileDescriptorCallback
 import android.util.Log
@@ -21,6 +22,7 @@ import com.google.firebase.ktx.Firebase
 class RubishDescription : AppCompatActivity() {
     //fun onLoad() {Toast.makeText(this, "msg", Toast.LENGTH_LONG).show()}
     val db = Firebase.firestore
+    var mail = ""
     object Singleton {
 
         var count = 0
@@ -31,7 +33,7 @@ class RubishDescription : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.rubish_description_page)
         setupComponents()
-
+        mail = intent.getStringExtra("key").toString()
     }
 
     private fun setupComponents() {
@@ -85,6 +87,7 @@ class RubishDescription : AppCompatActivity() {
                             }
                         Toast.makeText(this, "Dépot supprimé !", Toast.LENGTH_LONG).show()
                         finish()
+
                     }
                     if ((document.data.getValue("name") == markerTitle) and (document.data.getValue(
                             "creator"
