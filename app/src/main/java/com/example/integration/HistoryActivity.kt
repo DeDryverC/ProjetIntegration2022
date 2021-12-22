@@ -43,6 +43,9 @@ class HistoryActivity : AppCompatActivity() {
 
         updateActionBar()
         EventChangeListener()
+        if (historyActionArrayList.isEmpty()) {
+            setContentView(R.layout.activity_history_empty);
+        }
 
 
     }
