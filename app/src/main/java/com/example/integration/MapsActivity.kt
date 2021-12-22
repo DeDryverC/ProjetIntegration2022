@@ -6,6 +6,7 @@ import android.content.ContentValues.TAG
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Bundle
+import android.os.CountDownTimer
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
@@ -28,6 +29,7 @@ import com.google.firebase.ktx.Firebase
 import java.text.SimpleDateFormat
 
 import kotlinx.android.synthetic.main.activity_maps.*
+import java.lang.Thread.sleep
 import java.util.*
 
 
@@ -37,10 +39,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback,
     private lateinit var mMap: GoogleMap
     private var rubishCount: Int = 0
     private val REQUEST_LOCATION_PERMISSION = 1
-    private var mail = "";
-    private var bounty = 0L
-
-
+    private var mail = ""
     private val db = Firebase.firestore
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -55,23 +54,6 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback,
         mail = intent.getStringExtra("key").toString()
         updateActionBar()
 
-
-        //GET Récompense
-        /*
-        val bountyRef = db.collection("recompences").document("MapsActivity")
-
-        bountyRef.get()
-            .addOnSuccessListener { document ->
-                if (document != null) {
-                    val bountyLocal = document.data?.get("nombre")
-                    modifBounty(bountyLocal as Long)
-
-
-                }
-            }
-        Log.d(TAG,"TEST ==============================${bounty}")
-        */
-
     }
 
 
@@ -80,18 +62,9 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback,
         updateActionBar()
     }
 
-    private fun plusUn(mail: String, name: String) {
-        val db2 = db.collection("clients").document(mail)
-        var newScore: Int
-        db.runTransaction { transaction ->
-            val snapshot = transaction.get(db2)
-            newScore = (snapshot.getDouble("points")!! + Combien.combien(name)).toInt()
-            transaction.update(db2, "points", newScore)
-        }
-
-    }
 
     private fun updateActionBar() {
+        sleep(1000)
         val actionBar = supportActionBar
 
         val docRef = db.collection("clients").document(mail)
@@ -101,6 +74,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback,
                 actionBar!!.title =
                     mail.replaceAfter("@", "").replace("@", "") + " : $points points "
             }
+
     }
 
     override fun onMapReady(googleMap: GoogleMap) {
@@ -111,7 +85,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback,
         //mMap.addMarker(MarkerOptions().position(ephec).title("Ephec"))
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(ephec, zoomLevel))
         enableMyLocation()
-        addDepots(mMap)
+        addDepots()
         setMapLongClick(mMap)
 
         mMap.setOnInfoWindowLongClickListener(this@MapsActivity)
@@ -228,12 +202,9 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback,
         }
     }
 
-    private fun msgShow(msg: String) {
-        Toast.makeText(this, msg, Toast.LENGTH_LONG).show()
-    }
 
 
-    private fun addDepots(googleMap: GoogleMap) {
+    private fun addDepots() {
 
         db.collection("depots")
             .get()
@@ -308,7 +279,6 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback,
                 "points" to 20,
                 "user" to mail
             )
-            plusUn(mail, "MapsActivity")
             updateActionBar()
 
             //création du dépots dans la DB avant de lancer le formulaire
@@ -317,6 +287,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback,
             db.collection("action").document().set(action)
             //lancement de l'activité contentant le formulaire
             val intent = Intent(this, RubishCreationForm::class.java)
+            intent.putExtra("key", mail)
             startActivity(intent)
         })
     }

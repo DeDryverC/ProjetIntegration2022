@@ -2,6 +2,7 @@ package com.example.integration
 
 import android.content.ContentValues
 import android.content.ContentValues.TAG
+import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.util.Log
@@ -18,7 +19,7 @@ class RubishCreationForm : AppCompatActivity() {
     private val db = Firebase.firestore
     private var nameInput: Editable? = null
     private var descriptionInput: Editable? = null
-
+    private var mail = ""
 
     private val statRef = db.collection("statistique")
 
@@ -28,6 +29,7 @@ class RubishCreationForm : AppCompatActivity() {
         setContentView(R.layout.rubish_creation_form)
         setSpinnerView()
         setButtonAction()
+        mail = intent.getStringExtra("key").toString()
     }
 
     private fun setSpinnerView() {
@@ -65,6 +67,7 @@ class RubishCreationForm : AppCompatActivity() {
     }
 
     private fun addRubish() {
+
         nameInput = findViewById<EditText>(R.id.rubish_creation_title_input).editableText
         descriptionInput =
             findViewById<EditText>(R.id.rubish_creation_description_input).editableText
@@ -96,8 +99,15 @@ class RubishCreationForm : AppCompatActivity() {
                 Log.d(ContentValues.TAG, "Error getting documents: ", exception)
             }
 
+        intentPlus()
 
-        finish()
+    }
+    fun intentPlus(){
+        plusUn(mail, "MapsActivity")
+        val intent = Intent(this, MapsActivity::class.java)
+        intent.putExtra("key", mail)
+        // start your next activity
+        startActivity(intent)
     }
 
     private fun cancelButton() {
@@ -135,6 +145,29 @@ class RubishCreationForm : AppCompatActivity() {
         finish()
 
 
+
+    }
+    private fun plusUn(mail: String, name: String) {
+        val db2 = db.collection("clients").document(mail)
+        var newScore: Int
+        db.runTransaction { transaction ->
+            val snapshot = transaction.get(db2)
+            newScore = (snapshot.getDouble("points")!! + Combien.combien(name)).toInt()
+            transaction.update(db2, "points", newScore)
+        }
+
+    }
+
+    private fun updateActionBar() {
+        val actionBar = supportActionBar
+
+        val docRef = db.collection("clients").document(mail)
+        docRef.get()
+            .addOnSuccessListener { document ->
+                val points = document.data?.getValue("points")
+                actionBar!!.title =
+                    mail.replaceAfter("@", "").replace("@", "") + " : $points points "
+            }
     }
 
 
