@@ -1,6 +1,8 @@
 package com.example.integration.adapter
 
+import android.content.ContentValues
 import android.media.Image
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,6 +10,8 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.integration.ModeratorActivity
+import com.example.integration.ModeratorRepository
+import com.example.integration.ModeratorRepository.Singleton.databaseRef
 import com.example.integration.R
 import com.example.integration.model.ModeratorModel
 import com.google.firebase.firestore.ktx.firestore
@@ -15,8 +19,10 @@ import com.google.firebase.ktx.Firebase
 
 class ModeratorAdapter(
     private val context : ModeratorActivity,
-    private val reportList : List<ModeratorModel>,
+    private val reportList : ArrayList<ModeratorModel>,
+    private val name : String,
     private val layoutId: Int) : RecyclerView.Adapter<ModeratorAdapter.ViewHolder>(){
+
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val ModDepot = view.findViewById<TextView>(R.id.mod_depot_name)
@@ -40,47 +46,49 @@ class ModeratorAdapter(
     override fun onBindViewHolder(holder: ModeratorAdapter.ViewHolder, position: Int) {
 
         val currentReport = reportList[position]
+        val repo = ModeratorRepository()
+
         holder.ModDepot.text = currentReport.nomDepot
         holder.ModUser.text = currentReport.email
         holder.ModAssignment?.text = currentReport.modAssignement
-        holder.ModCheckout.setOnClickListener {
-            db.collection("reports")
-                .get()
-                .addOnSuccessListener { result ->
-                    for (document in result) {
-                        if (document.data.getValue("name") === currentReport.nomDepot) {
-                            db.collection("reports").document(document.id).delete()
-                        }
-                    }
 
-                }
+
+        holder.ModCheckout.setOnClickListener {
+            databaseRef.child(currentReport.id).removeValue()
+            repo.updateData {  }
         }
         holder.ModPinned.setOnClickListener{
-            db.collection("reports")
-                .get()
-                .addOnSuccessListener { result ->
-                    for(document in result) {
-                        if(document.data.getValue("name") === currentReport.nomDepot){
-                            val data = hashMapOf(
-                                "name" to currentReport.nomDepot,
-                                "user" to currentReport.email,
-                                "mod" to "dedryver.cedric@gmail.com",
-                                "pinned" to true
-                            )
-                        }
-                    }
-                }
+            currentReport.pinned = !currentReport.pinned
+            currentReport.modAssignement = name
+
+            repo.updateReport(currentReport)
         }
         holder.ModTrash.setOnClickListener{
-            db.collection("depot")
+            db.collection("depots")
                 .get()
                 .addOnSuccessListener { result ->
                     for(document in result){
-                        if(document.data.getValue("name") === currentReport.nomDepot){
-                            db.collection("depot").document(document.id).delete()
+                        if((document.data.getValue("name") == currentReport.nomDepot)
+                        and(document.data.getValue("creator") == currentReport.email)){
+                            db.collection("depots").document(document.id).delete()
+                                .addOnSuccessListener {
+                                    Log.d(
+                                        ContentValues.TAG,
+                                        "DocumentSnapshot successfully deleted!"
+                                    )
+                                }
+                                .addOnFailureListener { e ->
+                                    Log.w(
+                                        ContentValues.TAG,
+                                        "Error deleting document",
+                                        e
+                                    )
+                                }
                         }
                     }
                 }
+            databaseRef.child(currentReport.id).removeValue()
+            repo.updateData {  }
         }
 
 

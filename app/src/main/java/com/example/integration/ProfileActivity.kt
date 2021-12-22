@@ -18,7 +18,7 @@ class ProfileActivity : AppCompatActivity() {
 
     val db = Firebase.firestore
     private var mail = ""
-  
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_profile)
@@ -68,6 +68,7 @@ class ProfileActivity : AppCompatActivity() {
                             moderator_activity.visibility = View.VISIBLE
                             moderator_activity.setOnClickListener{
                                 val intent = Intent(this, ModeratorActivity::class.java)
+                                intent.putExtra("key", name)
                                 startActivity(intent)
                             }
                         }

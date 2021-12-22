@@ -50,7 +50,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback,
     private val REQUEST_LOCATION_PERMISSION = 1
     private var mail = ""
     private val db = Firebase.firestore
-
+    private val repo = ModeratorRepository()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
