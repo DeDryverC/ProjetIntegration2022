@@ -1,6 +1,7 @@
 package com.example.integration
 
 import android.app.Activity
+import android.app.AlertDialog
 import android.app.ProgressDialog
 import android.content.Intent
 import android.graphics.Bitmap
@@ -49,7 +50,7 @@ class DetectActivity : AppCompatActivity() {
     private fun uploadImage(file:Uri) {
         // vérifier si fichier n'est pas null
         if(file != null){
-            val fileName = UUID.randomUUID().toString() + ".jpg"
+            val fileName = "data.jpg"
             val ref = CollecteRepository.Singleton.storageReferencesignal.child(fileName)
             val uploadTask = ref.putFile(file)
 
@@ -65,6 +66,11 @@ class DetectActivity : AppCompatActivity() {
                 if(task.isSuccessful){
                     // récup l'image
                     CollecteRepository.Singleton.downloadUri = task.result
+                    val dialog3 = AlertDialog.Builder(this)
+                        .setTitle("Photo Envoyée !")
+                        .setPositiveButton("Ok") { dialog, _ -> dialog.dismiss() }
+                        .create()
+                    dialog3.show()
                 }
             }
         }
