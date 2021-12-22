@@ -18,7 +18,7 @@ import com.example.integration.model.ModeratorModel
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 
-class ModeratorFragment(private val context: ModeratorActivity) : Fragment() {
+class ModeratorFragment(private val context: ModeratorActivity, private val name : String) : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -29,7 +29,7 @@ class ModeratorFragment(private val context: ModeratorActivity) : Fragment() {
 
         Log.d("REPLIST", repList.toString())
         val modRecyclerView = view.findViewById<RecyclerView>(R.id.mod_recycle_view)
-        modRecyclerView.adapter = ModeratorAdapter(context, repList, R.layout.layout_moderator_report)
+        modRecyclerView.adapter = ModeratorAdapter(context, repList, name,  R.layout.layout_moderator_report)
 
         return view
     }

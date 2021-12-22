@@ -1,6 +1,8 @@
 package com.example.integration.adapter
 
+import android.content.ContentValues
 import android.media.Image
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -18,7 +20,9 @@ import com.google.firebase.ktx.Firebase
 class ModeratorAdapter(
     private val context : ModeratorActivity,
     private val reportList : ArrayList<ModeratorModel>,
+    private val name : String,
     private val layoutId: Int) : RecyclerView.Adapter<ModeratorAdapter.ViewHolder>(){
+
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val ModDepot = view.findViewById<TextView>(R.id.mod_depot_name)
@@ -55,7 +59,7 @@ class ModeratorAdapter(
         }
         holder.ModPinned.setOnClickListener{
             currentReport.pinned = !currentReport.pinned
-            //currentReport.modAssignement =
+            currentReport.modAssignement = name
 
             repo.updateReport(currentReport)
         }
@@ -64,8 +68,21 @@ class ModeratorAdapter(
                 .get()
                 .addOnSuccessListener { result ->
                     for(document in result){
-                        if(document.data.getValue("name") === currentReport.nomDepot){
-                            db.collection("depot").document(document.id).delete()
+                        if(document.data.getValue("name").toString() == currentReport.nomDepot){
+                            db.collection("depots").document(document.id).delete()
+                                .addOnSuccessListener {
+                                    Log.d(
+                                        ContentValues.TAG,
+                                        "DocumentSnapshot successfully deleted!"
+                                    )
+                                }
+                                .addOnFailureListener { e ->
+                                    Log.w(
+                                        ContentValues.TAG,
+                                        "Error deleting document",
+                                        e
+                                    )
+                                }
                         }
                     }
                 }
