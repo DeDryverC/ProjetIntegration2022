@@ -4,8 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".EventActivity"
-    android:background="@drawable/background_boutique">
+    tools:context=".EventActivity">
 
     <LinearLayout
         android:id="@+id/panel"
@@ -55,9 +54,9 @@
 
     <ImageView
         android:id="@+id/imageView2"
-        android:layout_width="413dp"
-        android:layout_height="397dp"
-        android:layout_marginTop="68dp"
+        android:layout_width="440dp"
+        android:layout_height="431dp"
+        android:layout_marginTop="72dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -74,7 +73,7 @@
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/guideline2"
-        app:layout_constraintVertical_bias="0.372" />
+        app:layout_constraintVertical_bias="0.779" />
 
     <Button
         android:id="@+id/button_envoi"
@@ -86,7 +85,7 @@
         app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/guideline2"
-        app:layout_constraintVertical_bias="0.526" />
+        app:layout_constraintVertical_bias="0.783" />
 
     <TextView
         android:id="@+id/textView4"
@@ -97,5 +96,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/panel" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

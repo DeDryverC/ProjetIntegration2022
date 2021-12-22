@@ -9,7 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textStyle="bold"
-        android:layout_marginTop="0dp"
+        android:layout_marginTop="30dp"
         android:text="Créez vos propres Collectes"
         android:textSize="20dp"
         android:paddingBottom="10dp"/>
