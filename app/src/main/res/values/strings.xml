@@ -15,12 +15,12 @@
         -->
 
     <!-- Title -->
-    <string name="initial_title">Welcome to the app!</string>
+    <string name="initial_title">Bienvenue sur la Citoyapp</string>
     <string name="logged_in_title">You\'re logged in.</string>
     <string name="logged_out_title">You\'re logged out.</string>
 
     <!-- "Log in" and "Log out" buttons -->
-    <string name="button_login">Log in</string>
+    <string name="button_login">Login</string>
     <string name="button_logout">Log out</string>
 
     <!-- User profile -->
@@ -78,7 +78,7 @@
     <string name="legende_photo_de_depot">photo_du_depot</string>
     <string name="close_button">close_button</string>
     <string name="editText_rubish_name">Indiquez ici le titre du dépôt</string>
-    <string name="editText_rubish_descritpion">Décrivez ici de dépôt</string>
+    <string name="editText_rubish_descritpion">Décrivez ici le dépôt</string>
     <string name="image_button_label">Charger Image</string>
     <string name="collecte_image_description">Collecte_image</string>
     <string name="button_cancel">annuler</string>
