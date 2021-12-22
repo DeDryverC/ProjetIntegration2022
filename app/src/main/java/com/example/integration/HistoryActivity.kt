@@ -43,9 +43,6 @@ class HistoryActivity : AppCompatActivity() {
 
         updateActionBar()
         EventChangeListener()
-        if (historyActionArrayList.isEmpty()) {
-            setContentView(R.layout.activity_history_empty);
-        }
 
 
     }
@@ -64,7 +61,7 @@ class HistoryActivity : AppCompatActivity() {
                 historyActionAdapter.notifyDataSetChanged()
             }
             .addOnFailureListener { exception ->
-                Toast.makeText(this, "erreur requete base de donnée", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "erreur requete base de donnÃ©e", Toast.LENGTH_SHORT).show()
             }
 
     }

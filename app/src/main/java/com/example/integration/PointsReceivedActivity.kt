@@ -54,6 +54,7 @@ class PointsReceivedActivity : AppCompatActivity() {
             transaction.update(db2, "points", newScore)
         }
         Thread.sleep(500)
+        Toast.makeText(this, "Vous avez gagné 15 point", Toast.LENGTH_SHORT).show();
         updateActionBar()
     }
 
