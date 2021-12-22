@@ -119,12 +119,13 @@ class AddCollecteFragment(
                 }
                 else -> {
                     // envoyer en DB
-                    val intent = Intent(context, PopupWindow::class.java)
-                    intent.putExtra("poputitle", "Envoi formulaire")
-                    intent.putExtra("popuptext", "Votre formulaire est valide et va être envoyé")
-                    intent.putExtra("popupbtn", "OK")
+                    val dialog3 = AlertDialog.Builder(context)
+                        .setTitle("Votre collecte a correctement été ajoutée !")
+                        .setPositiveButton("Ok") { dialog, _ -> dialog.dismiss() }
+                        .create()
+                    dialog3.show()
                     repo.insertCollecte(collect)
-
+                    
                 }
             }
         }
