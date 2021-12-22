@@ -35,7 +35,6 @@ class EventActivity : AppCompatActivity() {
                 R.id.collecte_page-> {
                     loadFragment(ListingCollecteFragment(this))
                     return@setOnNavigationItemReselectedListener
-                    true
                 }
                 R.id.collection_page -> {
                     loadFragment(CollectionFragment(this))
