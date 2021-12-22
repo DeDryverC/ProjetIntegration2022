@@ -57,6 +57,9 @@ open class LoginActivity : AppCompatActivity() {
 
     }
 
+
+
+
     fun login(): Boolean {
         WebAuthProvider
             .login(account)
@@ -126,6 +129,19 @@ open class LoginActivity : AppCompatActivity() {
 
         db.collection("clients").document("$text").get()
             .addOnSuccessListener {
+                    exception ->
+                val date = LocalDateTime.now()
+                val name = "$text".replaceAfter("@", "").replace("@", "")
+                val user = hashMapOf(
+                    "email" to "$text",
+                    "name" to "$name",
+                    "moderator" to false,
+                    "lastConnect" to "$date",
+                    "points" to 0
+                )
+                db.collection("clients").document("$text")
+                    .set(user)
+
             }
             .addOnFailureListener { exception ->
                 val date = LocalDateTime.now()
@@ -135,7 +151,7 @@ open class LoginActivity : AppCompatActivity() {
                     "name" to "$name",
                     "moderator" to false,
                     "lastConnect" to "$date",
-                    "points" to 1
+                    "points" to 0
                 )
                 db.collection("clients").document("$text")
                     .set(user)

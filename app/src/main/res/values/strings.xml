@@ -110,6 +110,7 @@
     <string name="entrer_votre_ticket_de_transport_en_commun_valide_et_vous_recevrez_des_points_d_penser">Entrer votre ticket de transport en commun valide et vous recevrez des points à dépenser !</string>
 
     <string name="location">Endroit de l\'action :</string>
+    <string name="history_empty">Votre historique est vide!</string>
 
 
 </resources>
