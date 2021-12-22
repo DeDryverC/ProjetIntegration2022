@@ -73,18 +73,18 @@
     <!-- popup window et page de detail-->
     <string name="description_depot">Description du dépôt</string>
     <string name="lorem_ipsum">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus ullamcorper accumsan porta. Nulla facilisi.</string>
-    <string name="nom_depot">Nom du dépots</string>
-    <string name="test_depot">test depot</string>
+    <string name="nom_depot">Nom du dépôt</string>
+    <string name="test_depot">test dépôt</string>
     <string name="legende_photo_de_depot">photo_du_depot</string>
     <string name="close_button">close_button</string>
-    <string name="editText_rubish_name">indiquer ici le titre du depot</string>
-    <string name="editText_rubish_descritpion">décriver ici de depot</string>
+    <string name="editText_rubish_name">Indiquez ici le titre du dépôt</string>
+    <string name="editText_rubish_descritpion">Décrivez ici de dépôt</string>
     <string name="image_button_label">Charger Image</string>
     <string name="collecte_image_description">Collecte_image</string>
     <string name="button_cancel">annuler</string>
     <string name="label_spinner_rubish_amount">Quantitée de déchet</string>
     <string name="send_form_rubish_button_label">Enregister le Dépôt sauvage</string>
-    <string name="Rubish_creation_form_image_desciption">photo(s) du depot</string>
+    <string name="Rubish_creation_form_image_desciption">Photo(s) du depot</string>
 
     <!-- strings profile -->
 
@@ -96,7 +96,7 @@
 
 
     <string name="setting_changename">Changer le nom</string>
-    <string name="setting_image">Changer d\'image de profil</string>
+    <string name="setting_image">Changer d\'image de profile</string>
 
 
     <string name="historique">Historique</string>
