@@ -5,7 +5,8 @@
     android:layout_margin="10dp"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/page_rubish_description">
+    android:id="@+id/page_rubish_description"
+    >
 
     <androidx.cardview.widget.CardView
         android:id="@+id/maps_image"
@@ -13,17 +14,7 @@
         android:layout_height="80dp"
 
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <ImageView
-            android:id="@+id/rubish_picture"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:contentDescription="@string/legende_photo_de_depot">
-
-        </ImageView>
-
-    </androidx.cardview.widget.CardView>
+        app:layout_constraintTop_toTopOf="parent"/>
 
     <TextView
         android:id="@+id/rubish_title"

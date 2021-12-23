@@ -20,7 +20,7 @@
     <string name="logged_out_title">You\'re logged out.</string>
 
     <!-- "Log in" and "Log out" buttons -->
-    <string name="button_login">Login</string>
+    <string name="button_login">Connexion</string>
     <string name="button_logout">Log out</string>
 
     <!-- User profile -->

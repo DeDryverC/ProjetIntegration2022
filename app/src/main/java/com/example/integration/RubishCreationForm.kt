@@ -13,6 +13,7 @@ import android.widget.Spinner
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+import java.lang.Thread.sleep
 
 
 class RubishCreationForm : AppCompatActivity() {
@@ -98,11 +99,10 @@ class RubishCreationForm : AppCompatActivity() {
             .addOnFailureListener { exception ->
                 Log.d(ContentValues.TAG, "Error getting documents: ", exception)
             }
-
         intentPlus()
-
     }
-    fun intentPlus(){
+    private fun intentPlus(){
+        sleep(500)
         plusUn(mail, "MapsActivity")
         val intent = Intent(this, MapsActivity::class.java)
         intent.putExtra("key", mail)
@@ -155,7 +155,8 @@ class RubishCreationForm : AppCompatActivity() {
             newScore = (snapshot.getDouble("points")!! + Combien.combien(name)).toInt()
             transaction.update(db2, "points", newScore)
         }
-
+        sleep(1000)
+        updateActionBar()
     }
 
     private fun updateActionBar() {
